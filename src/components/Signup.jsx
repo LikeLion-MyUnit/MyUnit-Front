@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Login = () => {
+const Signup = () => {
     return (
         <div className="container">
             <img src="img/logo.png" alt="logo" className="logo" />
@@ -11,13 +11,15 @@ const Login = () => {
                 <div className="input-password">
                     <input name="password" type="password" placeholder="비밀번호"/>
                 </div>
+                <div className="input-password">
+                    <input name="rePassword" type="password" placeholder="비밀번호 확인"/>
+                </div>
             </form>
-            <div className="btn-login">로그인</div>
+            <div className="btn-signup">회원가입</div>
 
-            <div className="btn-signup">처음이신가요?</div>
-            <div className="btn-forgottenpwd">비밀번호를 잊으셨나요?</div>
+            <div className="btn-login">이미 가입하셨나요?</div>
         </div>
     );
 };
 
-export default Login;
+export default Signup;
