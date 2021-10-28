@@ -1,26 +1,8 @@
-// > {
-//     return (
-//         <div className="container">
-//             <img src="img/logo.png" alt="logo" className="logo" />
-//             <form className="authForm">
-//                 <div className="input-id">
-//                     <input name="id" type="text" placeholder="아이디"/>
-//                 </div>
-//                 <div className="input-password">
-//                     <input name="password" type="password" placeholder="비밀번호"/>
-//                 </div>
-//             </form>
-//             <div className="btn-login">로그인</div>
-
-//             <div className="btn-signup">처음이신가요?</div>
-//             <div className="btn-forgottenpwd">비밀번호를 잊으셨나요?</div>
-//         </div>
-//     );
-
 .container {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  align-items: center;
   width: 100%;
   height: 100%;
 }
@@ -28,4 +10,26 @@
 .logo {
   width: 100%;
   height: auto;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input {
+  width: 278px;
+  height: 50px;
+  margin-bottom: 32px;
+  padding-left: 16px;
+}
+
+button {
+  width: 211px;
+  height: 50px;
+}
+
+textbutton {
+  margin-bottom: 32px;
 }

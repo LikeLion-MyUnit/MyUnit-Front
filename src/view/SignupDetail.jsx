@@ -1,14 +1,17 @@
 import React from 'react';
 
+
+import './signupDetail.scss';
 const SignupDetail = () => {
     return (
         <div className="container">
             <p className="alert">프로필을 자세히 쓸수록 모집 / 초대 확률이 높아져요</p>
             <div className="profile-box">
                 <div className="profile-box__pic">
-                    <img src="default image" alt="" />
+                    <img src="http://placehold.jp/50x50.png" alt="" />
                 </div>
-                <button className="profile-box__btn">닉네임 변경</button>
+                
+        <button>닉네임 변경</button>
             </div>
             <div className="select-container">
                 <select name="age" className="select-box">

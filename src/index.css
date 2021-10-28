@@ -5,15 +5,22 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  margin: 0px;
+  padding: 0px;
   width: 360px;
   height: 812px;
   border: 1px solid lightgray;
+  margin-top: 32px;
   overflow-y: scroll;
+  background-color: #f6f6f6;
 }
 
 html {
   display: flex;
   justify-content: center;
+  margin: 0px;
+  padding: 0px;
+  overflow-y: scroll;
 }
 
 code {

@@ -1,11 +1,13 @@
 import React from 'react';
-import '../common/textArea.scss';
+import '../common/TextArea.module.scss'
+import { textbutton } from '../componants/TextButton';
 
 const Signup = () => {
     return (
         <div className="container">
             <img src="img/logo.png" alt="logo" className="logo" />
-            <form className="authForm">
+            
+            <form className="column">
                 <div className="input-id">
                     <input name="id" type="text" placeholder="아이디"/>
                 </div>
@@ -15,10 +17,12 @@ const Signup = () => {
                 <div className="input-password">
                     <input name="rePassword" type="password" placeholder="비밀번호 확인"/>
                 </div>
+            <button className="btn-signup">회원가입</button>
             </form>
-            <div className="btn-signup">회원가입</div>
+            
+            
 
-            <div className="btn-login">이미 가입하셨나요?</div>
+            <textbutton className="btn-login">이미 가입하셨나요?</textbutton>
         </div>
     );
 };

@@ -1,12 +1,11 @@
 @import "./Colors.scss";
 
-textarea {
-  width: 100%;
+input {
   background: #fdfcff;
   border: 1px solid #8e8e8e;
   box-sizing: border-box;
-  border-radius: 10px;
-  resize: none;
+  border-radius: 30px;
+
   &:focus {
     outline: transparent;
     border: 1px solid $main-color;
