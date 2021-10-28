@@ -1,4 +1,5 @@
 import React from 'react';
+import '../common/textArea.scss';
 
 const Signup = () => {
     return (
