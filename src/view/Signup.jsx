@@ -2,7 +2,7 @@ import React from 'react';
 import '../common/TextArea.module.scss'
 import { textbutton } from '../componants/TextButton';
 
-const Signup = () => {
+const Signup = ({history}) => {
     return (
         <div className="container">
             <img src="img/logo.png" alt="logo" className="logo" />
@@ -22,7 +22,7 @@ const Signup = () => {
             
             
 
-            <textbutton className="btn-login">이미 가입하셨나요?</textbutton>
+            <textbutton className="btn-login"  onClick={()=>history.push('/')}>이미 가입하셨나요?</textbutton>
         </div>
     );
 };

@@ -2,7 +2,8 @@ import React from 'react';
 
 
 import './signupDetail.scss';
-const SignupDetail = () => {
+
+const SignupDetail = ({history}) => {
     return (
         <div className="container">
             <p className="alert">프로필을 자세히 쓸수록 모집 / 초대 확률이 높아져요</p>
@@ -54,7 +55,7 @@ const SignupDetail = () => {
                 </div>
             </div>
             <hr />
-            <button className="btn-later">나중에 할게요</button>
+            <button className="btn-later" onClick={()=>history.push('/welcome')}>나중에 할게요</button>
             <button className="btn-finish">작성완료</button>
         </div>
     );

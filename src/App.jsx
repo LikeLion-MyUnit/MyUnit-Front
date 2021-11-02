@@ -10,15 +10,12 @@ function App() {
   return (
     
     <BrowserRouter>
-      <Route exact path="/">
-      <Login />
-    </Route>
-    <Route exact path="/signup">
-      <Signup />
-      </Route>
-      <Route exact path="/signup_detail">
-      <SignupDetail />
-    </Route>
+    <Switch>
+      <Route exact path="/" component={Login} />
+      <Route path="/signup" component={Signup} />
+      <Route path="/signup_detail" component={SignupDetail} />
+      <Route path="/welcome" component={Welcome} />
+    </Switch>
     </BrowserRouter>
   );
 }

@@ -5,7 +5,7 @@ import '../common/Input.module.scss'
 import { textbutton } from '../componants/TextButton';
 import './login.scss';
 
-const Login = () => {
+const Login = ({history}) => {
     return (
         <div className="container">
             <img src="img/logo.png" alt="logo" className="logo" />
@@ -21,7 +21,7 @@ const Login = () => {
             </form>
             <div className="column">
                 
-            <textbutton className="text-btn-signup">처음이신가요?</textbutton>
+            <textbutton className="text-btn-signup" onClick={()=>history.push('/signup')}>처음이신가요?</textbutton>
                 <textbutton className="text-btn-forgottenpwd">비밀번호를 잊으셨나요?</textbutton>
                 </div>
         </div>
