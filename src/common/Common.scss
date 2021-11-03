@@ -1,0 +1,58 @@
+@import "./Colors.scss";
+
+.btn-main {
+  border: 1px solid #bbbbbb;
+  box-sizing: border-box;
+  border-radius: 10px;
+  background: #3c17c4;
+  color: white;
+  cursor: pointer;
+}
+
+.btn-text {
+  margin-bottom: 32px;
+  color: $green-color;
+  cursor: pointer;
+}
+
+.btn-white {
+  border: 1px solid #bbbbbb;
+  box-sizing: border-box;
+  border-radius: 10px;
+  background: gray;
+  color: white;
+  cursor: pointer;
+}
+
+input {
+  background: #fdfcff;
+  border: 1px solid #8e8e8e;
+  box-sizing: border-box;
+  border-radius: 30px;
+
+  &:focus {
+    outline: transparent;
+    border: 1px solid $main-color;
+    box-shadow: 0 0 10px transparent;
+  }
+}
+
+textarea {
+  width: 100%;
+  background: #fdfcff;
+  border: 1px solid #8e8e8e;
+  box-sizing: border-box;
+  border-radius: 10px;
+  resize: none;
+  &:focus {
+    outline: transparent;
+    border: 1px solid $main-color;
+    box-shadow: 0 0 10px transparent;
+  }
+}
+
+textbutton {
+  margin-bottom: 32px;
+  color: $green-color;
+  cursor: pointer;
+}

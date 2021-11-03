@@ -1,33 +1,31 @@
 import React from 'react';
 
+import styles from './signupDetail.module.scss';
 
-import './signupDetail.scss';
 
 const SignupDetail = ({history}) => {
     return (
-        <div className="container">
-            <p className="alert">프로필을 자세히 쓸수록 모집 / 초대 확률이 높아져요</p>
-            <div className="profile-box">
-                <div className="profile-box__pic">
-                    <img src="http://placehold.jp/50x50.png" alt="" />
-                </div>
+        <div className={styles.container}>
+            <p className={styles.alert}>프로필을 자세히 쓸수록 모집 / 초대 확률이 높아져요</p>
+            <div className={styles.profile_box}>
+                <img src="http://placehold.jp/50x50.png" alt="" />
+                <button>닉네임 변경</button>
                 
-        <button>닉네임 변경</button>
             </div>
-            <div className="select-container">
-                <select name="age" className="select-box">
+            <div className={styles.select_container}>
+                <select name="age">
                     <option value="" disabled selected>나이</option>
                     {/* 나이 셀렉트 */}
                 </select>
-                <select name="gender" className="select-box">
+                <select name="gender">
                 <option value="" disabled selected>성별</option>
                     {/* 성별 셀렉트 */}
                 </select>
-                <select name="area" className="select-box">
+                <select name="area">
                 <option value="" disabled selected>지역</option>
                     {/* 지역 셀렉트 */}
                 </select>
-                <select name="interest" className="select-box">
+                <select name="interest">
                 <option value="" disabled selected>관심 분야</option>
                     {/* 관심 분야 셀렉트 */}
                 </select>

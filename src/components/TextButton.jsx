@@ -1,5 +1,5 @@
 import React from 'react';
-import '../common/TextButton.module.scss'
+// import styles from '../common/Common.scss';
 
 export const textbutton = ({children, onClick }) => {
     return (<div className="text-button" onClick={onClick}>

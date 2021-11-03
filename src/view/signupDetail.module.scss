@@ -15,8 +15,10 @@ p.alert {
   font-size: 14px;
 }
 
-div.profile-box {
+div.profile_box {
   display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
 }
 

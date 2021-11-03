@@ -1,28 +1,24 @@
 import React from 'react';
 
-import '../common/Button.module.scss'
-import '../common/Input.module.scss'
-import { textbutton } from '../componants/TextButton';
-import './login.scss';
+import styles from './login.module.scss';
+import '../common/Common.scss';
+import { textbutton } from '../components/TextButton';
+
 
 const Login = ({history}) => {
     return (
-        <div className="container">
-            <img src="img/logo.png" alt="logo" className="logo" />
+        <div className={styles.container}>
+            <img src="img/logo.png" alt="logo" className={styles.logo} />
             
-            <form className="column">
-                <div className="input-box">
-                    <input name="id" type="text" placeholder="아이디"/>
-                </div>
-                <div className="input-box">
-                    <input name="password" type="password" placeholder="비밀번호"/>
-                </div>
-                <button className="btn-login">로그인</button>
+            <form className={styles.column}>
+                <input name="id" type="text" placeholder="아이디"/>
+                <input name="password" type="password" placeholder="비밀번호"/>
+                <button className="btn-login btn-main">로그인</button>
             </form>
-            <div className="column">
-                
-            <textbutton className="text-btn-signup" onClick={()=>history.push('/signup')}>처음이신가요?</textbutton>
-                <textbutton className="text-btn-forgottenpwd">비밀번호를 잊으셨나요?</textbutton>
+            <div className={styles.column}>
+            
+            <textbutton onClick={()=>history.push('/signup')}>처음이신가요?</textbutton>
+                <textbutton>비밀번호를 잊으셨나요?</textbutton>
                 </div>
         </div>
     );
