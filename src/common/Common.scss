@@ -4,13 +4,12 @@
   border: 1px solid #bbbbbb;
   box-sizing: border-box;
   border-radius: 10px;
-  background: #3c17c4;
+  background: $main-color;
   color: white;
   cursor: pointer;
 }
 
 .btn-text {
-  margin-bottom: 32px;
   color: $green-color;
   cursor: pointer;
 }
@@ -19,7 +18,16 @@
   border: 1px solid #bbbbbb;
   box-sizing: border-box;
   border-radius: 10px;
-  background: gray;
+  background: white;
+  color: $black-color;
+  cursor: pointer;
+}
+
+.btn-gray {
+  border: 1px solid #bbbbbb;
+  box-sizing: border-box;
+  border-radius: 10px;
+  background: $grey-color;
   color: white;
   cursor: pointer;
 }
@@ -49,10 +57,4 @@ textarea {
     border: 1px solid $main-color;
     box-shadow: 0 0 10px transparent;
   }
-}
-
-textbutton {
-  margin-bottom: 32px;
-  color: $green-color;
-  cursor: pointer;
 }

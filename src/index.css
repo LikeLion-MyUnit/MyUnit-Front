@@ -12,7 +12,6 @@ body {
   border: 1px solid lightgray;
   margin-top: 32px;
   overflow-y: scroll;
-  background-color: #f6f6f6;
 }
 
 body {
@@ -38,5 +37,8 @@ code {
 div#root {
   height: 100%;
   margin: auto;
-  background-color: #f6f6f6;
+}
+
+p {
+  margin: 0px;
 }

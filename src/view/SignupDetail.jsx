@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 import styles from './signupDetail.module.scss';
 
 
@@ -7,26 +8,26 @@ const SignupDetail = ({history}) => {
     return (
         <div className={styles.container}>
             <p className={styles.alert}>프로필을 자세히 쓸수록 모집 / 초대 확률이 높아져요</p>
-            <div className={styles.profile_box}>
+            <div className={styles.profileBox}>
                 <img src="http://placehold.jp/50x50.png" alt="" />
-                <button>닉네임 변경</button>
+                <button className="btn-white">닉네임 변경</button>
                 
             </div>
-            <div className={styles.select_container}>
+            <div className="select-container">
                 <select name="age">
-                    <option value="" disabled selected>나이</option>
+                    <option value="" disabled>나이</option>
                     {/* 나이 셀렉트 */}
                 </select>
                 <select name="gender">
-                <option value="" disabled selected>성별</option>
+                <option value="" disabled>성별</option>
                     {/* 성별 셀렉트 */}
                 </select>
                 <select name="area">
-                <option value="" disabled selected>지역</option>
+                <option value="" disabled>지역</option>
                     {/* 지역 셀렉트 */}
                 </select>
                 <select name="interest">
-                <option value="" disabled selected>관심 분야</option>
+                <option value="" disabled>관심 분야</option>
                     {/* 관심 분야 셀렉트 */}
                 </select>
             </div>
@@ -49,12 +50,12 @@ const SignupDetail = ({history}) => {
                 <div className="add-box">
                     <p>수상/자격증/어학</p>
                     <hr />
-                    <button className="btn-add">추가</button>
+                    <button className="btn-white">추가</button>
                 </div>
             </div>
             <hr />
-            <button className="btn-later" onClick={()=>history.push('/welcome')}>나중에 할게요</button>
-            <button className="btn-finish">작성완료</button>
+            <button className="btn-gray" onClick={()=>history.push('/welcome')}>나중에 할게요</button>
+            <button className="btn-main">작성완료</button>
         </div>
     );
 };

@@ -9,13 +9,13 @@
   height: 100%;
 }
 
-p.alert {
+.alert {
   color: $main-color;
   font-weight: bold;
   font-size: 14px;
 }
 
-div.profile_box {
+.profileBox {
   display: flex;
   justify-content: center;
   align-items: center;
