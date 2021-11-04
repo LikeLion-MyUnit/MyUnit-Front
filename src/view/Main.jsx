@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import MultipleTabBar from "../components/MultipleTabBar";
 import Navbar from "../components/Navbar";
+import Post from '../components/Post';
 import TabBar from "../components/TabBar";
 import TextTabBar from "../components/TextTabBar";
 
@@ -41,12 +42,13 @@ const Main = () => {
 
   useEffect(() => {
     
-  },[])
+  }, [])
 
   function changeTab(t) {
     setSelectedTab(t);
-    resetThirdTab(t);
+   
   }
+
   function changeSecondTab(t) {
     setSelectedSecondTab(t);
     resetThirdTab(t);
@@ -92,14 +94,26 @@ const Main = () => {
         callback={(t) => changeThirdTab(t)}
       ></MultipleTabBar>
       <div className={styles.dropdownContainer}>
-       <select name="area">
-          <option value="최신순" disabled>
+        <select name={styles.selectSort}>
+          <option value="최신순" selected>
             최신순
           </option>
-          {/* 지역 셀렉트 */}
+
         </select>
         <button className={`${styles.btnMain} btn-main`}>글쓰기</button>
-        </div>
+      </div>
+
+
+      {selectedTab === "모집" ? (<div>
+      <Post></Post>
+      <Post></Post>
+      <Post></Post>
+      <Post></Post>
+      <Post></Post>
+      <Post></Post>
+      <Post></Post></div>) : <div></div>
+  }
+
     </div>
   );
 };

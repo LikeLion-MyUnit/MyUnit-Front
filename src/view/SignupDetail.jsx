@@ -14,29 +14,30 @@ const SignupDetail = ({ history }) => {
           alt=""
           className={styles.profileImg}
         />
-        <button className="btn-white">닉네임 변경</button>
+        <button className={`${styles.btnWhite} btn-white`}>닉네임 변경</button>
       </div>
       <div className="select-container">
-        <select name="age">
-          <option value="" disabled>
+        <select className={styles.select} name="age">
+          <option value="" selected>
             나이
           </option>
           {/* 나이 셀렉트 */}
         </select>
-        <select name="gender">
-          <option value="" disabled>
+        <select className={styles.select}  name="gender">
+          <option value="" selected>
             성별
           </option>
           {/* 성별 셀렉트 */}
-        </select>
-        <select name="area">
-          <option value="" disabled>
+        </select></div>
+        <div className="select-container">
+        <select className={styles.select}  name="area">
+          <option value="" selected>
             지역
           </option>
           {/* 지역 셀렉트 */}
         </select>
-        <select name="interest">
-          <option value="" disabled>
+        <select className={styles.select}  name="interest">
+          <option value="" selected>
             관심 분야
           </option>
           {/* 관심 분야 셀렉트 */}
@@ -61,14 +62,18 @@ const SignupDetail = ({ history }) => {
         <div className="add-box">
           <p>수상/자격증/어학</p>
           <hr />
-          <button className="btn-white">추가</button>
+          <button className={`${styles.btnWhite} btn-white`}>추가</button>
         </div>
       </div>
       <hr />
-      <button className="btn-gray" onClick={() => history.push("/welcome")}>
+      <div className={styles.rowBtns}>
+      <button className={`${styles.btnGreyBottom} btn-gray`} onClick={() => history.push("/welcome")}>
         나중에 할게요
       </button>
-      <button className="btn-main">작성완료</button>
+        <button className="btn-main">작성완료</button>
+        </div>
+
+
     </div>
   );
 };

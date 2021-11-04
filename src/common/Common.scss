@@ -19,7 +19,7 @@
 .btn-white {
   border: 1px solid #bbbbbb;
   box-sizing: border-box;
-  border-radius: 10px;
+
   background: white;
   color: $black-color;
   cursor: pointer;
@@ -59,4 +59,11 @@ textarea {
     border: 1px solid $main-color;
     box-shadow: 0 0 10px transparent;
   }
+}
+
+select {
+  width: 80px;
+  padding: 4px;
+  border-radius: 10px;
+  border: 1px solid $grey-color;
 }
