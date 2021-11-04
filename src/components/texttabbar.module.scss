@@ -21,10 +21,32 @@
   height: 100%;
   margin-top: 16px;
   margin-bottom: 16px;
-  margin-left: 24px;
   cursor: pointer;
+
+  span {
+    margin: 0 12px;
+  }
 }
 
 .container {
-  display: inline-flex;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.searchGroup {
+  display: flex;
+  align-items: center;
+  margin: 0 20px;
+
+  .search {
+    width: 140px;
+    height: 20px;
+    margin: 0 8px 0 0;
+    padding: 0;
+    text-align: center;
+  }
+  .searchBtn {
+    cursor: pointer;
+  }
 }
