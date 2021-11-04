@@ -1,0 +1,25 @@
+@import "../common/Colors.scss";
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.btnSelected {
+  margin: 4px 8px;
+  padding: 4px 8px;
+  border-radius: 10px;
+  background-color: $main-color;
+  color: $white-color;
+  cursor: pointer;
+}
+
+.btn {
+  margin: 4px 8px;
+  padding: 4px 8px;
+  border-radius: 10px;
+  background-color: $grey-color;
+  color: $white-color;
+  cursor: pointer;
+}

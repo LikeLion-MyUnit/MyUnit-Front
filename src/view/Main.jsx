@@ -43,6 +43,16 @@ const Main = () => {
   function changeSecondTab(t) {
     setSelectedSecondTab(t);
   }
+  function changeThirdTab(t) {
+    let temp = selectedThirdTab;
+    if (!selectedThirdTab.includes(t)) {
+      temp = [...temp, t];
+    } else {
+      temp = temp.filter((e) => e !== t);
+    }
+    setSelectedThirdTab(temp);
+    console.log(selectedThirdTab);
+  }
 
   return (
     <div>
@@ -62,6 +72,8 @@ const Main = () => {
       </div>
       <MultipleTabBar
         tabs={selectedSecondTab === "지역" ? localTabs : contestCategoryTabs}
+        selected={selectedThirdTab}
+        callback={(t) => changeThirdTab(t)}
       ></MultipleTabBar>
     </div>
   );
