@@ -1,0 +1,30 @@
+@import "../common/Colors.scss";
+
+.textSelected {
+  height: 100%;
+  color: $main-color;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.text {
+  height: 100%;
+  vertical-align: middle;
+  color: $dark-grey-color;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.btnTab {
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  margin-left: 24px;
+  cursor: pointer;
+}
+
+.container {
+  display: inline-flex;
+}
