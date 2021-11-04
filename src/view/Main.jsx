@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Navbar from "../components/Navbar";
 import TabBar from "../components/TabBar";
 import TextTabBar from "../components/TextTabBar";
 
@@ -18,7 +19,7 @@ const Main = () => {
 
   return (
     <div>
-      {/* <div></div> Nav Space */}
+      <Navbar />
       <TabBar
         className="1stTabBar"
         tabs={tabs}
