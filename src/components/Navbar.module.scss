@@ -1,0 +1,36 @@
+@import "../common/Colors.scss";
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 98px;
+}
+.logo {
+  width: 39px;
+  margin-left: 8px;
+}
+.btnGroup {
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+
+  button {
+    background-color: transparent;
+    margin-left: 8px;
+    cursor: pointer;
+  }
+}
+
+.btnAlarm,
+.btnSettings {
+  width: 30px;
+  height: 30px;
+  border: 1px solid $grey-color;
+  border-radius: 50%;
+}
+
+.btnLogout {
+  //   margin-left: 140px;
+  border: none;
+}
