@@ -1,13 +1,16 @@
-import React from 'react';
+import React from "react";
+import styles from "./Welcome.module.scss";
 
-const Welcome = () => {
-    return (
-        <div className="container">
-            {/* 로고 short version 넣기 */}
-            <h1 className="welcome">에 오신 것을 환영합니다!</h1>
-            <button className="btn-findteam">팀원 찾기</button>
-        </div>
-    );
+const Welcome = ({ history }) => {
+  return (
+    <div className={styles.container}>
+      <img src="img/logo_short.png" alt="" className={styles.logo} />
+      <h1 className={styles.welcome}> 환영합니다!</h1>
+      <button className="btn-main" onClick={() => history.push("/recruit")}>
+        팀원 찾기
+      </button>
+    </div>
+  );
 };
 
 export default Welcome;
