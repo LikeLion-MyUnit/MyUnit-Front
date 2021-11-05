@@ -43,6 +43,7 @@ const ProfileSettings = () => {
           Vero, magni quaerat.
         </div>
       </div>
+      <button className={`${styles.btnEdit} btn-main`}>수정하기</button>
     </div>
   );
 };

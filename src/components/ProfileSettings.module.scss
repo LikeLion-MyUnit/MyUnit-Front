@@ -1,5 +1,10 @@
 @import "../common/Colors.scss";
 
+.container {
+  position: relative;
+  height: calc(812px - 170px);
+}
+
 .profileBox {
   display: flex;
   align-items: center;
@@ -53,4 +58,13 @@
     border-radius: 10px;
     background-color: transparent;
   }
+}
+
+.btnEdit {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 85px;
+  height: 30px;
 }
