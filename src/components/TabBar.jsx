@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./tabbar.module.scss";
+import styles from "./tabBar.module.scss";
 
 const TabBar = ({ tabs, selected, callback }) => {
   //List<String> tabs, function callback(setState)
