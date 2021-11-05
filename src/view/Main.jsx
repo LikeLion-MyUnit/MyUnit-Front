@@ -5,7 +5,7 @@ import Post from "../components/Post";
 import TabBar from "../components/TabBar";
 import TextTabBar from "../components/TextTabBar";
 
-import styles from "./main.module.scss";
+import styles from "./Main.module.scss";
 import UserInfo from "./../components/UserInfo";
 
 const tabs = ["모집", "초대"];

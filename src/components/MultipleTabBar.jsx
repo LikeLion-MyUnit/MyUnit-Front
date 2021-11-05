@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./multipleTabBar.module.scss";
+import styles from "./MultipleTabBar.module.scss";
 
 const MultipleTabBar = ({ tabs, selected, callback }) => {
   tabs = tabs.filter((e) => !selected.includes(e));

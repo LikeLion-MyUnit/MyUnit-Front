@@ -1,6 +1,6 @@
 import React from "react";
 
-import styles from "./login.module.scss";
+import styles from "./Login.module.scss";
 import "../common/Common.scss";
 
 const Login = ({ history }) => {
