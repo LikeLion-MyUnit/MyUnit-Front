@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import MultipleTabBar from "../components/MultipleTabBar";
 import Navbar from "../components/Navbar";
-import Post from '../components/Post';
+import Post from "../components/Post";
 import TabBar from "../components/TabBar";
 import TextTabBar from "../components/TextTabBar";
 
 import styles from "./main.module.scss";
+import UserInfo from "./../components/UserInfo";
 
 const tabs = ["모집", "초대"];
 const secondTabs = ["지역", "대회분류"];
@@ -40,23 +41,20 @@ const Main = () => {
   const [selectedSecondTab, setSelectedSecondTab] = useState(secondTabs[0]);
   const [selectedThirdTab, setSelectedThirdTab] = useState([localTabs[0]]);
 
-  useEffect(() => {
-    
-  }, [])
+  useEffect(() => {}, []);
 
   function changeTab(t) {
     setSelectedTab(t);
-   
   }
 
   function changeSecondTab(t) {
     setSelectedSecondTab(t);
     resetThirdTab(t);
   }
-  
+
   function resetThirdTab(t) {
     let temp = selectedThirdTab;
-    temp = temp.filter((e) => false)
+    temp = temp.filter((e) => false);
     let defaultElement = t === "지역" ? localTabs[0] : contestCategoryTabs[0];
     setSelectedThirdTab([...temp, defaultElement]);
   }
@@ -88,7 +86,8 @@ const Main = () => {
           callback={(t) => changeSecondTab(t)}
         ></TextTabBar>
       </div>
-      <MultipleTabBar className="3rdTabBar"
+      <MultipleTabBar
+        className="3rdTabBar"
         tabs={selectedSecondTab === "지역" ? localTabs : contestCategoryTabs}
         selected={selectedThirdTab}
         callback={(t) => changeThirdTab(t)}
@@ -98,22 +97,30 @@ const Main = () => {
           <option value="최신순" selected>
             최신순
           </option>
-
         </select>
         <button className={`${styles.btnMain} btn-main`}>글쓰기</button>
       </div>
 
-
-      {selectedTab === "모집" ? (<div>
-      <Post></Post>
-      <Post></Post>
-      <Post></Post>
-      <Post></Post>
-      <Post></Post>
-      <Post></Post>
-      <Post></Post></div>) : <div></div>
-  }
-
+      {selectedTab === "모집" ? (
+        <div>
+          <Post></Post>
+          <Post></Post>
+          <Post></Post>
+          <Post></Post>
+          <Post></Post>
+          <Post></Post>
+          <Post></Post>
+        </div>
+      ) : (
+        // 초대 클릭시
+        <div>
+          <UserInfo />
+          <UserInfo />
+          <UserInfo />
+          <UserInfo />
+          <UserInfo />
+        </div>
+      )}
     </div>
   );
 };
