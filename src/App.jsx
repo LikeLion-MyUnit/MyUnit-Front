@@ -6,7 +6,7 @@ import Login from "./view/Login";
 import SignupDetail from "./view/SignupDetail";
 import Welcome from "./view/Welcome";
 import Main from "./view/Main";
-import ProfileSettings from "./view/ProfileSettings";
+import MyPage from "./view/MyPage";
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
         <Route path="/signup_detail" component={SignupDetail} />
         <Route path="/welcome" component={Welcome} />
         <Route path="/main" component={Main} />
-        <Route path="/profile_settings" component={ProfileSettings} />
+        <Route path="/mypage" component={MyPage} />
       </Switch>
     </BrowserRouter>
   );
