@@ -13,6 +13,8 @@
   color: $main-color;
   font-weight: bold;
   font-size: 14px;
+
+  margin-bottom: 16px;
 }
 
 .profileBox {
@@ -20,6 +22,14 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  padding-bottom: 16px;
+}
+
+.selectContainer {
+  margin-bottom: 16px;
+}
+.inputBox {
+  margin-bottom: 16px;
 }
 
 .profileImg {
@@ -44,4 +54,10 @@
 
 .btnGreyBottom {
   margin-right: 16px;
+}
+
+.addBtnContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }

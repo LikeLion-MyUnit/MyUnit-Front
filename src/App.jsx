@@ -16,7 +16,7 @@ function App() {
         <Route path="/signup" component={Signup} />
         <Route path="/signup_detail" component={SignupDetail} />
         <Route path="/welcome" component={Welcome} />
-        <Route path="/main" component={Main} />
+        <Route path="/" component={Main} />
         <Route path="/mypage" component={MyPage} />
       </Switch>
     </BrowserRouter>
