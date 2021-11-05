@@ -5,7 +5,6 @@ import Signup from "./view/Signup";
 import Login from "./view/Login";
 import SignupDetail from "./view/SignupDetail";
 import Welcome from "./view/Welcome";
-import Recruit from "./view/Recruit";
 import Main from "./view/Main";
 
 function App() {
@@ -16,7 +15,6 @@ function App() {
         <Route path="/signup" component={Signup} />
         <Route path="/signup_detail" component={SignupDetail} />
         <Route path="/welcome" component={Welcome} />
-        <Route path="/recruit" component={Recruit} />
         <Route path="/main" component={Main} />
       </Switch>
     </BrowserRouter>
