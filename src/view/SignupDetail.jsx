@@ -16,7 +16,8 @@ const SignupDetail = ({ history }) => {
         />
         <button className={`${styles.btnWhite} btn-white`}>닉네임 변경</button>
       </div>
-      <div className="select-container">
+      <div  className={styles.selectContainer}>
+      <div>
         <select className={styles.select} name="age">
           <option value="" selected>
             나이
@@ -29,7 +30,7 @@ const SignupDetail = ({ history }) => {
           </option>
           {/* 성별 셀렉트 */}
         </select></div>
-        <div className="select-container">
+        <div>
         <select className={styles.select}  name="area">
           <option value="" selected>
             지역
@@ -42,27 +43,30 @@ const SignupDetail = ({ history }) => {
           </option>
           {/* 관심 분야 셀렉트 */}
         </select>
-      </div>
+        </div>
+        </div>
       <div className="input-container">
-        <div className="input-box">
+        <div className={styles.inputBox}>
           <p>자기소개</p>
           <hr />
           <textarea name="intro" cols="30" rows="10"></textarea>
         </div>
-        <div className="input-box">
+        <div className={styles.inputBox}>
           <p>가능한 역할 / 기술</p>
           <hr />
           <textarea name="stack" cols="30" rows="10"></textarea>
         </div>
-        <div className="input-box">
+        <div className={styles.inputBox}>
           <p>포트폴리오</p>
           <hr />
           <textarea name="portfolio" cols="30" rows="10"></textarea>
         </div>
-        <div className="add-box">
+        <div className={styles.inputBox}>
           <p>수상/자격증/어학</p>
           <hr />
-          <button className={`${styles.btnWhite} btn-white`}>추가</button>
+          <div className={styles.addBtnContainer}>
+            <button className={`${styles.btnWhite} btn-white`}>추가</button>
+            </div>
         </div>
       </div>
       <hr />
