@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import ProfileSettings from "../components/ProfileSettings";
 import TabBar from "../components/TabBar";
 import Messages from "./Messages";
+import Interest from "./Interest";
 
 const tabs = ["프로필", "메시지", "관심목록"];
 
@@ -22,6 +23,7 @@ const MyPage = () => {
       ></TabBar>
       {selectedTab === "프로필" ? <ProfileSettings /> : null}
       {selectedTab === "메시지" ? <Messages /> : null}
+      {selectedTab === "관심목록" ? <Interest /> : null}
     </div>
   );
 };

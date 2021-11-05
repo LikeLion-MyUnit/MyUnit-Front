@@ -1,0 +1,13 @@
+@import "../common/Colors.scss";
+
+.profiles,
+.recruitment {
+  margin-top: 35px;
+}
+
+.title {
+  font-weight: bolder;
+  padding-left: 25px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid $grey-color;
+}
