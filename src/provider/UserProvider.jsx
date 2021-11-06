@@ -18,7 +18,7 @@ function reducer(state, action) {
       return {
         ...state,
         isLoggedIn: true,
-        ...action.payload,
+        user: action.payload.user,
       };
 
     case "logout":
@@ -38,13 +38,11 @@ function UserProvider(props, children) {
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  async function login() {
-    //TODO : request login to django
+  async function login(user) {
+    //TODO : save to cookie
     dispatch({
       type: "login",
-      payload: {
-        //TODO : data
-      },
+      payload: { user: user },
     });
   }
 

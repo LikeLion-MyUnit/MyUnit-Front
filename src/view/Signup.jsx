@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "../common/Common.scss";
+import { UserContext } from "../provider/UserProvider";
 import { requestLogin } from "../service/AuthService";
 import styles from "./Login.module.scss";
 // import { useForm } from "react-hook-form";
@@ -12,6 +13,7 @@ const Signup = ({ history }) => {
   const [pw, setPwTextInput] = useState("");
   const [rePw, setRePwTextInput] = useState("");
   const [nickname, setNicknameTextInput] = useState("");
+  const { login } = useContext(UserContext);
 
   function changeTextInput(e) {
     const {
@@ -37,12 +39,16 @@ const Signup = ({ history }) => {
   async function onSubmit(e) {
     e.preventDefault(); //prevent initialization input
     //TODO : add validate
-    if (rePw !== pw) {
+    if (!id.includes("@")) {
+      alert("이메일 형식을 입력하세요.");
+    } else if (rePw !== pw) {
       alert("비밀번호를 확인하세요.");
     } else {
       let response = await requestLogin(id, pw, nickname);
-      if (response) {
-        history.push("login");
+      if (typeof response !== "string") {
+        console.log(response);
+        login(response);
+        history.push("/");
       } else {
         alert(response);
       }
