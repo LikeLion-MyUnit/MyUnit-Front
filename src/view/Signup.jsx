@@ -1,14 +1,10 @@
 import React, { useContext, useState } from "react";
 import "../common/Common.scss";
 import { UserContext } from "../provider/UserProvider";
-import { requestLogin } from "../service/AuthService";
+import { requestSignup } from "../service/AuthService";
 import styles from "./Login.module.scss";
-// import { useForm } from "react-hook-form";
-// import validator from "validator";
 
 const Signup = ({ history }) => {
-  // const { register, handleSubmit, errors } = useForm();
-
   const [id, setIdTextInput] = useState("");
   const [pw, setPwTextInput] = useState("");
   const [rePw, setRePwTextInput] = useState("");
@@ -44,7 +40,7 @@ const Signup = ({ history }) => {
     } else if (rePw !== pw) {
       alert("비밀번호를 확인하세요.");
     } else {
-      let response = await requestLogin(id, pw, nickname);
+      let response = await requestSignup(id, pw, nickname);
       if (typeof response !== "string") {
         login(response);
         history.push("/");
