@@ -15,6 +15,10 @@ const UserContext = createContext({
 function reducer(state, action) {
   switch (action.type) {
     case "login":
+      window.localStorage.setItem(
+        "userInfo",
+        JSON.stringify(action.payload.user)
+      );
       return {
         ...state,
         isLoggedIn: true,
@@ -22,9 +26,12 @@ function reducer(state, action) {
       };
 
     case "logout":
+      window.localStorage.removeItem("userInfo");
       return {
         ...state,
+
         ...initialState,
+        isLoggedIn: false,
       };
 
     default:
@@ -33,13 +40,14 @@ function reducer(state, action) {
 
 function UserProvider(props, children) {
   useEffect(() => {
+    let cookie = JSON.parse(window.localStorage.getItem("userInfo"));
+    if (cookie) login(cookie);
     //TODO : load login session from cookie
   }, []);
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
   async function login(user) {
-    //TODO : save to cookie
     dispatch({
       type: "login",
       payload: { user: user },
@@ -48,7 +56,7 @@ function UserProvider(props, children) {
 
   function logout() {
     dispatch({
-      type: "setLogout",
+      type: "logout",
     });
   }
 

@@ -17,9 +17,9 @@ const Login = ({ history }) => {
         <div className="btn-text" onClick={() => history.push("/signup")}>
           처음이신가요?
         </div>
-        <div className="btn-text" style={{ marginTop: 30 }}>
+        {/* <div className="btn-text" style={{ marginTop: 30 }}>
           비밀번호를 잊으셨나요?
-        </div>
+        </div> */}
       </div>
     </div>
   );

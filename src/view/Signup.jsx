@@ -46,7 +46,6 @@ const Signup = ({ history }) => {
     } else {
       let response = await requestLogin(id, pw, nickname);
       if (typeof response !== "string") {
-        console.log(response);
         login(response);
         history.push("/");
       } else {
