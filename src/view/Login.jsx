@@ -11,12 +11,15 @@ const Login = ({ history }) => {
       <form className={styles.column}>
         <input name="id" type="text" placeholder="아이디" />
         <input name="password" type="password" placeholder="비밀번호" />
-        {/* 버튼 width 다시 수정해야함 */}
         <button className="btn-login btn-main">로그인</button>
       </form>
       <div className={styles.column}>
-        <div onClick={() => history.push("/signup")}>처음이신가요?</div>
-        <div>비밀번호를 잊으셨나요?</div>
+        <div className="btn-text" onClick={() => history.push("/signup")}>
+          처음이신가요?
+        </div>
+        <div className="btn-text" style={{ marginTop: 30 }}>
+          비밀번호를 잊으셨나요?
+        </div>
       </div>
     </div>
   );
