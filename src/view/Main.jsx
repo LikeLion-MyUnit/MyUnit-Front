@@ -41,13 +41,16 @@ const Main = ({ history }) => {
   const [selectedTab, setSelectedTab] = useState(tabs[0]);
   const [selectedSecondTab, setSelectedSecondTab] = useState(secondTabs[0]);
   const [selectedThirdTab, setSelectedThirdTab] = useState([localTabs[0]]);
-  // const { details } = useContext(UserContext);
+  const { details,isLoggedIn } = useContext(UserContext);
 
   useEffect(() => {
-    // if (details === null) {
-    //if not be writen user detail profile yet.
-    // }
-  }, []);
+    
+    if (details!==null && details.city === "선택안함" && isLoggedIn) {
+      // if not be writen user detail profile yet.
+      
+      history.push("/signup_detail");
+    }
+  }, [details,isLoggedIn]);
 
   function changeTab(t) {
     setSelectedTab(t);

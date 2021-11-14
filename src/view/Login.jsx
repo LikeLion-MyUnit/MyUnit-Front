@@ -36,12 +36,7 @@ const Login = ({ history }) => {
       let response = await requestLogin(id, pw);
       if (typeof response !== "string") {
         login(response);
-        let details = await getUserProfile(response.token, response.user_pk);
-        if (details === null) {
-          history.push("/signup_detail");
-        } else {
           history.push("/");
-        }
       } else {
         alert(response);
       }

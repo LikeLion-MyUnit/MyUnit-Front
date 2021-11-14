@@ -3,6 +3,7 @@ import { serverURL } from "./ServerConst";
 
 export async function requestSignup(id, password, nickname, phonenum) {
   try {
+    
     let response = await axios.post(
       `${serverURL}/account/user/signup/`,
 
@@ -13,7 +14,7 @@ export async function requestSignup(id, password, nickname, phonenum) {
         phonenum: `+82${phonenum.substring(1)}`,
       }
     );
-    response.data.password = "";
+    // response.data.password = "";
     console.log(response.data);
     return response.data;
   } catch (e) {
@@ -39,7 +40,8 @@ export async function requestLogin(id, password) {
         password: password,
       }
     );
-    response.data.password = "";
+    // response.data.password = "";
+    // console.log(response.data);
     return response.data;
   } catch (e) {
     return "이메일 혹은 비밀번호를 확인하세요.";
@@ -51,19 +53,50 @@ export async function getUserProfile(token, pk) {
   try {
     let response = await axios({
       method: "get",
-      url: `${serverURL}/account/profile/${pk}`,
+      url: `${serverURL}/account/profile/${pk}/`,
       xstfCookieName: "csrftoken",
       xsrfHeaderName: "X-CSRFToken",
       headers: {
         Authorization: `Token ${token}`,
       },
     });
+    console.log(response.data)
     return response.data;
   } catch (e) {
     return null;
-
-    //TODO : save to cookie
   }
 }
+
+
+export async function postUserProfile(token, data) {
+  try {
+
+    console.log(data.photo)
+
+    let response = await axios({
+      method: "put",
+      url: `${serverURL}/account/profile/${data.user_pk}/`,
+      xstfCookieName: "csrftoken",
+      xsrfHeaderName: "X-CSRFToken",
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+      data: {
+        gender: data.gender,
+        city: data.city,
+        interest: data.interest,
+        skill: data.skill,
+        mycomment: data.mycomment,
+        portfolio: data.portfolio,
+        is_open: data.is_open,
+        photo:data.photo
+      }
+    });
+    return response.data;
+  } catch (e) {
+    return null;
+  }
+}
+
 
 // export async function

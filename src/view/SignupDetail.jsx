@@ -1,19 +1,22 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../provider/UserProvider";
+import { postUserProfile } from '../service/AuthService';
 
 import styles from "./SignupDetail.module.scss";
 
 const SignupDetail = ({ history }) => {
-  const { user } = useContext(UserContext);
+  const { user, details,updateProfile } = useContext(UserContext);
   const [inputData, setInputData] = useState({ nickname: "", is_open: true });
 
   useEffect(() => {
-    if (user === null) {
-      // history.push("/");
+    if (user === null && details===null) {
     } else {
-      setInputData({ ...user });
+      if (details.city === "선택안함") {
+        setInputData({ ...user, ...details, city:"서울" });
+      }
+      setInputData({ ...user, ...details });
     }
-  }, [user]);
+  }, [user,details]);
 
   function changeTextInput(e) {
     const {
@@ -41,20 +44,50 @@ const SignupDetail = ({ history }) => {
       case "skill":
         setInputData({ ...inputData, skill: value });
         break;
-      case "portfolio":
-        setInputData({ ...inputData, portfolio: value });
-        break;
+ 
+      //TODO: 파일 삽입
+      //TODO: 사진 확인
+ 
       case "is_open":
-        console.log(value);
-        setInputData({ ...inputData, is_open: value });
+        setInputData({ ...inputData, is_open: !inputData.is_open });
         break;
-
       default:
     }
   }
 
-  function onSubmit(e) {
-    e.target.preventDefault();
+  async function onSubmit(e) {
+    e.preventDefault();
+  
+    
+    let response = await postUserProfile(user.token,
+
+    
+      {
+        user_pk : user.user_pk,
+        photo: inputData.photo,
+        gender: inputData.gender,
+        city: inputData.city,
+        interest: inputData.interest,
+        skill: inputData.skill,
+        mycomment: inputData.mycomment,
+        portfolio: inputData.portfolio,
+        is_open: inputData.is_open,
+      })
+    if (response !== null) {
+      updateProfile(response)
+      history.push("/welcome")
+    }
+  }
+
+
+  function changeProfileInput(e) {
+
+    setInputData({ ...inputData, photo: e.target.files[0] });
+  }
+
+  function changePortfolioInput(e) {
+  
+    setInputData({ ...inputData, portfolio: e.target.files[0] });
   }
 
   return (
@@ -62,58 +95,29 @@ const SignupDetail = ({ history }) => {
       <p className={styles.alert}>
         프로필을 자세히 쓸수록 모집 / 초대 확률이 높아져요
       </p>
-      <div className={styles.profileBox}>
+      닉네임 : {inputData.nickname}
+      <div className={styles.profileBox} >
+      
         <img
-          src="http://placehold.jp/50x50.png"
+          src= "http://placehold.jp/50x50.png"
           alt=""
           className={styles.profileImg}
         />
         <input
-          name="nickname"
-          className={styles.inputBoxNickname}
-          value={inputData.nickname ?? ""}
-          onChange={changeTextInput}
-        />
-
-        {/* <button className={`${styles.btnWhite} btn-white`}>닉네임 변경</button> */}
+          className={styles.profileFileInput}
+            name="poster"
+          type="file"
+          // value={inputData.photo}
+            // accept="image/jpg,image/png,image/jpeg,image/gif"
+            onChange={changeProfileInput}
+          />
+      
+       
       </div>
       <div className={styles.selectContainer}>
-        <div>
-          <select
-            className={styles.select}
-            name="age"
-            value={inputData.age}
-            onChange={changeTextInput}
-          >
-            <option value="20세" selected>
-              20세
-            </option>
-            <option value="21세">21세</option>
-            <option value="22세">22세</option>
-            <option value="23세">23세</option>
-            <option value="24세">24세</option>
-            <option value="25세">25세</option>
-            <option value="25세">25세</option>
-            <option value="26세">26세</option>
-            <option value="27세">27세</option>
-            <option value="28세">28세</option>
-            <option value="29세">29세</option>
-            <option value="30대">30대</option>
-
-            {/* 나이 셀렉트 */}
-          </select>
-          <select
-            className={styles.select}
-            name="gender"
-            value={inputData.gender}
-            onChange={changeTextInput}
-          >
-            <option value="남자">남자</option>
-            <option value="여자">여자</option>
-            <option value="선택안함">선택안함</option>
-            {/* 성별 셀렉트 */}
-          </select>
-        </div>
+        
+       
+       
         <div>
           <select
             className={styles.select}
@@ -153,6 +157,18 @@ const SignupDetail = ({ history }) => {
             {/* 관심 분야 셀렉트 */}
           </select>
         </div>
+         
+        <select
+            className={styles.select}
+            name="gender"
+            value={inputData.gender}
+            onChange={changeTextInput}
+          >
+            <option value="남자">남자</option>
+            <option value="여자">여자</option>
+            <option value="선택안함">선택안함</option>
+            {/* 성별 셀렉트 */}
+          </select>
       </div>
       <div className="input-container">
         <div className={styles.inputBox}>
@@ -177,7 +193,7 @@ const SignupDetail = ({ history }) => {
             value={inputData.skill}
           ></textarea>
         </div>
-        <div className={styles.inputBox}>
+        {/* <div className={styles.inputBox}>
           <p>포트폴리오</p>
           <hr />
           <textarea
@@ -187,32 +203,41 @@ const SignupDetail = ({ history }) => {
             onChange={changeTextInput}
             value={inputData.portfolio}
           ></textarea>
-        </div>
+        </div> */}
         <div className={styles.inputBox}>
           <p>수상/자격증/어학</p>
           <hr />
           <div className={styles.addBtnContainer}>
-            <button className={`${styles.btnWhite} btn-white`}>추가</button>
+          <input
+          className={styles.profileFileInput}
+            name="poster"
+             type="file"
+          // value={inputData.photo}
+            // accept="image/jpg,image/png,image/jpeg,image/gif"
+            onChange={changePortfolioInput}
+          />
           </div>
         </div>
       </div>
       <hr />
-      <div className={styles.isOpenCheckBox}>
+      <div className={styles.checkBoxContainer}>
         <input
+          className={styles.checkbox}
           type="checkbox"
           name="is_open"
-          value={inputData.is_open}
+        
+          checked={inputData.is_open}
           onChange={changeTextInput}
-        ></input>
-        프로필 공개 여부
+        ></input>프로필 공개 여부
+     
       </div>
       <div className={styles.rowBtns}>
-        <button
+        {/* <button
           className={`${styles.btnGreyBottom} btn-gray`}
           onClick={() => history.push("/welcome")}
         >
           나중에 할게요
-        </button>
+        </button> */}
         <button className="btn-main" onClick={onSubmit}>
           작성완료
         </button>

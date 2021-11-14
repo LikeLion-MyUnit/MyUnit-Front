@@ -23,7 +23,7 @@ function reducer(state, action) {
         ...state,
         isLoggedIn: true,
         user: action.payload.user,
-        // details: action.payload.details,
+        details: action.payload.details,
       };
 
     case "logout":
@@ -34,7 +34,14 @@ function reducer(state, action) {
         isLoggedIn: false,
       };
 
-    default:
+      case "updateProfile":
+        return {
+          ...state,
+          details: action.payload.details,
+        };
+        
+      default:
+        
   }
 }
 
@@ -48,9 +55,12 @@ function UserProvider(props, children) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   async function login(user) {
+
+    let details = await getUserProfile(user.token, user.user_pk);
+
     dispatch({
       type: "login",
-      payload: { user: user },
+      payload: { user: user , details : details},
     });
   }
 
@@ -60,12 +70,20 @@ function UserProvider(props, children) {
     });
   }
 
+  function updateProfile(details) {
+    dispatch({
+      type: 'updateProfile',
+      payload : {details : details}
+    })
+  }
+
   return (
     <UserContext.Provider
       value={{
         ...state,
         login,
         logout,
+        updateProfile
       }}
       {...props}
     />

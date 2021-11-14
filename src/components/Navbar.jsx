@@ -13,11 +13,11 @@ import { getUserProfile } from "../service/AuthService";
 const Navbar = () => {
   const { user, logout, isLoggedIn } = useContext(UserContext);
   const history = useHistory();
-  console.log(user);
+  
 
-  // function onClickProfileBtn() {
-  //   getUserProfile(user.token, user.user_pk);
-  // }
+  function onClickProfileBtn() {
+    history.push('/signup_detail');
+  }
 
   return (
     <nav className={styles.navbar}>
@@ -27,7 +27,7 @@ const Navbar = () => {
         <button className={styles.btnAlarm}>
           <FontAwesomeIcon icon={faBell} />
         </button>
-        <button className={styles.btnSettings}>
+        <button className={styles.btnSettings} onClick={onClickProfileBtn}>
           <FontAwesomeIcon icon={faUserCog} />
         </button>
         {isLoggedIn ? (
