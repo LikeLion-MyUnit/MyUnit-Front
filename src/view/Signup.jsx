@@ -34,7 +34,7 @@ const Signup = ({ history }) => {
 
   async function onSubmit(e) {
     e.preventDefault(); //prevent initialization input
-    //TODO : add validate
+
     if (!id.includes("@")) {
       alert("이메일 형식을 입력하세요.");
     } else if (rePw !== pw) {

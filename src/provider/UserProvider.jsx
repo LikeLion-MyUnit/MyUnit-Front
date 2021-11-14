@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useReducer, createContext, useEffect } from "react";
 
 const initialState = {
@@ -5,10 +6,7 @@ const initialState = {
   user: null,
 };
 
-const UserContext = createContext({
-  isLoggedIn: false,
-  user: null,
-});
+const UserContext = createContext();
 
 //==============================================================================//
 
@@ -29,7 +27,6 @@ function reducer(state, action) {
       window.localStorage.removeItem("userInfo");
       return {
         ...state,
-
         ...initialState,
         isLoggedIn: false,
       };
@@ -47,7 +44,7 @@ function UserProvider(props, children) {
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  async function login(user) {
+  function login(user) {
     dispatch({
       type: "login",
       payload: { user: user },
