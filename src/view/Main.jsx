@@ -107,7 +107,12 @@ const Main = ({ history }) => {
             최신순
           </option>
         </select>
-        <button className={`${styles.btnMain} btn-main`}>글쓰기</button>
+        <button
+          className={`${styles.btnMain} btn-main`}
+          onClick={() => history.push("/post_write")}
+        >
+          글쓰기
+        </button>
       </div>
 
       {selectedTab === "모집" ? (

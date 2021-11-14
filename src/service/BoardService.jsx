@@ -2,6 +2,7 @@ import axios from "axios";
 import { serverURL } from "./ServerConst";
 
 export async function postBoard(
+  token,
   title,
   contest,
   content,
@@ -10,13 +11,19 @@ export async function postBoard(
   interest,
   end_date,
   is_open,
-  recruit
+  recruit,
+  profile
 ) {
   try {
-    let response = await axios.post(
-      `${serverURL}/board/create/`,
-
-      {
+    let response = await axios({
+      method: "post",
+      url: `${serverURL}/board/create/`,
+      xstfCookieName: "csrftoken",
+      xsrfHeaderName: "X-CSRFToken",
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+      data: {
         title: title,
         contest: contest,
         content: content,
@@ -26,8 +33,9 @@ export async function postBoard(
         end_date: end_date,
         is_open: is_open,
         recruit: recruit,
-      }
-    );
+        profile: profile,
+      },
+    });
     return response.data;
   } catch (e) {
     console.log(e.response.data);
