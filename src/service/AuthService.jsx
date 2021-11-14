@@ -1,7 +1,7 @@
 import axios from "axios";
 import { serverURL } from "./ServerConst";
 
-export async function requestSignup(id, password, nickname) {
+export async function requestSignup(id, password, nickname, phonenum) {
   try {
     let response = await axios.post(
       `${serverURL}/account/user/signup/`,
@@ -10,6 +10,7 @@ export async function requestSignup(id, password, nickname) {
         nickname: nickname,
         email: id,
         password: password,
+        phonenum: `+82${phonenum.substring(1)}`,
       }
     );
     response.data.password = "";
@@ -52,3 +53,5 @@ export async function requestLogin(id, password) {
     //TODO : save to cookie
   }
 }
+
+// export async function
