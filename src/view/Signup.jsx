@@ -46,8 +46,9 @@ const Signup = ({ history }) => {
     } else {
       let response = await requestSignup(id, pw, nickname, phonenum);
       if (typeof response !== "string") {
-        login(response);
-        history.push("/");
+        // login(response);
+        alert("가입이 완료되었습니다!");
+        history.push("/login");
       } else {
         alert(response);
       }
