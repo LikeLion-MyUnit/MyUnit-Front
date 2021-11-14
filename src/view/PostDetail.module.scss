@@ -1,0 +1,32 @@
+@import "../common/Colors.scss";
+
+div{
+    margin-bottom:10px;
+}
+.container{
+    margin:0 10% 0 10%;
+    height:100%;
+    button{
+        margin-top: 50px;
+    }
+}
+.button_container{
+    width: 100%;
+    display:flex;
+    justify-content: center;
+}
+.header{
+    width:100%;
+    height:33%;
+}
+.image_container{
+    display:flex;
+    height:100px;
+}
+.image{
+    display:flex;
+    width:100px;
+    border:solid 1px black;
+    border-radius:10px;
+    height:100%;
+}
