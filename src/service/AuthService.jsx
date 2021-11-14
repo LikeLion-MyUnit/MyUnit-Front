@@ -54,4 +54,26 @@ export async function requestLogin(id, password) {
   }
 }
 
+export async function getUserProfile(token, pk) {
+  try {
+    let response = await axios({
+      method: "get",
+      url: `${serverURL}/account/profile/${pk}`,
+      xstfCookieName: "csrftoken",
+      xsrfHeaderName: "X-CSRFToken",
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    });
+    console.log(response.data);
+    return response.data;
+  } catch (e) {
+    console.log(e.response.data);
+
+    return "예기치 못한 에러가 발생했습니다.";
+
+    //TODO : save to cookie
+  }
+}
+
 // export async function

@@ -36,7 +36,7 @@ const contestCategoryTabs = [
   "기타",
 ];
 
-const Main = () => {
+const Main = ({ history }) => {
   const [selectedTab, setSelectedTab] = useState(tabs[0]);
   const [selectedSecondTab, setSelectedSecondTab] = useState(secondTabs[0]);
   const [selectedThirdTab, setSelectedThirdTab] = useState([localTabs[0]]);
@@ -98,7 +98,12 @@ const Main = () => {
             최신순
           </option>
         </select>
-        <button className={`${styles.btnMain} btn-main`}>글쓰기</button>
+        <button
+          className={`${styles.btnMain} btn-main`}
+          onClick={() => history.push("/post_write")}
+        >
+          글쓰기
+        </button>
       </div>
 
       {selectedTab === "모집" ? (

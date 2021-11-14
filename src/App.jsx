@@ -8,6 +8,7 @@ import Welcome from "./view/Welcome";
 import Main from "./view/Main";
 import MyPage from "./view/MyPage";
 import { UserProvider } from "./provider/UserProvider";
+import PostWrite from "./view/PostWrite";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/signup_detail" component={SignupDetail} />
           <Route path="/welcome" component={Welcome} />
           <Route path="/mypage" component={MyPage} />
+          <Route path="/post_write" component={PostWrite} />
         </Switch>
       </BrowserRouter>
     </UserProvider>
