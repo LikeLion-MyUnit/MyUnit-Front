@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import MultipleTabBar from "../components/MultipleTabBar";
 import Navbar from "../components/Navbar";
 import Post from "../components/Post";
@@ -7,6 +7,7 @@ import TextTabBar from "../components/TextTabBar";
 
 import styles from "./Main.module.scss";
 import UserInfo from "./../components/UserInfo";
+import { UserContext } from "../provider/UserProvider";
 
 const tabs = ["모집", "초대"];
 const secondTabs = ["지역", "대회분류"];
@@ -40,8 +41,16 @@ const Main = ({ history }) => {
   const [selectedTab, setSelectedTab] = useState(tabs[0]);
   const [selectedSecondTab, setSelectedSecondTab] = useState(secondTabs[0]);
   const [selectedThirdTab, setSelectedThirdTab] = useState([localTabs[0]]);
+  const { details,isLoggedIn } = useContext(UserContext);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    
+    if (details!==null && details.city === "선택안함" && isLoggedIn) {
+      // if not be writen user detail profile yet.
+      
+      history.push("/signup_detail");
+    }
+  }, [details,isLoggedIn]);
 
   function changeTab(t) {
     setSelectedTab(t);
