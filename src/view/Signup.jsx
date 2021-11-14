@@ -9,6 +9,7 @@ const Signup = ({ history }) => {
   const [pw, setPwTextInput] = useState("");
   const [rePw, setRePwTextInput] = useState("");
   const [nickname, setNicknameTextInput] = useState("");
+  const [phonenum, setPhonenum] = useState("");
   const { login } = useContext(UserContext);
 
   function changeTextInput(e) {
@@ -28,6 +29,9 @@ const Signup = ({ history }) => {
       case "nickname":
         setNicknameTextInput(value);
         break;
+      case "phonenum":
+        setPhonenum(value);
+        break;
       default:
     }
   }
@@ -40,7 +44,7 @@ const Signup = ({ history }) => {
     } else if (rePw !== pw) {
       alert("비밀번호를 확인하세요.");
     } else {
-      let response = await requestSignup(id, pw, nickname);
+      let response = await requestSignup(id, pw, nickname, phonenum);
       if (typeof response !== "string") {
         login(response);
         history.push("/");
@@ -86,6 +90,16 @@ const Signup = ({ history }) => {
           onChange={changeTextInput}
           required
         />
+        <input
+          value={phonenum}
+          name="phonenum"
+          type="text"
+          placeholder="전화 번호"
+          pattern="[0-9]{3}[0-9]{4}[0-9]{4}"
+          onChange={changeTextInput}
+          required
+        />
+        <small>Forat : 01012345678</small>
         <button className="btn-main">회원가입</button>
       </form>
       <div className="btn-text" onClick={() => history.push("/login")}>
