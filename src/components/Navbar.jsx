@@ -8,11 +8,17 @@ import {
 import styles from "./Navbar.module.scss";
 import { UserContext } from "../provider/UserProvider";
 import { useHistory } from "react-router";
+import { getUserProfile } from "../service/AuthService";
 
 const Navbar = () => {
   const { user, logout, isLoggedIn } = useContext(UserContext);
   const history = useHistory();
   console.log(user);
+
+  // function onClickProfileBtn() {
+  //   getUserProfile(user.token, user.user_pk);
+  // }
+
   return (
     <nav className={styles.navbar}>
       <img src="img/logo_short.png" alt="" className={styles.logo} />

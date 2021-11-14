@@ -1,9 +1,11 @@
 import axios from "axios";
 import React, { useReducer, createContext, useEffect } from "react";
+import { getUserProfile } from "../service/AuthService";
 
 const initialState = {
   isLoggedIn: false,
   user: null,
+  details: null,
 };
 
 const UserContext = createContext();
@@ -21,6 +23,7 @@ function reducer(state, action) {
         ...state,
         isLoggedIn: true,
         user: action.payload.user,
+        // details: action.payload.details,
       };
 
     case "logout":
@@ -44,7 +47,7 @@ function UserProvider(props, children) {
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  function login(user) {
+  async function login(user) {
     dispatch({
       type: "login",
       payload: { user: user },

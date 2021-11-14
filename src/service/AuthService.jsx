@@ -42,14 +42,26 @@ export async function requestLogin(id, password) {
     response.data.password = "";
     return response.data;
   } catch (e) {
-    console.log(e.response.data);
-    if (Object.keys(e.response.data).includes("email")) {
-      return "해당 이메일이 존재하지 않습니다.";
-    } else if (Object.keys(e.response.data).includes("password")) {
-      return "비밀번호가 틀립니다.";
-    } else {
-      return "예기치 못한 에러가 발생했습니다.";
-    }
+    return "이메일 혹은 비밀번호를 확인하세요.";
+    //TODO : save to cookie
+  }
+}
+
+export async function getUserProfile(token, pk) {
+  try {
+    let response = await axios({
+      method: "get",
+      url: `${serverURL}/account/profile/${pk}`,
+      xstfCookieName: "csrftoken",
+      xsrfHeaderName: "X-CSRFToken",
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    });
+    return response.data;
+  } catch (e) {
+    return null;
+
     //TODO : save to cookie
   }
 }
