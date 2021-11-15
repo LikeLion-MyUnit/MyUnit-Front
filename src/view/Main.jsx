@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef } from "react";
+import {Link} from 'react-router-dom';
 import MultipleTabBar from "../components/MultipleTabBar";
 import Navbar from "../components/Navbar";
 import Post from "../components/Post";
@@ -7,6 +8,9 @@ import TextTabBar from "../components/TextTabBar";
 
 import styles from "./Main.module.scss";
 import UserInfo from "./../components/UserInfo";
+
+import {RequestMainPost} from "../service/BoardService";
+import { faTruckLoading } from "@fortawesome/free-solid-svg-icons";
 
 const tabs = ["모집", "초대"];
 const secondTabs = ["지역", "대회분류"];
@@ -37,11 +41,14 @@ const contestCategoryTabs = [
 ];
 
 const Main = () => {
+  const [Posts,SetPosts] = useState([]);
   const [selectedTab, setSelectedTab] = useState(tabs[0]);
   const [selectedSecondTab, setSelectedSecondTab] = useState(secondTabs[0]);
   const [selectedThirdTab, setSelectedThirdTab] = useState([localTabs[0]]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    RequestMainPost().then((value)=>{SetPosts(value)});
+  }, []);
 
   function changeTab(t) {
     setSelectedTab(t);
@@ -98,18 +105,16 @@ const Main = () => {
             최신순
           </option>
         </select>
-        <button className={`${styles.btnMain} btn-main`}>글쓰기</button>
+        <Link to="/post_write"><button className={`${styles.btnMain} btn-main`}>글쓰기</button></Link>
       </div>
 
       {selectedTab === "모집" ? (
         <div>
-          <Post></Post>
-          <Post></Post>
-          <Post></Post>
-          <Post></Post>
-          <Post></Post>
-          <Post></Post>
-          <Post></Post>
+          {Posts.map((post,i)=>(
+            <Post key={i} title={post.title} contest={post.contest} end_date={post.end_date}/>
+          ))}
+          {/* <Link to="post_detail"><Post></Post></Link> */}
+
         </div>
       ) : (
         // 초대 클릭시

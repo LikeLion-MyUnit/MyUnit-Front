@@ -1,5 +1,7 @@
 import axios from "axios";
 import { serverURL } from "./ServerConst";
+import React,{useState} from 'react'
+import Post from "../components/Post";
 
 export async function requestSignup(id, password, nickname) {
   try {
@@ -25,5 +27,19 @@ export async function requestSignup(id, password, nickname) {
       return "예기치 못한 에러가 발생했습니다.";
     }
     //TODO : save to cookie
+  }
+}
+
+
+
+export async function RequestMainPost(){
+  try{
+    const response = await axios.get(`${serverURL}/board/post_all`)
+    console.log(response.data)
+    return response.data
+  }
+    catch(e){
+    console.log(e.response.data);
+    alert('데이터를 불러오는데 실패해버렸쨔농 ㅜㅜ')
   }
 }
