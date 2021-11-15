@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useRef } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {Link} from 'react-router-dom';
 import MultipleTabBar from "../components/MultipleTabBar";
 import Navbar from "../components/Navbar";
@@ -8,6 +8,7 @@ import TextTabBar from "../components/TextTabBar";
 
 import styles from "./Main.module.scss";
 import UserInfo from "./../components/UserInfo";
+import { UserContext } from "../provider/UserProvider";
 
 import {RequestMainPost} from "../service/BoardService";
 import { faTruckLoading } from "@fortawesome/free-solid-svg-icons";
@@ -40,15 +41,22 @@ const contestCategoryTabs = [
   "기타",
 ];
 
-const Main = () => {
+const Main = ({ history }) => {
   const [Posts,SetPosts] = useState([]);
   const [selectedTab, setSelectedTab] = useState(tabs[0]);
   const [selectedSecondTab, setSelectedSecondTab] = useState(secondTabs[0]);
   const [selectedThirdTab, setSelectedThirdTab] = useState([localTabs[0]]);
+  const { details,isLoggedIn } = useContext(UserContext);
 
   useEffect(() => {
     RequestMainPost().then((value)=>{SetPosts(value)});
-  }, []);
+    
+    if (details!==null && details.city === "선택안함" && isLoggedIn) {
+      // if not be writen user detail profile yet.
+      
+      history.push("/signup_detail");
+    }
+  }, [details,isLoggedIn]);
 
   function changeTab(t) {
     setSelectedTab(t);
@@ -105,13 +113,30 @@ const Main = () => {
             최신순
           </option>
         </select>
-        <Link to="/post_write"><button className={`${styles.btnMain} btn-main`}>글쓰기</button></Link>
+        <button
+          className={`${styles.btnMain} btn-main`}
+          onClick={() => history.push("/post_write")}
+        >
+          글쓰기
+        </button>
       </div>
 
       {selectedTab === "모집" ? (
         <div>
           {Posts.map((post,i)=>(
-            <Post key={i} title={post.title} contest={post.contest} end_date={post.end_date}/>
+            <Link to={{
+              pathname:`/post_detail`,
+              state:{
+                title:post.title,
+                author:post.profile,
+                contest:post.contest,
+                content:post.content,
+                image:post.poster,
+                city:post.city
+              }
+              }}>
+              <Post key={i} title={post.title} contest={post.contest} end_date={post.end_date}/>
+              </Link>
           ))}
           {/* <Link to="post_detail"><Post></Post></Link> */}
 

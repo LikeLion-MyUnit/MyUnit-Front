@@ -6,7 +6,7 @@ const Welcome = ({ history }) => {
     <div className={styles.container}>
       <img src="img/logo_short.png" alt="" className={styles.logo} />
       <h1 className={styles.welcome}> 환영합니다!</h1>
-      <button className="btn-main" onClick={() => history.push("/recruit")}>
+      <button className="btn-main" onClick={() => history.push("/")}>
         팀원 찾기
       </button>
     </div>
