@@ -14,6 +14,7 @@ const SignupDetail = ({ history }) => {
       if (details.city === "선택안함") {
         setInputData({ ...user, ...details, city: "서울" });
       }
+
       setInputData({ ...user, ...details });
     }
   }, [user, details]);
@@ -58,21 +59,18 @@ const SignupDetail = ({ history }) => {
   async function onSubmit(e) {
     e.preventDefault();
 
-    let response = await postUserProfile(
-      user.token,
-
-      {
-        user_pk: user.user_pk,
-        photo: inputData.photo,
-        gender: inputData.gender,
-        city: inputData.city,
-        interest: inputData.interest,
-        skill: inputData.skill,
-        mycomment: inputData.mycomment,
-        portfolio: inputData.portfolio,
-        is_open: inputData.is_open,
-      }
-    );
+    console.log(inputData.photo);
+    let response = await postUserProfile(user.token, {
+      user_pk: user.user_pk,
+      photo: inputData.photo,
+      gender: inputData.gender,
+      city: inputData.city,
+      interest: inputData.interest,
+      skill: inputData.skill,
+      mycomment: inputData.mycomment,
+      portfolio: inputData.portfolio,
+      is_open: inputData.is_open,
+    });
     if (response !== null) {
       updateProfile(response);
       history.push("/welcome");
