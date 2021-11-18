@@ -6,14 +6,14 @@ import styles from "./SignupDetail.module.scss";
 
 const SignupDetail = ({ history }) => {
   const { user, details,updateProfile } = useContext(UserContext);
-  const [inputData, setInputData] = useState({ nickname: "", is_open: true });
+  const [inputData, setInputData] = useState({ is_open: true, nickname:""});
 
   useEffect(() => {
     if (user === null && details===null) {
     } else {
       
-      if (details.city === "선택안함") {
-        setInputData({ ...user, ...details, city:"서울" });
+      if (details.nickname === null) {
+        setInputData({ ...user, ...details, city:"서울" , nickname:""});
       }
       
       setInputData({ ...user, ...details });
@@ -63,6 +63,7 @@ const SignupDetail = ({ history }) => {
       console.log(inputData.photo)
     let response = await postUserProfile(user.token,
       {
+        nickname:inputData.nickname,
         user_pk : user.user_pk,
         photo: inputData.photo,
         gender: inputData.gender,
@@ -95,7 +96,12 @@ const SignupDetail = ({ history }) => {
       <p className={styles.alert}>
         프로필을 자세히 쓸수록 모집 / 초대 확률이 높아져요
       </p>
-      닉네임 : {inputData.nickname}
+      <div className={styles.nicknameBox}>
+        닉네임 : <input className={styles.nickname}
+          name="nickname"
+            value={inputData.nickname}
+            onChange={changeTextInput} required></input>
+      </div>
       <div className={styles.profileBox} >
       
         <img
