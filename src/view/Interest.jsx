@@ -9,8 +9,8 @@ const Interest = () => {
     <>
       <div className={styles.profiles}>
         <p className={styles.title}>관심프로필</p>
-        <UserInfo />
-        <UserInfo />
+        {/* <UserInfo />
+        <UserInfo /> */}
       </div>
       <div className={styles.recruitment}>
         <p className={styles.title}>관심모집글</p>

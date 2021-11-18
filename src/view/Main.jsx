@@ -56,7 +56,7 @@ const Main = ({ history }) => {
       
       history.push("/signup_detail");
     }
-  }, [details,isLoggedIn]);
+  }, [details, history, isLoggedIn]);
 
   function changeTab(t) {
     setSelectedTab(t);

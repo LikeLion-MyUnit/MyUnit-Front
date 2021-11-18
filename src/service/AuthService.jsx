@@ -71,8 +71,7 @@ export async function getUserProfile(token, pk) {
 export async function postUserProfile(token, data) {
   try {
 
-    console.log(data.photo)
-
+    
     let response = await axios({
       method: "put",
       url: `${serverURL}/account/profile/${data.user_pk}/`,
@@ -80,6 +79,7 @@ export async function postUserProfile(token, data) {
       xsrfHeaderName: "X-CSRFToken",
       headers: {
         Authorization: `Token ${token}`,
+        "Content-Type":"multipart/form-data"
       },
       data: {
         gender: data.gender,
