@@ -1,13 +1,13 @@
 import React from "react";
 import styles from "./UserInfoBtns.module.scss";
 
-const UserInfoBtns = () => {
+const UserInfoBtns = (props) => {
+  const {gender,interest,city} = props
   return (
     <div className={styles.infoBtns}>
-      <button className={`${styles.btn} btn-main`}>20</button>
-      <button className={`${styles.btn} btn-main`}>남</button>
-      <button className={`${styles.btn} btn-main`}>부산</button>
-      <button className={`${styles.btn} btn-main`}>기획/아이디어</button>
+      <button className={`${styles.btn} btn-main`}>{gender}</button>
+      <button className={`${styles.btn} btn-main`}>{city}</button>
+      <button className={`${styles.btn} btn-main`}>{interest}</button>
     </div>
   );
 };

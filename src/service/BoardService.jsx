@@ -16,6 +16,7 @@ export async function postBoard(
   recruit,
   profile
 ) {
+  console.log(token)
   try {
     let response = await axios({
       method: "post",
@@ -107,7 +108,4 @@ export async function RequestMainPost(){
     console.log(e.response.data);
     alert('데이터를 불러오는데 실패해버렸쨔농 ㅜㅜ')
   }
-}
-export async function getImage(){
-  
 }

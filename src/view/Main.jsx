@@ -10,8 +10,8 @@ import styles from "./Main.module.scss";
 import UserInfo from "./../components/UserInfo";
 import { UserContext } from "../provider/UserProvider";
 
+import { RequestUsers } from "../service/AuthService";
 import {RequestMainPost} from "../service/BoardService";
-import { faTruckLoading } from "@fortawesome/free-solid-svg-icons";
 
 const tabs = ["모집", "초대"];
 const secondTabs = ["지역", "대회분류"];
@@ -43,6 +43,7 @@ const contestCategoryTabs = [
 
 const Main = ({ history }) => {
   const [Posts,SetPosts] = useState([]);
+  const [Users,SetUsers] = useState([]);
   const [selectedTab, setSelectedTab] = useState(tabs[0]);
   const [selectedSecondTab, setSelectedSecondTab] = useState(secondTabs[0]);
   const [selectedThirdTab, setSelectedThirdTab] = useState([localTabs[0]]);
@@ -50,6 +51,8 @@ const Main = ({ history }) => {
 
   useEffect(() => {
     RequestMainPost().then((value)=>{SetPosts(value)});
+    RequestUsers().then((value)=>{SetUsers(value)});
+
     
     if (details!==null && details.city === "선택안함" && isLoggedIn) {
       // if not be writen user detail profile yet.
@@ -144,11 +147,25 @@ const Main = ({ history }) => {
       ) : (
         // 초대 클릭시
         <div>
-          <UserInfo />
-          <UserInfo />
-          <UserInfo />
-          <UserInfo />
-          <UserInfo />
+          {Users.map((user,i)=>(
+            <Link to={{
+              pathname:`/user_detail`,
+              state:{
+                nickname:user.nickname,
+                gender:user.gender,
+                city:user.city,
+                mycomment:user.mycomment,
+                photo:user.photo,
+                skill:user.skill,
+                interest:user.interest,
+                portfolio:user.portfolio,
+                user:user.user,
+                user_pk:user.user_pk
+              }
+              }}>
+              <UserInfo key={i} nickname={user.nickname} skill={user.skill} gender={user.gender} interest={user.interest} city={user.city}/>
+              </Link>
+          ))}
         </div>
       )}
     </div>
