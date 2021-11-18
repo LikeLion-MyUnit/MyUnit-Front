@@ -10,8 +10,8 @@ function PostWrite() {
   const [contest, setContest] = useState("");
   const [content, setContent] = useState("");
   const [poster, setPoster] = useState();
-  const [city, setCity] = useState();
-  const [interest, setInterest] = useState("");
+  const [city, setCity] = useState("서울");
+  const [interest, setInterest] = useState("기획/아이디어");
   const [endDate, setEndDate] = useState("");
   const [isOpen, setIsOpen] = useState(true); //true&false 조건 만들기
   const [recruit, setRecruit] = useState(0);
