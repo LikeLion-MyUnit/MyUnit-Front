@@ -11,6 +11,7 @@ import { UserProvider } from "./provider/UserProvider";
 import PostWrite from './view/PostWrite';
 import PostDetail from './view/PostDetail';
 import UserDetail from './view/UserDetail'
+import Chat from "./view/Chat";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/post_write" component={PostWrite}/>
           <Route path="/post_detail" component={PostDetail}/>
           <Route path="/user_detail" component={UserDetail}/>
+          <Route path="/chat" component={Chat} />
         </Switch>
       </BrowserRouter>
     </UserProvider>

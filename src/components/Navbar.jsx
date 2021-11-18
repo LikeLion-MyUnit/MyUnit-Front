@@ -16,12 +16,15 @@ const Navbar = () => {
   
 
   function onClickProfileBtn() {
-    history.push('/signup_detail');
+    history.push('/mypage');
+  }
+  function onClickLogo() {
+    history.push('/');
   }
 
   return (
     <nav className={styles.navbar}>
-      <img src="img/logo_short.png" alt="" className={styles.logo} />
+      <img src="img/logo_short.png" alt="" className={styles.logo} onClick={onClickLogo} />
 
       <div className={styles.btnGroup}>
         <button className={styles.btnAlarm}>

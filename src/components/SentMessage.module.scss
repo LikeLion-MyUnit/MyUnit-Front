@@ -1,0 +1,20 @@
+@import "../common/Colors.scss";
+
+.sentMessageBox {
+  display: flex;
+  justify-content: flex-end;
+}
+.sentMessage {
+  width: 60%;
+  margin: 8px 8px;
+  padding: 16px;
+  border-radius: 21px;
+  background: $main-color;
+  overflow: hidden;
+  text-overflow: clip;
+  display: inline-grid;
+  -webkit-line-clamp: 4; // max nb lines to show
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+  color: white;
+}

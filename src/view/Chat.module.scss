@@ -1,0 +1,38 @@
+@import "../common/Colors.scss";
+
+.container {
+  h1 {
+    color: $main-color;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 25px;
+  }
+  p {
+    margin: 0 0 5px 30px;
+    font-weight: bold;
+  }
+}
+
+.chatBox {
+  width: 100%;
+  height: 500px;
+  border-top: 1px solid $grey-color;
+  border-bottom: 1px solid $grey-color;
+  border-right: 1px solid $grey-color;
+  overflow-y: scroll;
+}
+
+.inputBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 25px;
+
+  input {
+    width: 60%;
+    margin: 0 10px 0 0;
+  }
+  button {
+    width: 65px;
+  }
+}
