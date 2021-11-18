@@ -11,9 +11,11 @@ const SignupDetail = ({ history }) => {
   useEffect(() => {
     if (user === null && details===null) {
     } else {
+      
       if (details.city === "선택안함") {
         setInputData({ ...user, ...details, city:"서울" });
       }
+      
       setInputData({ ...user, ...details });
     }
   }, [user,details]);
@@ -58,10 +60,8 @@ const SignupDetail = ({ history }) => {
   async function onSubmit(e) {
     e.preventDefault();
   
-    
+      console.log(inputData.photo)
     let response = await postUserProfile(user.token,
-
-    
       {
         user_pk : user.user_pk,
         photo: inputData.photo,
