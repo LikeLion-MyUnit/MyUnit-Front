@@ -8,8 +8,9 @@ import Welcome from "./view/Welcome";
 import Main from "./view/Main";
 import MyPage from "./view/MyPage";
 import { UserProvider } from "./provider/UserProvider";
-import PostWrite from './view/PostWrite';
-import PostDetail from './view/PostDetail';
+import PostWrite from "./view/PostWrite";
+import PostDetail from "./view/PostDetail";
+import Chat from "./view/Chat";
 
 function App() {
   return (
@@ -22,8 +23,9 @@ function App() {
           <Route path="/signup_detail" component={SignupDetail} />
           <Route path="/welcome" component={Welcome} />
           <Route path="/mypage" component={MyPage} />
-          <Route path="/post_write" component={PostWrite}/>
-          <Route path="/post_detail" component={PostDetail}/>
+          <Route path="/post_write" component={PostWrite} />
+          <Route path="/post_detail" component={PostDetail} />
+          <Route path="/chat" component={Chat} />
         </Switch>
       </BrowserRouter>
     </UserProvider>
