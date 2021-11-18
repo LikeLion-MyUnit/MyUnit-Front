@@ -54,7 +54,7 @@ const Main = ({ history }) => {
     if (details!==null && details.city === "선택안함" && isLoggedIn) {
       // if not be written user detail profile yet.
       
-      // history.push("/signup_detail");
+      history.push("/signup_detail");
     }
   }, [details, history, isLoggedIn]);
 
