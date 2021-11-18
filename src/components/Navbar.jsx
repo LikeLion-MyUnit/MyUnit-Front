@@ -11,7 +11,7 @@ import { useHistory } from "react-router";
 import { getUserProfile } from "../service/AuthService";
 
 const Navbar = () => {
-  const { user, logout, isLoggedIn } = useContext(UserContext);
+  const {  details, logout, isLoggedIn } = useContext(UserContext);
   const history = useHistory();
   
 
@@ -35,7 +35,7 @@ const Navbar = () => {
         </button>
         {isLoggedIn ? (
           <div>
-            <span className={styles.nickname}>{user.nickname}님</span>
+            <span className={styles.nickname}>{details.nickname}님</span>
             <button
               className={styles.btnLogout}
               onClick={() => {

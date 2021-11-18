@@ -52,7 +52,7 @@ const Main = ({ history }) => {
     RequestMainPost().then((value)=>{SetPosts(value)});
     
     if (details!==null && details.city === "선택안함" && isLoggedIn) {
-      // if not be writen user detail profile yet.
+      // if not be written user detail profile yet.
       
       history.push("/signup_detail");
     }

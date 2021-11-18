@@ -22,7 +22,7 @@ const ProfileSettings = () => {
           alt=""
           className={styles.profileImg}
         />
-        <p className={styles.name}>{user.nickname}</p>
+        <p className={styles.name}>{details.nickname}</p>
         {/* <div className={styles.interest}>
           <FontAwesomeIcon icon={faHeart} className={styles.heart} />
           <span className={styles.heartCount}>100</span>

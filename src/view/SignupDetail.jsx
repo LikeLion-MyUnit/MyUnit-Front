@@ -63,8 +63,8 @@ const SignupDetail = ({ history }) => {
       console.log(inputData.photo)
     let response = await postUserProfile(user.token,
       {
-        nickname:inputData.nickname,
         user_pk : user.user_pk,
+        nickname:inputData.nickname,
         photo: inputData.photo,
         gender: inputData.gender,
         city: inputData.city,
@@ -108,7 +108,6 @@ const SignupDetail = ({ history }) => {
         />
         <input
           className={styles.profileFileInput}
-          name="poster"
           type="file"
           // value={inputData.photo}
           // accept="image/jpg,image/png,image/jpeg,image/gif"
@@ -208,10 +207,7 @@ const SignupDetail = ({ history }) => {
           <div className={styles.addBtnContainer}>
             <input
               className={styles.profileFileInput}
-              name="poster"
               type="file"
-              // value={inputData.photo}
-              // accept="image/jpg,image/png,image/jpeg,image/gif"
               onChange={changePortfolioInput}
             />
           </div>

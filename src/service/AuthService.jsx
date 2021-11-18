@@ -79,8 +79,8 @@ console.log(data)
         Authorization: `Token ${token}`,
       },
       data: {
-        nickname: data.nickname,
         gender: data.gender,
+        nickname: data.nickname,
         city: data.city,
         interest: data.interest,
         skill: data.skill,
@@ -92,6 +92,7 @@ console.log(data)
     });
     return response.data;
   } catch (e) {
+    console.log(e.response.data)
     return null;
   }
 }
