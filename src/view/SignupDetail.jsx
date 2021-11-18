@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../provider/UserProvider";
 import { postUserProfile } from "../service/AuthService";
 
-import styles from "./signupDetail.module.scss";
+import styles from "./SignupDetail.module.scss";
 
 const SignupDetail = ({ history }) => {
   const { user, details,updateProfile } = useContext(UserContext);
