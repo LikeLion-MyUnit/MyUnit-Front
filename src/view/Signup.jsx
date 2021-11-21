@@ -1,6 +1,5 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import "../common/Common.scss";
-import { UserContext } from "../provider/UserProvider";
 import { requestSignup } from "../service/AuthService";
 import styles from "./Login.module.scss";
 

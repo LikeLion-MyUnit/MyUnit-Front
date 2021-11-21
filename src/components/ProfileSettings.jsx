@@ -1,13 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import UserInfoBtns from "./UserInfoBtns";
 import { UserContext } from "../provider/UserProvider";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import styles from "./ProfileSettings.module.scss";
 import { useHistory } from "react-router";
 
 const ProfileSettings = () => {
-  const { user, details, updateProfile } = useContext(UserContext);
+  const { user, details } = useContext(UserContext);
 
   const history = useHistory();
   function onClickProfileBtn() {
