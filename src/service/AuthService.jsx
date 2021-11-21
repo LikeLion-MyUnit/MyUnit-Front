@@ -40,7 +40,7 @@ export async function requestLogin(id, password) {
     // //console.log(response.data);
     return response.data;
   } catch (e) {
-    //console.log(e.response.data);
+    console.log(e.response.data);
     return "이메일 혹은 비밀번호를 확인하세요.";
     //TODO : save to cookie
   }
@@ -110,23 +110,12 @@ export async function RequestUsers() {
 export async function getMessages(token, user_pk) {
   try {
     let response = await axios({
-      method: "put",
-      url: `${serverURL}/account/profile/${user_pk}/`,
+      method: "get",
+      url: `${serverURL}/messages/list/${user_pk}/`,
       xstfCookieName: "csrftoken",
       xsrfHeaderName: "X-CSRFToken",
       headers: {
         Authorization: `Token ${token}`,
-      },
-      data: {
-        // gender: data.gender,
-        // nickname: data.nickname,
-        // city: data.city,
-        // interest: data.interest,
-        // skill: data.skill,
-        // mycomment: data.mycomment,
-        // portfolio: data.portfolio,
-        // is_open: data.is_open,
-        // photo: data.photo,
       },
     });
     return response.data;
