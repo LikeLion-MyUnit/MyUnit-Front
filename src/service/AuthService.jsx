@@ -95,4 +95,17 @@ export async function postUserProfile(token, data) {
   }
 }
 
+export async function RequestUsers(){
+  try{
+    const response = await axios.get(`${serverURL}/account/profile_all`)
+    console.log(response.data)
+    return response.data
+  }
+    catch(e){
+    console.log(e.response.data);
+    alert('데이터를 불러오는데 실패해버렸쨔농 ㅜㅜ')
+  }
+}
+
+
 // export async function

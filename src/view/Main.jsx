@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 import MultipleTabBar from "../components/MultipleTabBar";
 import Navbar from "../components/Navbar";
 import Post from "../components/Post";
@@ -10,8 +10,9 @@ import styles from "./Main.module.scss";
 import UserInfo from "./../components/UserInfo";
 import { UserContext } from "../provider/UserProvider";
 
-import {RequestMainPost} from "../service/BoardService";
-import { faTruckLoading } from "@fortawesome/free-solid-svg-icons";
+import { RequestUsers } from "../service/AuthService";
+import { RequestMainPost } from "../service/BoardService";
+import MultiUserInfoBtn from "../components/MultiUserInfoBtn";
 
 const tabs = ["모집", "초대"];
 const secondTabs = ["지역", "대회분류"];
@@ -42,18 +43,24 @@ const contestCategoryTabs = [
 ];
 
 const Main = ({ history }) => {
-  const [Posts,SetPosts] = useState([]);
+  const [Posts, SetPosts] = useState([]);
+  const [Users, SetUsers] = useState([]);
   const [selectedTab, setSelectedTab] = useState(tabs[0]);
   const [selectedSecondTab, setSelectedSecondTab] = useState(secondTabs[0]);
   const [selectedThirdTab, setSelectedThirdTab] = useState([localTabs[0]]);
-  const { details,isLoggedIn } = useContext(UserContext);
+  const { details, isLoggedIn } = useContext(UserContext);
 
   useEffect(() => {
-    RequestMainPost().then((value)=>{SetPosts(value)});
-    
-    if (details!==null && details.city === "선택안함" && isLoggedIn) {
+    RequestMainPost().then((value) => {
+      SetPosts(value);
+    });
+    RequestUsers().then((value) => {
+      SetUsers(value);
+    });
+
+    if (details !== null && details.city === "선택안함" && isLoggedIn) {
       // if not be written user detail profile yet.
-      
+
       history.push("/signup_detail");
     }
   }, [details, history, isLoggedIn]);
@@ -123,32 +130,61 @@ const Main = ({ history }) => {
 
       {selectedTab === "모집" ? (
         <div>
-          {Posts.map((post,i)=>(
-            <Link to={{
-              pathname:`/post_detail`,
-              state:{
-                title:post.title,
-                author:post.profile,
-                contest:post.contest,
-                content:post.content,
-                image:post.poster,
-                city:post.city
-              }
-              }}>
-              <Post key={i} title={post.title} contest={post.contest} end_date={post.end_date}/>
-              </Link>
+          {[...Posts].reverse().map((post, i) => (
+            <Link
+              to={{
+                pathname: `/post_detail`,
+                state: {
+                  title: post.title,
+                  author: post.profile,
+                  contest: post.contest,
+                  content: post.content,
+                  image: post.poster,
+                  city: post.city,
+                },
+              }}
+            >
+              <Post
+                key={i}
+                title={post.title}
+                contest={post.contest}
+                end_date={post.end_date}
+              />
+            </Link>
           ))}
           {/* <Link to="post_detail"><Post></Post></Link> */}
-
         </div>
       ) : (
         // 초대 클릭시
         <div>
-          <UserInfo />
-          <UserInfo />
-          <UserInfo />
-          <UserInfo />
-          <UserInfo />
+          {Users.map((user, i) => (
+            <Link
+              to={{
+                pathname: `/user_detail`,
+                state: {
+                  nickname: user.nickname,
+                  gender: user.gender,
+                  city: user.city,
+                  mycomment: user.mycomment,
+                  photo: user.photo,
+                  skill: user.skill,
+                  interest: user.interest,
+                  portfolio: user.portfolio,
+                  user: user.user,
+                  user_pk: user.user_pk,
+                },
+              }}
+            >
+              <UserInfo
+                key={i}
+                nickname={user.nickname}
+                skill={user.skill}
+                gender={user.gender}
+                interest={user.interest}
+                city={user.city}
+              />
+            </Link>
+          ))}
         </div>
       )}
     </div>
