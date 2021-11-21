@@ -2,10 +2,11 @@ import React from "react";
 
 import styles from "./ReceivedMessage.module.scss";
 
-const ReceivedMessage = () => {
+const ReceivedMessage = (props) => {
+  const {message} = props
   return (
     <div className={styles.message}>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, et.
+      {message}
     </div>
   );
 };

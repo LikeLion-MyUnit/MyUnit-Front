@@ -52,23 +52,17 @@ const UserDetail = (props) => {
           ))}
         </div>
       </div>
-      <Link
-        style={{ textDecoration: "none", color: "black" }}
-        to={{
-          pathname: `/chat`,
-          state: {
-            nickname: nickname,
-            gender: gender,
-            city: city,
-            mycomment: mycomment,
-            photo: photo,
-            user: user,
-            user_pk: user_pk,
-          },
-        }}
-      >
-        <button className={`${styles.btnEdit} btn-main`}>쪽지보내기</button>
-      </Link>
+      <Link to={{
+              pathname:`/chat`,
+              state:{
+                nickname:nickname,
+                photo:photo,
+                receiver_user:user,
+                receiver_user_pk:user_pk
+              }
+              }}>
+                <button className={`${styles.btnEdit} btn-main`}>쪽지보내기</button>
+              </Link>
     </div>
   );
 };

@@ -140,6 +140,7 @@ function PostWrite({ history }) {
             name="endDate"
             id="endDate"
             type="date"
+            min={new Date().toISOString().split("T")[0]}
             onChange={changeInput}
           />
           <br />

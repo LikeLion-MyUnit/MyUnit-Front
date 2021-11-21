@@ -2,12 +2,12 @@ import React from "react";
 
 import styles from "./SentMessage.module.scss";
 
-const SentMessage = () => {
+const SentMessage = (props) => {
+  const {message} = props
   return (
     <div className={styles.sentMessageBox}>
       <div className={styles.sentMessage}>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus,
-        quas.
+        {message}
       </div>
     </div>
   );
