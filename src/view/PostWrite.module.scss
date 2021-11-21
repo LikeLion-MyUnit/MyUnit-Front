@@ -16,5 +16,25 @@ textarea {
 }
 .fileInput {
   width: 160px;
+  height: fit-content;
+  margin: 0px;
+
   border: 0px solid transparent;
+}
+
+.selectBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.select {
+  width: 160px;
+}
+
+.recruitInput {
+  width: 160px;
+  height: 32px;
+  margin: 0px;
 }

@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { UserContext } from "../provider/UserProvider";
 import { postUserProfile } from "../service/AuthService";
 
 import styles from "./SignupDetail.module.scss";
 
 const SignupDetail = ({ history }) => {
-  let isNewUser = false;
+  const isNewUser = useRef(false);
   const { user, details, updateProfile } = useContext(UserContext);
   const [inputData, setInputData] = useState({
     is_open: true,
@@ -21,7 +21,7 @@ const SignupDetail = ({ history }) => {
     if (user === null && details === null) {
     } else {
       if (details.nickname === null) {
-        isNewUser = true;
+        isNewUser.current = true;
         setInputData({
           ...user,
           ...details,
@@ -101,7 +101,7 @@ const SignupDetail = ({ history }) => {
     });
     if (response !== null) {
       updateProfile(response);
-      if (isNewUser) {
+      if (isNewUser.current) {
         history.push("/welcome");
       } else {
         history.push("/mypage");
@@ -111,7 +111,6 @@ const SignupDetail = ({ history }) => {
 
   const getBase64 = (file) => {
     return new Promise((resolve) => {
-      let fileInfo;
       let baseURL = "";
       // Make new FileReader
       let reader = new FileReader();

@@ -1,8 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import MultiUserInfoBtn from "../components/MultiUserInfoBtn";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import styles from "../components/ProfileSettings.module.scss";
 import { serverURL } from "../service/ServerConst";
 
