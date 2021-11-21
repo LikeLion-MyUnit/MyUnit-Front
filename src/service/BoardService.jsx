@@ -109,19 +109,25 @@ export async function RequestMainPost(){
   }
 }
 
-// export async function SendMessage(){
-//   try{
-//     let response = await axios({
-//       method: "post",
-//       url: `${serverURL}/chat/messages/`,
-//       xstfCookieName: "csrftoken",
-//       xsrfHeaderName: "X-CSRFToken",
-//       headers: {
-//         Authorization: `Token ${token}`,
-//       },
-//     });
-    
-//   }catch(e){
-//     console.log(e.response.data);
-//   }
-// }
+async function SendMessage(
+  token,sender,receiver,message
+){
+  try{
+    let response = await axios({
+      method: "post",
+      url: `${serverURL}/chat/messages/`,
+      xstfCookieName: "csrftoken",
+      xsrfHeaderName: "X-CSRFToken",
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+      data: {
+        "receiver":receiver,
+        "sender":sender,
+        "message":message
+      },
+    });
+  }catch(e){
+    console.log(e.response.data);
+  }
+}
