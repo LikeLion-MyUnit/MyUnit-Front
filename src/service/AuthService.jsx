@@ -3,12 +3,10 @@ import { serverURL } from "./ServerConst";
 
 export async function requestSignup(id, password, phonenum) {
   try {
-    
     let response = await axios.post(
       `${serverURL}/account/user/signup/`,
 
       {
-    
         email: id,
         password: password,
         phonenum: `+82${phonenum.substring(1)}`,
@@ -42,6 +40,7 @@ export async function requestLogin(id, password) {
     // console.log(response.data);
     return response.data;
   } catch (e) {
+    console.log(e.response.data);
     return "이메일 혹은 비밀번호를 확인하세요.";
     //TODO : save to cookie
   }
@@ -58,18 +57,17 @@ export async function getUserProfile(token, pk) {
         Authorization: `Token ${token}`,
       },
     });
-    console.log(response.data)
+    console.log(response.data);
     return response.data;
   } catch (e) {
     return null;
   }
 }
 
-
 export async function postUserProfile(token, data) {
   try {
-console.log(data)
-    
+    console.log(data);
+
     let response = await axios({
       method: "put",
       url: `${serverURL}/account/profile/${data.user_pk}/`,
@@ -87,16 +85,14 @@ console.log(data)
         mycomment: data.mycomment,
         portfolio: data.portfolio,
         is_open: data.is_open,
-        photo:data.photo
-      }
+        photo: data.photo,
+      },
     });
     return response.data;
   } catch (e) {
-    console.log(e.response.data)
+    console.log(e.response.data);
     return null;
   }
 }
-
-
 
 // export async function
