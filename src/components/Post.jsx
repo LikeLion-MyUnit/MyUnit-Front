@@ -3,12 +3,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "./Post.module.scss";
+import { serverURL } from "../service/ServerConst";
 
 const Post = (props) => {
+  const image = `${serverURL}/board${props.poster}`;
   return (
     <div className={styles.container}>
       <div className={styles.thumbnailBackground}>
-        <FontAwesomeIcon icon={faUser} className={styles.thumbnail} />
+        <img className={styles.poster} src={image} alt=""></img>
       </div>
 
       <div className={styles.article}>

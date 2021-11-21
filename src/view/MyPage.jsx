@@ -5,7 +5,7 @@ import TabBar from "../components/TabBar";
 import Messages from "./Messages";
 import Interest from "./Interest";
 
-const tabs = ["프로필", "메시지", "관심목록"];
+const tabs = ["프로필", "메시지"];
 
 const MyPage = () => {
   const [selectedTab, setSelectedTab] = useState(tabs[0]);
@@ -23,7 +23,7 @@ const MyPage = () => {
       ></TabBar>
       {selectedTab === "프로필" ? <ProfileSettings /> : null}
       {selectedTab === "메시지" ? <Messages /> : null}
-      {selectedTab === "관심목록" ? <Interest /> : null}
+      {/* {selectedTab === "관심목록" ? <Interest /> : null} */}
     </div>
   );
 };

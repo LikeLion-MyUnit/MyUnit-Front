@@ -5,19 +5,21 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import styles from "./UserInfo.module.scss";
 import UserInfoBtns from "./UserInfoBtns";
 import MultiUserInfoBtn from "./MultiUserInfoBtn";
+import { serverURL } from "../service/ServerConst";
 
 const UserInfo = (props) => {
-  const {nickname,skill,gender,interest,city} = props;
+  const { nickname, skill, gender, interest, city, photo } = props;
+  const image = `${serverURL}/board${photo}`;
   return (
     <div className={styles.container}>
       <div className={styles.thumbnailBackground}>
-        <FontAwesomeIcon icon={faUser} className={styles.thumbnail} />
+        <img className={styles.photo} src={image} alt=""></img>
       </div>
 
       <div className={styles.article}>
+        <p className={styles.skill}>{skill}</p>
         <p className={styles.nickname}>{nickname}</p>
-        <p className={styles.title}>{skill}</p>
-        <MultiUserInfoBtn gender={gender} interest={interest} city={city}/>
+        <MultiUserInfoBtn gender={gender} interest={interest} city={city} />
       </div>
 
       <span className={styles.arrow}>{">"}</span>
