@@ -15,7 +15,7 @@
   margin: 0 30px 0 20px;
   width: 50px;
   border-radius: 50%;
-  background-color: black;
+  background-color: grey;
 }
 .thumbnail {
   width: 30px !important;
@@ -30,11 +30,11 @@
     margin-bottom: 6px;
   }
   .nickname {
-    color: $grey-color;
-    font-size: 12px;
-  }
-  .title {
     font-weight: bolder;
+  }
+  .skill {
+    color: $dark-grey-color;
+    font-size: 12px;
   }
 }
 
@@ -43,4 +43,10 @@
   font-size: 20px;
   font-weight: bolder;
   cursor: pointer;
+}
+
+.photo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
 }

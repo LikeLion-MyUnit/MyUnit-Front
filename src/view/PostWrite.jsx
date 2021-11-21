@@ -102,7 +102,7 @@ function PostWrite({ history }) {
         setPoster(result);
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
       });
   }
 
@@ -140,6 +140,7 @@ function PostWrite({ history }) {
             name="endDate"
             id="endDate"
             type="date"
+            min={new Date().toISOString().split("T")[0]}
             onChange={changeInput}
           />
           <br />
@@ -184,7 +185,11 @@ function PostWrite({ history }) {
             onChange={changeInput}
           />
 
-          <input type="file" onChange={changeImageInput} />
+          <input
+            className={styles.fileInput}
+            type="file"
+            onChange={changeImageInput}
+          />
 
           <button type="submit" className="btn-main">
             작성완료

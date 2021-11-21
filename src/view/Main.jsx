@@ -1,17 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 import MultipleTabBar from "../components/MultipleTabBar";
 import Navbar from "../components/Navbar";
 import Post from "../components/Post";
 import TabBar from "../components/TabBar";
-import TextTabBar from "../components/TextTabBar";
+import FirstTabBar from "../components/TextTabBar";
 
 import styles from "./Main.module.scss";
 import UserInfo from "./../components/UserInfo";
 import { UserContext } from "../provider/UserProvider";
 
 import { RequestUsers } from "../service/AuthService";
-import {RequestMainPost} from "../service/BoardService";
+import { RequestMainPost } from "../service/BoardService";
 import MultiUserInfoBtn from "../components/MultiUserInfoBtn";
 
 const tabs = ["모집", "초대"];
@@ -43,21 +43,25 @@ const contestCategoryTabs = [
 ];
 
 const Main = ({ history }) => {
-  const [Posts,SetPosts] = useState([]);
-  const [Users,SetUsers] = useState([]);
+  const [Posts, SetPosts] = useState([]);
+  const [Users, SetUsers] = useState([]);
   const [selectedTab, setSelectedTab] = useState(tabs[0]);
   const [selectedSecondTab, setSelectedSecondTab] = useState(secondTabs[0]);
-  const [selectedThirdTab, setSelectedThirdTab] = useState([localTabs[0]]);
-  const { details,isLoggedIn } = useContext(UserContext);
+  const [selectedThirdTab, setSelectedThirdTab] = useState(localTabs);
+  const [searchInput, setSearchInput] = useState("");
+  const { details, isLoggedIn } = useContext(UserContext);
 
   useEffect(() => {
-    RequestMainPost().then((value)=>{SetPosts(value)});
-    RequestUsers().then((value)=>{SetUsers(value)});
+    RequestMainPost().then((value) => {
+      SetPosts(value);
+    });
+    RequestUsers().then((value) => {
+      SetUsers(value);
+    });
 
-    
-    if (details!==null && details.city === "선택안함" && isLoggedIn) {
+    if (details !== null && details.city === "선택안함" && isLoggedIn) {
       // if not be written user detail profile yet.
-      
+
       history.push("/signup_detail");
     }
   }, [details, history, isLoggedIn]);
@@ -74,8 +78,9 @@ const Main = ({ history }) => {
   function resetThirdTab(t) {
     let temp = selectedThirdTab;
     temp = temp.filter((e) => false);
-    let defaultElement = t === "지역" ? localTabs[0] : contestCategoryTabs[0];
-    setSelectedThirdTab([...temp, defaultElement]);
+    temp = temp.concat(t === "지역" ? localTabs : contestCategoryTabs);
+
+    setSelectedThirdTab([...temp]);
   }
 
   function changeThirdTab(t) {
@@ -86,7 +91,7 @@ const Main = ({ history }) => {
       temp = temp.filter((e) => e !== t);
     }
     setSelectedThirdTab(temp);
-    console.log(selectedThirdTab);
+    //console.log(selectedThirdTab);
   }
 
   return (
@@ -99,11 +104,13 @@ const Main = ({ history }) => {
         callback={(t) => changeTab(t)}
       ></TabBar>
       <div className="2ndTabBar">
-        <TextTabBar
+        <FirstTabBar
+          searchInput={searchInput}
+          setSearchInput={setSearchInput}
           tabs={secondTabs}
           selected={selectedSecondTab}
           callback={(t) => changeSecondTab(t)}
-        ></TextTabBar>
+        ></FirstTabBar>
       </div>
       <MultipleTabBar
         className="3rdTabBar"
@@ -113,7 +120,7 @@ const Main = ({ history }) => {
       ></MultipleTabBar>
       <div className={styles.dropdownContainer}>
         <select name={styles.selectSort}>
-          <option value="최신순" selected>
+          <option value="최신순" defaultValue>
             최신순
           </option>
         </select>
@@ -126,47 +133,86 @@ const Main = ({ history }) => {
       </div>
 
       {selectedTab === "모집" ? (
-        <div>
-          {Posts.map((post,i)=>(
-            <Link to={{
-              pathname:`/post_detail`,
-              state:{
-                title:post.title,
-                author:post.profile,
-                contest:post.contest,
-                content:post.content,
-                image:post.poster,
-                city:post.city
-              }
-              }}>
-              <Post key={i} title={post.title} contest={post.contest} end_date={post.end_date}/>
+        <div key="recruit">
+          {[...Posts].reverse().map((post, i) =>
+            (selectedSecondTab === "지역" &&
+              selectedThirdTab.includes(post.city)) |
+              (selectedSecondTab === "대회분류" &&
+                selectedThirdTab.includes(post.interest)) &&
+            (searchInput !== "" && post.title.includes(searchInput)) |
+              (searchInput === "") ? (
+              <Link
+                style={{ textDecoration: "none", color: "black" }}
+                key={i}
+                to={{
+                  pathname: `/post_detail`,
+                  state: {
+                    title: post.title,
+                    author: post.profile,
+                    contest: post.contest,
+                    content: post.content,
+                    image: post.poster,
+                    city: post.city,
+                  },
+                }}
+              >
+                <Post
+                  key={i}
+                  poster={post.poster}
+                  title={post.title}
+                  contest={post.contest}
+                  end_date={post.end_date}
+                />
               </Link>
-          ))}
+            ) : (
+              <div key={i}></div>
+            )
+          )}
           {/* <Link to="post_detail"><Post></Post></Link> */}
-
         </div>
       ) : (
         // 초대 클릭시
-        <div>
-          {Users.map((user,i)=>(
-            <Link to={{
-              pathname:`/user_detail`,
-              state:{
-                nickname:user.nickname,
-                gender:user.gender,
-                city:user.city,
-                mycomment:user.mycomment,
-                photo:user.photo,
-                skill:user.skill,
-                interest:user.interest,
-                portfolio:user.portfolio,
-                user:user.user,
-                user_pk:user.user_pk
-              }
-              }}>
-              <UserInfo key={i} nickname={user.nickname} skill={user.skill} gender={user.gender} interest={user.interest} city={user.city}/>
+        <div key="invite">
+          {Users.map((user, i) =>
+            (selectedSecondTab === "지역" &&
+              selectedThirdTab.includes(user.city)) |
+              (selectedSecondTab === "대회분류" &&
+                selectedThirdTab.includes(user.interest)) &&
+            (searchInput !== "" && user.nickname.includes(searchInput)) |
+              (searchInput === "") ? (
+              <Link
+                style={{ textDecoration: "none", color: "black" }}
+                key={i}
+                to={{
+                  pathname: `/user_detail`,
+                  state: {
+                    nickname: user.nickname,
+                    gender: user.gender,
+                    city: user.city,
+                    mycomment: user.mycomment,
+                    photo: user.photo,
+                    skill: user.skill,
+                    interest: user.interest,
+                    portfolio: user.portfolio,
+                    user: user.user,
+                    user_pk: user.user_pk,
+                  },
+                }}
+              >
+                <UserInfo
+                  key={i}
+                  photo={user.photo}
+                  nickname={user.nickname}
+                  skill={user.skill}
+                  gender={user.gender}
+                  interest={user.interest}
+                  city={user.city}
+                />
               </Link>
-          ))}
+            ) : (
+              <div key={i}></div>
+            )
+          )}
         </div>
       )}
     </div>

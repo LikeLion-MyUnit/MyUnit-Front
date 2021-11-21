@@ -13,10 +13,10 @@ export async function requestSignup(id, password, phonenum) {
       }
     );
     // response.data.password = "";
-    console.log(response.data);
+    //console.log(response.data);
     return response.data;
   } catch (e) {
-    console.log(e.response.data);
+    //console.log(e.response.data);
     if (Object.keys(e.response.data).includes("email")) {
       return "중복된 이메일이 존재합니다.";
     } else {
@@ -37,10 +37,10 @@ export async function requestLogin(id, password) {
       }
     );
     // response.data.password = "";
-    // console.log(response.data);
+    // //console.log(response.data);
     return response.data;
   } catch (e) {
-    console.log(e.response.data);
+    //console.log(e.response.data);
     return "이메일 혹은 비밀번호를 확인하세요.";
     //TODO : save to cookie
   }
@@ -57,7 +57,7 @@ export async function getUserProfile(token, pk) {
         Authorization: `Token ${token}`,
       },
     });
-    console.log(response.data);
+    //console.log(response.data);
     return response.data;
   } catch (e) {
     return null;
@@ -66,7 +66,7 @@ export async function getUserProfile(token, pk) {
 
 export async function postUserProfile(token, data) {
   try {
-    console.log(data);
+    //console.log(data);
 
     let response = await axios({
       method: "put",
@@ -90,22 +90,20 @@ export async function postUserProfile(token, data) {
     });
     return response.data;
   } catch (e) {
-    console.log(e.response.data);
+    //console.log(e.response.data);
     return null;
   }
 }
 
-export async function RequestUsers(){
-  try{
-    const response = await axios.get(`${serverURL}/account/profile_all`)
-    console.log(response.data)
-    return response.data
-  }
-    catch(e){
-    console.log(e.response.data);
-    alert('데이터를 불러오는데 실패해버렸쨔농 ㅜㅜ')
+export async function RequestUsers() {
+  try {
+    const response = await axios.get(`${serverURL}/account/profile_all`);
+    //console.log(response.data)
+    return response.data;
+  } catch (e) {
+    //console.log(e.response.data);
+    alert("데이터를 불러오는데 실패해버렸쨔농 ㅜㅜ");
   }
 }
-
 
 // export async function

@@ -6,13 +6,17 @@ const MultipleTabBar = ({ tabs, selected, callback }) => {
 
   return (
     <div className={styles.container}>
-      {selected.map((t) => (
-        <span className={styles.btnSelected} onClick={() => callback(t)}>
+      {selected.map((t, i) => (
+        <span
+          key={i}
+          className={styles.btnSelected}
+          onClick={() => callback(t)}
+        >
           {t}
         </span>
       ))}
-      {tabs.map((t) => (
-        <span className={styles.btn} onClick={() => callback(t)}>
+      {tabs.map((t, i) => (
+        <span key={i} className={styles.btn} onClick={() => callback(t)}>
           {t}
         </span>
       ))}

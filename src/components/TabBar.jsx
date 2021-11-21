@@ -5,8 +5,9 @@ const TabBar = ({ tabs, selected, callback }) => {
   //List<String> tabs, function callback(setState)
   return (
     <div className={styles.container}>
-      {tabs.map((t) => (
+      {tabs.map((t, i) => (
         <div
+          key={i}
           className={t === selected ? styles.btnTabSelected : styles.btnTab}
           onClick={() => callback(t)}
         >

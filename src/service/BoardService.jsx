@@ -1,6 +1,6 @@
 import axios from "axios";
 import { serverURL } from "./ServerConst";
-import React,{useState} from 'react'
+import React, { useState } from "react";
 import Post from "../components/Post";
 
 export async function postBoard(
@@ -13,8 +13,8 @@ export async function postBoard(
   interest,
   end_date,
   is_open,
-  recruit,
-  profile
+  recruit
+  // profile
 ) {
   try {
     let response = await axios({
@@ -35,12 +35,12 @@ export async function postBoard(
         end_date: end_date,
         is_open: is_open,
         recruit: recruit,
-        profile: profile,
+        // profile: profile,
       },
     });
     return response.data;
   } catch (e) {
-    console.log(e.response.data);
+    //console.log(e.response.data);
     // if (Object.keys(e.response.data).includes("email")) {
     //   return "중복된 이메일이 존재합니다.";
     // } else if (Object.keys(e.response.data).includes("nickname")) {
@@ -84,7 +84,7 @@ export async function getBoard(
     );
     return response.data;
   } catch (e) {
-    console.log(e.response.data);
+    //console.log(e.response.data);
     // if (Object.keys(e.response.data).includes("email")) {
     //   return "중복된 이메일이 존재합니다.";
     // } else if (Object.keys(e.response.data).includes("nickname")) {
@@ -95,19 +95,17 @@ export async function getBoard(
   }
 }
 
-
-
-export async function RequestMainPost(){
-  try{
-    const response = await axios.get(`${serverURL}/board/post_all`)
-    console.log(response.data)
-    return response.data
-  }
-    catch(e){
-    console.log(e.response.data);
-    alert('데이터를 불러오는데 실패해버렸쨔농 ㅜㅜ')
+export async function RequestMainPost() {
+  try {
+    const response = await axios.get(`${serverURL}/board/post_all`);
+    //console.log(response.data);
+    return response.data;
+  } catch (e) {
+    //console.log(e.response.data);
+    alert("데이터를 불러오는데 실패해버렸쨔농 ㅜㅜ");
   }
 }
+
 
 async function SendMessage(
   token,sender,receiver,message

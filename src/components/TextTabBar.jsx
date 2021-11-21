@@ -3,12 +3,18 @@ import styles from "./TextTabBar.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
-export const TextTabBar = ({ tabs, selected, callback }) => {
+export const FirstTabBar = ({
+  tabs,
+  selected,
+  callback,
+  searchInput,
+  setSearchInput,
+}) => {
   //List<String> tabs, function callback(setState)
   return (
     <div className={styles.container}>
-      {tabs.map((t) => (
-        <span className={styles.btnTab} onClick={() => callback(t)}>
+      {tabs.map((t, i) => (
+        <span key={i} className={styles.btnTab} onClick={() => callback(t)}>
           <span className={t === selected ? styles.textSelected : styles.text}>
             {t}
           </span>
@@ -19,6 +25,10 @@ export const TextTabBar = ({ tabs, selected, callback }) => {
           <input
             name="keyword"
             type="text"
+            value={searchInput}
+            onChange={(e) => {
+              setSearchInput(e.target.value);
+            }}
             placeholder="키워드 검색"
             className={styles.search}
           />
@@ -29,4 +39,4 @@ export const TextTabBar = ({ tabs, selected, callback }) => {
   );
 };
 
-export default TextTabBar;
+export default FirstTabBar;
