@@ -1,6 +1,6 @@
 import axios from "axios";
 import { serverURL } from "./ServerConst";
-import React,{useState} from 'react'
+import React, { useState } from "react";
 import Post from "../components/Post";
 
 export async function postBoard(
@@ -13,8 +13,8 @@ export async function postBoard(
   interest,
   end_date,
   is_open,
-  recruit,
-  profile
+  recruit
+  // profile
 ) {
   try {
     let response = await axios({
@@ -35,7 +35,7 @@ export async function postBoard(
         end_date: end_date,
         is_open: is_open,
         recruit: recruit,
-        profile: profile,
+        // profile: profile,
       },
     });
     return response.data;
@@ -95,17 +95,14 @@ export async function getBoard(
   }
 }
 
-
-
-export async function RequestMainPost(){
-  try{
-    const response = await axios.get(`${serverURL}/board/post_all`)
-    console.log(response.data)
-    return response.data
-  }
-    catch(e){
+export async function RequestMainPost() {
+  try {
+    const response = await axios.get(`${serverURL}/board/post_all`);
+    console.log(response.data);
+    return response.data;
+  } catch (e) {
     console.log(e.response.data);
-    alert('데이터를 불러오는데 실패해버렸쨔농 ㅜㅜ')
+    alert("데이터를 불러오는데 실패해버렸쨔농 ㅜㅜ");
   }
 }
 
@@ -120,7 +117,7 @@ export async function RequestMainPost(){
 //         Authorization: `Token ${token}`,
 //       },
 //     });
-    
+
 //   }catch(e){
 //     console.log(e.response.data);
 //   }
