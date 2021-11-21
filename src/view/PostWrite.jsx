@@ -4,30 +4,17 @@ import { UserContext } from "../provider/UserProvider";
 import { postBoard } from "../service/BoardService";
 import styles from "./PostWrite.module.scss";
 
-function PostWrite() {
+function PostWrite({ history }) {
   const { user } = useContext(UserContext);
   const [title, setTitle] = useState("");
   const [contest, setContest] = useState("");
   const [content, setContent] = useState("");
   const [poster, setPoster] = useState();
-  const [city, setCity] = useState();
-  const [interest, setInterest] = useState("");
+  const [city, setCity] = useState("서울");
+  const [interest, setInterest] = useState("기획/아이디어");
   const [endDate, setEndDate] = useState("");
   const [isOpen, setIsOpen] = useState(true); //true&false 조건 만들기
   const [recruit, setRecruit] = useState(0);
-
-  // let newDate = new Date();
-  // let date = "";
-  // let getdate = () => {
-  //   if (newDate.getDate() < 10) {
-  //     date = `0${newDate.getDate()}`;
-  //   } else {
-  //     date = newDate.getDate();
-  //   }
-  // };
-  // getdate();
-  // let month = newDate.getMonth() + 1;
-  // let year = newDate.getFullYear();
 
   function changeInput(e) {
     // Depends on input's name
@@ -44,9 +31,7 @@ function PostWrite() {
       case "content":
         setContent(value);
         break;
-      case "poster":
-        setPoster(e.target.files[0]);
-        break;
+
       case "city":
         setCity(value);
         break;
@@ -83,8 +68,42 @@ function PostWrite() {
         isOpen,
         recruit
       );
+      history.push("/");
       return response.data;
     }
+  }
+
+  // change image file to base64 file
+  const getBase64 = (file) => {
+    return new Promise((resolve) => {
+      let fileInfo;
+      let baseURL = "";
+      // Make new FileReader
+      let reader = new FileReader();
+
+      // Convert the file to base64 text
+      reader.readAsDataURL(file);
+
+      // on reader load somthing...
+      reader.onload = () => {
+        // Make a fileInfo Object
+        baseURL = reader.result;
+        resolve(baseURL);
+      };
+    });
+  };
+
+  function changeImageInput(e) {
+    const file = e.target.files[0];
+    getBase64(file)
+      .then((result) => {
+        file["base64"] = result;
+
+        setPoster(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   return (
@@ -165,30 +184,9 @@ function PostWrite() {
             onChange={changeInput}
           />
 
-          <input
-            name="poster"
-            type="file"
-            accept="image/jpg,image/png,image/jpeg,image/gif"
-            onChange={changeInput}
-          />
+          <input type="file" onChange={changeImageInput} />
 
-          <button
-            type="submit"
-            className="btn-main"
-            onClick={() =>
-              console.log(
-                title,
-                contest,
-                content,
-                city,
-                interest,
-                endDate,
-                isOpen,
-                recruit,
-                poster
-              )
-            }
-          >
+          <button type="submit" className="btn-main">
             작성완료
           </button>
         </form>

@@ -5,17 +5,17 @@ import { postUserProfile } from "../service/AuthService";
 import styles from "./SignupDetail.module.scss";
 
 const SignupDetail = ({ history }) => {
-  const { user, details,updateProfile } = useContext(UserContext);
-  const [inputData, setInputData] = useState({ is_open: true, nickname:""});
+  const { user, details, updateProfile } = useContext(UserContext);
+  const [inputData, setInputData] = useState({ is_open: true, nickname: "" });
+  const [portfolioInputLength, setPortfolioInputLength] = useState(1);
 
   useEffect(() => {
     if (user === null && details === null) {
     } else {
-      
       if (details.nickname === null) {
-        setInputData({ ...user, ...details, city:"서울" , nickname:""});
+        setInputData({ ...user, ...details, city: "서울", nickname: "" });
       }
-
+      console.log(details);
       setInputData({ ...user, ...details });
     }
   }, [user, details]);
@@ -59,33 +59,71 @@ const SignupDetail = ({ history }) => {
 
   async function onSubmit(e) {
     e.preventDefault();
-  
-      console.log(inputData.photo)
-    let response = await postUserProfile(user.token,
-      {
-        nickname:inputData.nickname,
-        user_pk : user.user_pk,
-        photo: inputData.photo,
-        gender: inputData.gender,
-        city: inputData.city,
-        interest: inputData.interest,
-        skill: inputData.skill,
-        mycomment: inputData.mycomment,
-        portfolio: inputData.portfolio,
-        is_open: inputData.is_open,
-      })
+
+    console.log(inputData.photo);
+    let response = await postUserProfile(user.token, {
+      user_pk: user.user_pk,
+      nickname: inputData.nickname,
+      photo: inputData.photo,
+      gender: inputData.gender,
+      city: inputData.city,
+      interest: inputData.interest,
+      skill: inputData.skill,
+      mycomment: inputData.mycomment,
+      portfolio: inputData.portfolio,
+      is_open: inputData.is_open,
+    });
     if (response !== null) {
       updateProfile(response);
       history.push("/welcome");
     }
   }
 
+  const getBase64 = (file) => {
+    return new Promise((resolve) => {
+      let fileInfo;
+      let baseURL = "";
+      // Make new FileReader
+      let reader = new FileReader();
+
+      // Convert the file to base64 text
+      reader.readAsDataURL(file);
+
+      // on reader load somthing...
+      reader.onload = () => {
+        // Make a fileInfo Object
+        console.log("Called", reader);
+        baseURL = reader.result;
+        console.log(baseURL);
+        resolve(baseURL);
+      };
+      console.log(fileInfo);
+    });
+  };
+
   function changeProfileInput(e) {
-    setInputData({ ...inputData, photo: e.target.files[0] });
+    const file = e.target.files[0];
+    getBase64(file)
+      .then((result) => {
+        file["base64"] = result;
+        console.log("File Is", file);
+        setInputData({ ...inputData, photo: result });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
-  function changePortfolioInput(e) {
-    setInputData({ ...inputData, portfolio: e.target.files[0] });
+  function changePortfolioInput(e, index) {
+    setInputData({ ...inputData, portfolio: e.target.value });
+  }
+
+  function addPortfolioInput(e) {
+    setPortfolioInputLength(portfolioInputLength + 1);
+  }
+  function delPortfolioInput(e) {
+    if (portfolioInputLength > 1)
+      setPortfolioInputLength(portfolioInputLength - 1);
   }
 
   return (
@@ -94,26 +132,29 @@ const SignupDetail = ({ history }) => {
         프로필을 자세히 쓸수록 모집 / 초대 확률이 높아져요
       </p>
       <div className={styles.nicknameBox}>
-        닉네임 : <input className={styles.nickname}
+        닉네임 :{" "}
+        <input
+          className={styles.customInput}
           name="nickname"
-            value={inputData.nickname}
-            onChange={changeTextInput} required></input>
+          value={inputData.nickname}
+          onChange={changeTextInput}
+          required
+        ></input>
       </div>
-      <div className={styles.profileBox} >
-      
+      <div className={styles.profileBox}>
         <img
           src="http://placehold.jp/50x50.png"
           alt=""
           className={styles.profileImg}
         />
-        <input
+        {/* <input
           className={styles.profileFileInput}
-          name="poster"
           type="file"
           // value={inputData.photo}
           // accept="image/jpg,image/png,image/jpeg,image/gif"
           onChange={changeProfileInput}
-        />
+        /> */}
+        <input type="file" onChange={changeProfileInput} />
       </div>
       <div className={styles.selectContainer}>
         <div>
@@ -203,17 +244,20 @@ const SignupDetail = ({ history }) => {
           ></textarea>
         </div> */}
         <div className={styles.inputBox}>
-          <p>수상/자격증/어학</p>
+          <p>포트폴리오 (URL)</p>
           <hr />
-          <div className={styles.addBtnContainer}>
-            <input
-              className={styles.profileFileInput}
-              name="poster"
-              type="file"
-              // value={inputData.photo}
-              // accept="image/jpg,image/png,image/jpeg,image/gif"
-              onChange={changePortfolioInput}
-            />
+          <div>
+            {Array.from({ length: portfolioInputLength }, (v, i) => i).map(
+              (e) => (
+                <input
+                  value={inputData.portfolio}
+                  className={styles.customInput}
+                  onChange={changePortfolioInput}
+                ></input>
+              )
+            )}
+            <button onClick={addPortfolioInput}>추가</button>
+            <button onClick={delPortfolioInput}>삭제</button>
           </div>
         </div>
       </div>
