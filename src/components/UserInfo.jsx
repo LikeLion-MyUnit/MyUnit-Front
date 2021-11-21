@@ -1,9 +1,6 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "./UserInfo.module.scss";
-import UserInfoBtns from "./UserInfoBtns";
 import MultiUserInfoBtn from "./MultiUserInfoBtn";
 import { serverURL } from "../service/ServerConst";
 

@@ -4,12 +4,12 @@ import styles from "./Login.module.scss";
 import "../common/Common.scss";
 import { useState } from "react";
 import { UserContext } from "../provider/UserProvider";
-import { getUserProfile, requestLogin } from "../service/AuthService";
+import { requestLogin } from "../service/AuthService";
 
 const Login = ({ history }) => {
   const [id, setIdTextInput] = useState("");
   const [pw, setPwTextInput] = useState("");
-  const { login, user } = useContext(UserContext);
+  const { login } = useContext(UserContext);
 
   function changeTextInput(e) {
     const {
@@ -36,7 +36,7 @@ const Login = ({ history }) => {
       let response = await requestLogin(id, pw);
       if (typeof response !== "string") {
         login(response);
-          history.push("/");
+        history.push("/");
       } else {
         alert(response);
       }

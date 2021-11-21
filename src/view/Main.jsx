@@ -12,7 +12,6 @@ import { UserContext } from "../provider/UserProvider";
 
 import { RequestUsers } from "../service/AuthService";
 import { RequestMainPost } from "../service/BoardService";
-import MultiUserInfoBtn from "../components/MultiUserInfoBtn";
 
 const tabs = ["모집", "초대"];
 const secondTabs = ["지역", "대회분류"];
@@ -53,10 +52,12 @@ const Main = ({ history }) => {
 
   useEffect(() => {
     RequestMainPost().then((value) => {
-      SetPosts(value);
+      if (value !== null) SetPosts(value);
+      else history.push("login");
     });
     RequestUsers().then((value) => {
-      SetUsers(value);
+      if (value !== null) SetUsers(value);
+      else history.push("/login");
     });
 
     if (details !== null && details.city === "선택안함" && isLoggedIn) {
@@ -132,7 +133,7 @@ const Main = ({ history }) => {
         </button>
       </div>
 
-      {selectedTab === "모집" ? (
+      {selectedTab === "모집" && Posts.length > 0 ? (
         <div key="recruit">
           {[...Posts].reverse().map((post, i) =>
             (selectedSecondTab === "지역" &&
@@ -172,48 +173,50 @@ const Main = ({ history }) => {
         </div>
       ) : (
         // 초대 클릭시
-        <div key="invite">
-          {Users.map((user, i) =>
-            (selectedSecondTab === "지역" &&
-              selectedThirdTab.includes(user.city)) |
-              (selectedSecondTab === "대회분류" &&
-                selectedThirdTab.includes(user.interest)) &&
-            (searchInput !== "" && user.nickname.includes(searchInput)) |
-              (searchInput === "") ? (
-              <Link
-                style={{ textDecoration: "none", color: "black" }}
-                key={i}
-                to={{
-                  pathname: `/user_detail`,
-                  state: {
-                    nickname: user.nickname,
-                    gender: user.gender,
-                    city: user.city,
-                    mycomment: user.mycomment,
-                    photo: user.photo,
-                    skill: user.skill,
-                    interest: user.interest,
-                    portfolio: user.portfolio,
-                    user: user.user,
-                    user_pk: user.user_pk,
-                  },
-                }}
-              >
-                <UserInfo
+        Users.length > 0 && (
+          <div key="invite">
+            {Users.map((user, i) =>
+              (selectedSecondTab === "지역" &&
+                selectedThirdTab.includes(user.city)) |
+                (selectedSecondTab === "대회분류" &&
+                  selectedThirdTab.includes(user.interest)) &&
+              (searchInput !== "" && user.nickname.includes(searchInput)) |
+                (searchInput === "") ? (
+                <Link
+                  style={{ textDecoration: "none", color: "black" }}
                   key={i}
-                  photo={user.photo}
-                  nickname={user.nickname}
-                  skill={user.skill}
-                  gender={user.gender}
-                  interest={user.interest}
-                  city={user.city}
-                />
-              </Link>
-            ) : (
-              <div key={i}></div>
-            )
-          )}
-        </div>
+                  to={{
+                    pathname: `/user_detail`,
+                    state: {
+                      nickname: user.nickname,
+                      gender: user.gender,
+                      city: user.city,
+                      mycomment: user.mycomment,
+                      photo: user.photo,
+                      skill: user.skill,
+                      interest: user.interest,
+                      portfolio: user.portfolio,
+                      user: user.user,
+                      user_pk: user.user_pk,
+                    },
+                  }}
+                >
+                  <UserInfo
+                    key={i}
+                    photo={user.photo}
+                    nickname={user.nickname}
+                    skill={user.skill}
+                    gender={user.gender}
+                    interest={user.interest}
+                    city={user.city}
+                  />
+                </Link>
+              ) : (
+                <div key={i}></div>
+              )
+            )}
+          </div>
+        )
       )}
     </div>
   );

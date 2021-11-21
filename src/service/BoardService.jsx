@@ -1,7 +1,5 @@
 import axios from "axios";
 import { serverURL } from "./ServerConst";
-import React, { useState } from "react";
-import Post from "../components/Post";
 
 export async function postBoard(
   token,
@@ -101,31 +99,28 @@ export async function RequestMainPost() {
     //console.log(response.data);
     return response.data;
   } catch (e) {
-    //console.log(e.response.data);
-    alert("데이터를 불러오는데 실패해버렸쨔농 ㅜㅜ");
+    alert("네트워크 에러가 발생했습니다.");
+    return null;
   }
 }
 
-
-async function SendMessage(
-  token,sender,receiver,message
-){
-  try{
-    let response = await axios({
-      method: "post",
-      url: `${serverURL}/chat/messages/`,
-      xstfCookieName: "csrftoken",
-      xsrfHeaderName: "X-CSRFToken",
-      headers: {
-        Authorization: `Token ${token}`,
-      },
-      data: {
-        "receiver":receiver,
-        "sender":sender,
-        "message":message
-      },
-    });
-  }catch(e){
-    console.log(e.response.data);
-  }
-}
+// async function SendMessage(token, sender, receiver, message) {
+//   try {
+//     let response = await axios({
+//       method: "post",
+//       url: `${serverURL}/chat/messages/`,
+//       xstfCookieName: "csrftoken",
+//       xsrfHeaderName: "X-CSRFToken",
+//       headers: {
+//         Authorization: `Token ${token}`,
+//       },
+//       data: {
+//         receiver: receiver,
+//         sender: sender,
+//         message: message,
+//       },
+//     });
+//   } catch (e) {
+//     console.log(e.response.data);
+//   }
+// }

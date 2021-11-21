@@ -1,20 +1,47 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useHistory } from "react-router";
+import { UserContext } from "../provider/UserProvider";
+import { getUserProfile } from "../service/AuthService";
+import { serverURL } from "../service/ServerConst";
 
 import styles from "./Message.module.scss";
 
-const Message = () => {
+const Message = ({ user_pk, lastMessage, time }) => {
+  const { user } = useContext(UserContext);
+  const history = useHistory();
+  const [counterpartUser, setCounterpartUser] = useState({
+    nickname: "",
+  });
+  const image = `${serverURL}/board${counterpartUser.photo}`;
+  useEffect(() => {
+    if (user !== null)
+      getUserProfile(user.token, user_pk).then((e) => {
+        setCounterpartUser(e);
+      });
+  }, [user, user_pk]);
+
+  const directionMessage = () => {
+    history.push({
+      pathname: "/chat",
+      state: {
+        nickname: counterpartUser.nickname,
+        receiver_user: counterpartUser.user_pk,
+      },
+    });
+  };
+
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onClick={directionMessage}>
       <img
-        src="http://placehold.jp/50x50.png"
+        src={image ?? "http://placehold.jp/50x50.png"}
         alt=""
         className={styles.profileImg}
       />
       <div className={styles.content}>
-        <p className={styles.name}>닉네임1</p>
-        <p className={styles.preview}>Lorem ipsum dolor sit amet....</p>
+        <p className={styles.name}>{counterpartUser.nickname}</p>
+        <p className={styles.preview}>{lastMessage}</p>
       </div>
-      <p className={styles.time}>10:34</p>
+      <p className={styles.time}>{time}</p>
     </div>
   );
 };

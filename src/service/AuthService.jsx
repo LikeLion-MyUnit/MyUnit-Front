@@ -102,8 +102,36 @@ export async function RequestUsers() {
     return response.data;
   } catch (e) {
     //console.log(e.response.data);
-    alert("데이터를 불러오는데 실패해버렸쨔농 ㅜㅜ");
+    alert("네트워크 에러가 발생했습니다.");
+    return null;
   }
 }
 
-// export async function
+export async function getMessages(token, user_pk) {
+  try {
+    let response = await axios({
+      method: "put",
+      url: `${serverURL}/account/profile/${user_pk}/`,
+      xstfCookieName: "csrftoken",
+      xsrfHeaderName: "X-CSRFToken",
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+      data: {
+        // gender: data.gender,
+        // nickname: data.nickname,
+        // city: data.city,
+        // interest: data.interest,
+        // skill: data.skill,
+        // mycomment: data.mycomment,
+        // portfolio: data.portfolio,
+        // is_open: data.is_open,
+        // photo: data.photo,
+      },
+    });
+    return response.data;
+  } catch (e) {
+    alert("네트워크 에러가 발생했습니다.");
+    return null;
+  }
+}
