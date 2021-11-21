@@ -16,7 +16,6 @@ export async function postBoard(
   recruit,
   profile
 ) {
-  console.log(token)
   try {
     let response = await axios({
       method: "post",
@@ -109,3 +108,20 @@ export async function RequestMainPost(){
     alert('데이터를 불러오는데 실패해버렸쨔농 ㅜㅜ')
   }
 }
+
+// export async function SendMessage(){
+//   try{
+//     let response = await axios({
+//       method: "post",
+//       url: `${serverURL}/chat/messages/`,
+//       xstfCookieName: "csrftoken",
+//       xsrfHeaderName: "X-CSRFToken",
+//       headers: {
+//         Authorization: `Token ${token}`,
+//       },
+//     });
+    
+//   }catch(e){
+//     console.log(e.response.data);
+//   }
+// }

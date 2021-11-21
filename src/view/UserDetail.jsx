@@ -1,11 +1,12 @@
 import React from "react";
-import UserInfoBtns from "../components/UserInfoBtns";
-
+import { Link } from "react-router-dom";
+import MultiUserInfoBtn from "../components/MultiUserInfoBtn";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import styles from "../components/ProfileSettings.module.scss";
 
-const ProfileSettings = (props) => {
+
+const UserDetail = (props) => {
     const {nickname,city,gender,interest,mycomment,photo,portfolio,skill,user,user_pk} = props.location.state
 
   return (
@@ -23,7 +24,7 @@ const ProfileSettings = (props) => {
         </div>
       </div>
       <div className={styles.btnsContainer}>
-        <UserInfoBtns city={city} gender={gender} interest={interest}/>
+        <MultiUserInfoBtn city={city} gender={gender} interest={interest}/>
       </div>
       <div className={styles.inputContainer}>
         <h1>자기소개</h1>
@@ -42,9 +43,22 @@ const ProfileSettings = (props) => {
           {portfolio}
         </div>
       </div>
-      <button className={`${styles.btnEdit} btn-main`}>쪽지보내기</button>
+      <Link to={{
+              pathname:`/chat`,
+              state:{
+                nickname:nickname,
+                gender:gender,
+                city:city,
+                mycomment:mycomment,
+                photo:photo,
+                user:user,
+                user_pk:user_pk
+              }
+              }}>
+                <button className={`${styles.btnEdit} btn-main`}>쪽지보내기</button>
+              </Link>
     </div>
   );
 };
 
-export default ProfileSettings;
+export default UserDetail;

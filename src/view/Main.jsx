@@ -12,6 +12,7 @@ import { UserContext } from "../provider/UserProvider";
 
 import { RequestUsers } from "../service/AuthService";
 import {RequestMainPost} from "../service/BoardService";
+import MultiUserInfoBtn from "../components/MultiUserInfoBtn";
 
 const tabs = ["모집", "초대"];
 const secondTabs = ["지역", "대회분류"];

@@ -4,6 +4,7 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "./UserInfo.module.scss";
 import UserInfoBtns from "./UserInfoBtns";
+import MultiUserInfoBtn from "./MultiUserInfoBtn";
 
 const UserInfo = (props) => {
   const {nickname,skill,gender,interest,city} = props;
@@ -16,7 +17,7 @@ const UserInfo = (props) => {
       <div className={styles.article}>
         <p className={styles.nickname}>{nickname}</p>
         <p className={styles.title}>{skill}</p>
-        <UserInfoBtns gender={gender} interest={interest} city={city}/>
+        <MultiUserInfoBtn gender={gender} interest={interest} city={city}/>
       </div>
 
       <span className={styles.arrow}>{">"}</span>

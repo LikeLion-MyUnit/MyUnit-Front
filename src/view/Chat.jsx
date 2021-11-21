@@ -8,12 +8,13 @@ import styles from "./Chat.module.scss";
 const onSubmit = () => {};
 const onChange = () => {};
 
-const Chat = () => {
+const Chat = (props) => {
+  const {nickname,photo,user,user_pk} = props.location.state
   return (
     <div className={styles.container}>
       <Navbar />
       <h1>메세지</h1>
-      <p>닉네임1</p>
+      <p>{nickname}</p>
       <div className={styles.chatBox}>
         <ReceivedMessage />
         <SentMessage />
