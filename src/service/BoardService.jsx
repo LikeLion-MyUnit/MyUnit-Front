@@ -1,7 +1,5 @@
 import axios from "axios";
 import { serverURL } from "./ServerConst";
-import React, { useState } from "react";
-import Post from "../components/Post";
 
 export async function postBoard(
   token,
@@ -103,29 +101,5 @@ export async function RequestMainPost() {
   } catch (e) {
     //console.log(e.response.data);
     alert("데이터를 불러오는데 실패해버렸쨔농 ㅜㅜ");
-  }
-}
-
-
-async function SendMessage(
-  token,sender,receiver,message
-){
-  try{
-    let response = await axios({
-      method: "post",
-      url: `${serverURL}/chat/messages/`,
-      xstfCookieName: "csrftoken",
-      xsrfHeaderName: "X-CSRFToken",
-      headers: {
-        Authorization: `Token ${token}`,
-      },
-      data: {
-        "receiver":receiver,
-        "sender":sender,
-        "message":message
-      },
-    });
-  }catch(e){
-    console.log(e.response.data);
   }
 }

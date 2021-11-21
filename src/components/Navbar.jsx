@@ -1,30 +1,29 @@
 import React, { useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBell,
-  faBellSlash,
-  faUserCog,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBell, faUserCog } from "@fortawesome/free-solid-svg-icons";
 import styles from "./Navbar.module.scss";
 import { UserContext } from "../provider/UserProvider";
 import { useHistory } from "react-router";
-import { getUserProfile } from "../service/AuthService";
 
 const Navbar = () => {
-  const {  details, logout, isLoggedIn } = useContext(UserContext);
+  const { details, logout, isLoggedIn } = useContext(UserContext);
   const history = useHistory();
-  
 
   function onClickProfileBtn() {
-    history.push('/mypage');
+    history.push("/mypage");
   }
   function onClickLogo() {
-    history.push('/');
+    history.push("/");
   }
 
   return (
     <nav className={styles.navbar}>
-      <img src="img/logo_short.png" alt="" className={styles.logo} onClick={onClickLogo} />
+      <img
+        src="img/logo_short.png"
+        alt=""
+        className={styles.logo}
+        onClick={onClickLogo}
+      />
 
       <div className={styles.btnGroup}>
         <button className={styles.btnAlarm}>
