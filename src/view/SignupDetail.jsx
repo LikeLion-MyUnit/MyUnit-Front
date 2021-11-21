@@ -30,8 +30,15 @@ const SignupDetail = ({ history }) => {
         });
       } else {
         let portfolio = details["portfolio"].split("|");
+
         setPortfolioInputLength(portfolio.length);
-        setInputData({ ...user, ...details, portfolio: portfolio });
+
+        setInputData({
+          ...user,
+          ...details,
+          portfolio: portfolio,
+          photo: null,
+        });
       }
     }
   }, [user, details]);

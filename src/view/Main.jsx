@@ -120,7 +120,7 @@ const Main = ({ history }) => {
       ></MultipleTabBar>
       <div className={styles.dropdownContainer}>
         <select name={styles.selectSort}>
-          <option value="최신순" selected>
+          <option value="최신순" defaultValue>
             최신순
           </option>
         </select>
@@ -133,7 +133,7 @@ const Main = ({ history }) => {
       </div>
 
       {selectedTab === "모집" ? (
-        <div>
+        <div key="recruit">
           {[...Posts].reverse().map((post, i) =>
             (selectedSecondTab === "지역" &&
               selectedThirdTab.includes(post.city)) |
@@ -165,14 +165,14 @@ const Main = ({ history }) => {
                 />
               </Link>
             ) : (
-              <div></div>
+              <div key={i}></div>
             )
           )}
           {/* <Link to="post_detail"><Post></Post></Link> */}
         </div>
       ) : (
         // 초대 클릭시
-        <div>
+        <div key="invite">
           {Users.map((user, i) =>
             (selectedSecondTab === "지역" &&
               selectedThirdTab.includes(user.city)) |
@@ -210,7 +210,7 @@ const Main = ({ history }) => {
                 />
               </Link>
             ) : (
-              <div></div>
+              <div key={i}></div>
             )
           )}
         </div>

@@ -14,7 +14,7 @@ const Post = (props) => {
       </div>
 
       <div className={styles.article}>
-        <p className={styles.date}>{props.end_date}</p>
+        <p className={styles.date}>마감일 : {props.end_date}</p>
         <p className={styles.title}>{props.title}</p>
         <p className={styles.contestTitle}>{props.contest}</p>
       </div>

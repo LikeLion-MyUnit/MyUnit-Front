@@ -15,7 +15,7 @@
   margin: 0 30px 0 20px;
   width: 50px;
   height: 50px;
-  border-radius: 50%;
+  // border-radius: 50%;
   background-color: lightgrey;
 }
 .thumbnail {
@@ -31,7 +31,7 @@
     margin-bottom: 6px;
   }
   .date {
-    color: $grey-color;
+    color: $dark-grey-color;
     font-size: 12px;
   }
   .title {
@@ -52,5 +52,5 @@
 .poster {
   width: 48px;
   height: 48px;
-  border-radius: 50%;
+  // border-radius: 50%;
 }
