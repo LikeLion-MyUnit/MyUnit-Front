@@ -6,17 +6,31 @@ import styles from "./SignupDetail.module.scss";
 
 const SignupDetail = ({ history }) => {
   const { user, details, updateProfile } = useContext(UserContext);
-  const [inputData, setInputData] = useState({ is_open: true, nickname: "" });
+  const [inputData, setInputData] = useState({
+    is_open: true,
+    photo: "",
+    nickname: "",
+    mycomment: "",
+    skill: "",
+    portfolio: [""],
+  });
   const [portfolioInputLength, setPortfolioInputLength] = useState(1);
 
   useEffect(() => {
     if (user === null && details === null) {
     } else {
       if (details.nickname === null) {
-        setInputData({ ...user, ...details, city: "서울", nickname: "" });
+        setInputData({
+          ...user,
+          ...details,
+          city: "서울",
+          nickname: "",
+        });
+      } else {
+        let portfolio = details["portfolio"].split("|");
+        setPortfolioInputLength(portfolio.length);
+        setInputData({ ...user, ...details, portfolio: portfolio });
       }
-      console.log(details);
-      setInputData({ ...user, ...details });
     }
   }, [user, details]);
 
@@ -60,7 +74,11 @@ const SignupDetail = ({ history }) => {
   async function onSubmit(e) {
     e.preventDefault();
 
-    console.log(inputData.photo);
+    if (inputData["photo"] === null) {
+      alert("프로필 사진이 필요합니다.");
+      return;
+    }
+
     let response = await postUserProfile(user.token, {
       user_pk: user.user_pk,
       nickname: inputData.nickname,
@@ -70,7 +88,7 @@ const SignupDetail = ({ history }) => {
       interest: inputData.interest,
       skill: inputData.skill,
       mycomment: inputData.mycomment,
-      portfolio: inputData.portfolio,
+      portfolio: inputData.portfolio.join("|"),
       is_open: inputData.is_open,
     });
     if (response !== null) {
@@ -84,15 +102,27 @@ const SignupDetail = ({ history }) => {
   }
 
   function changePortfolioInput(e, index) {
-    setInputData({ ...inputData, portfolio: e.target.value });
+    let arr = inputData["portfolio"];
+    arr[index] = e.target.value;
+    setInputData({ ...inputData, portfolio: arr });
   }
 
   function addPortfolioInput(e) {
+    let arr = inputData["portfolio"];
+    console.log(arr);
+    arr.push("");
+    setInputData({ ...inputData, portfolio: arr });
     setPortfolioInputLength(portfolioInputLength + 1);
+    console.log(arr);
   }
   function delPortfolioInput(e) {
-    if (portfolioInputLength > 1)
+    if (portfolioInputLength > 1) {
+      let arr = inputData["portfolio"];
+      arr.pop();
+      setInputData({ ...inputData, portfolio: arr });
       setPortfolioInputLength(portfolioInputLength - 1);
+      console.log(arr);
+    }
   }
 
   return (
@@ -112,15 +142,13 @@ const SignupDetail = ({ history }) => {
       </div>
       <div className={styles.profileBox}>
         <img
-          src="http://placehold.jp/50x50.png"
+          src={inputData.photo ?? "http://placehold.jp/50x50.png"}
           alt=""
           className={styles.profileImg}
         />
         <input
           className={styles.profileFileInput}
           type="file"
-          // value={inputData.photo}
-          // accept="image/jpg,image/png,image/jpeg,image/gif"
           onChange={changeProfileInput}
         />
       </div>
@@ -200,32 +228,29 @@ const SignupDetail = ({ history }) => {
             value={inputData.skill}
           ></textarea>
         </div>
-        {/* <div className={styles.inputBox}>
-          <p>포트폴리오</p>
-          <hr />
-          <textarea
-            name="portfolio"
-            cols="30"
-            rows="10"
-            onChange={changeTextInput}
-            value={inputData.portfolio}
-          ></textarea>
-        </div> */}
+
         <div className={styles.inputBox}>
           <p>포트폴리오 (URL)</p>
           <hr />
-          <div>
+          <div className={styles.portfolioBox}>
             {Array.from({ length: portfolioInputLength }, (v, i) => i).map(
-              (e) => (
+              (e, i) => (
                 <input
-                  value={inputData.portfolio}
+                  key={i}
+                  value={inputData.portfolio[i]}
                   className={styles.customInput}
-                  onChange={changePortfolioInput}
+                  onChange={(e) => {
+                    changePortfolioInput(e, i);
+                  }}
                 ></input>
               )
             )}
-            <button onClick={addPortfolioInput}>추가</button>
-            <button onClick={delPortfolioInput}>삭제</button>
+
+            <div>
+              {" "}
+              <button onClick={addPortfolioInput}>추가</button>
+              <button onClick={delPortfolioInput}>삭제</button>
+            </div>
           </div>
         </div>
       </div>
