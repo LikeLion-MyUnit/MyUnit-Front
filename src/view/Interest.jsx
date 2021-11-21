@@ -1,5 +1,4 @@
 import React from "react";
-import UserInfo from "./../components/UserInfo";
 
 import styles from "./Interest.module.scss";
 import Post from "./../components/Post";
