@@ -1,32 +1,35 @@
 @import "../common/Colors.scss";
 
-div{
-    margin-bottom:10px;
+div {
+  margin-bottom: 10px;
 }
-.container{
-    margin:0 10% 0 10%;
-    height:100%;
-    button{
-        margin-top: 50px;
-    }
+.container {
+  position: relative;
+  padding: 0 10% 0 10%;
+  height: 100%;
+  button {
+    margin-top: 50px;
+  }
 }
-.button_container{
-    width: 100%;
-    display:flex;
-    justify-content: center;
+.button_container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
-.header{
-    width:100%;
-    height:33%;
+.header {
+  width: 100%;
+  height: 100px;
 }
-.image_container{
-    display:flex;
-    height:100px;
+.image {
+  width: 100%;
+  border: solid 1px black;
+  border-radius: 10px;
 }
-.image{
-    display:flex;
-    width:100px;
-    border:solid 1px black;
-    border-radius:10px;
-    height:100%;
+
+.imageOnClick {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
 }
