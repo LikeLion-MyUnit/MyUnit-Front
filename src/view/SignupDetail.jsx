@@ -5,6 +5,7 @@ import { postUserProfile } from "../service/AuthService";
 import styles from "./SignupDetail.module.scss";
 
 const SignupDetail = ({ history }) => {
+  let isNewUser = false;
   const { user, details, updateProfile } = useContext(UserContext);
   const [inputData, setInputData] = useState({
     is_open: true,
@@ -20,6 +21,7 @@ const SignupDetail = ({ history }) => {
     if (user === null && details === null) {
     } else {
       if (details.nickname === null) {
+        isNewUser = true;
         setInputData({
           ...user,
           ...details,
@@ -78,7 +80,6 @@ const SignupDetail = ({ history }) => {
       alert("프로필 사진이 필요합니다.");
       return;
     }
-
     let response = await postUserProfile(user.token, {
       user_pk: user.user_pk,
       nickname: inputData.nickname,
@@ -93,7 +94,11 @@ const SignupDetail = ({ history }) => {
     });
     if (response !== null) {
       updateProfile(response);
-      history.push("/welcome");
+      if (isNewUser) {
+        history.push("/welcome");
+      } else {
+        history.push("/mypage");
+      }
     }
   }
 
@@ -164,7 +169,7 @@ const SignupDetail = ({ history }) => {
       <div className={styles.nicknameBox}>
         닉네임 :{" "}
         <input
-          className={styles.customInput}
+          className={styles.nicknameInput}
           name="nickname"
           value={inputData.nickname}
           onChange={changeTextInput}
@@ -182,7 +187,11 @@ const SignupDetail = ({ history }) => {
           type="file"
           onChange={changeProfileInput}
         /> */}
-        <input type="file" onChange={changeProfileInput} />
+        <input
+          className={styles.fileInput}
+          type="file"
+          onChange={changeProfileInput}
+        />
       </div>
       <div className={styles.selectContainer}>
         <div>

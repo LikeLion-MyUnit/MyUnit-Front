@@ -13,8 +13,8 @@ export const FirstTabBar = ({
   //List<String> tabs, function callback(setState)
   return (
     <div className={styles.container}>
-      {tabs.map((t) => (
-        <span className={styles.btnTab} onClick={() => callback(t)}>
+      {tabs.map((t, i) => (
+        <span key={i} className={styles.btnTab} onClick={() => callback(t)}>
           <span className={t === selected ? styles.textSelected : styles.text}>
             {t}
           </span>

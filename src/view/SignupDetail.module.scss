@@ -90,13 +90,22 @@
   border: 0px;
   border-radius: 0px;
 }
+.nicknameInput {
+  width: 160px;
+  height: 36px;
+}
 
 .customInput {
-  width: 160px;
+  width: 240px;
   height: 36px;
 }
 
 .portfolioBox {
   display: flex;
   flex-direction: column;
+}
+
+.fileInput {
+  width: 160px;
+  border: 0px solid transparent;
 }

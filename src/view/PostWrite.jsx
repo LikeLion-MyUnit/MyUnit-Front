@@ -184,7 +184,11 @@ function PostWrite({ history }) {
             onChange={changeInput}
           />
 
-          <input type="file" onChange={changeImageInput} />
+          <input
+            className={styles.fileInput}
+            type="file"
+            onChange={changeImageInput}
+          />
 
           <button type="submit" className="btn-main">
             작성완료
