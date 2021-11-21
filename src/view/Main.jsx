@@ -91,7 +91,7 @@ const Main = ({ history }) => {
       temp = temp.filter((e) => e !== t);
     }
     setSelectedThirdTab(temp);
-    console.log(selectedThirdTab);
+    //console.log(selectedThirdTab);
   }
 
   return (

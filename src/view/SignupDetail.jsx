@@ -115,12 +115,12 @@ const SignupDetail = ({ history }) => {
       // on reader load somthing...
       reader.onload = () => {
         // Make a fileInfo Object
-        console.log("Called", reader);
+        //console.log("Called", reader);
         baseURL = reader.result;
-        console.log(baseURL);
+        //console.log(baseURL);
         resolve(baseURL);
       };
-      console.log(fileInfo);
+      //console.log(fileInfo);
     });
   };
 
@@ -129,11 +129,11 @@ const SignupDetail = ({ history }) => {
     getBase64(file)
       .then((result) => {
         file["base64"] = result;
-        console.log("File Is", file);
+        //console.log("File Is", file);
         setInputData({ ...inputData, photo: result });
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
       });
   }
 
@@ -145,11 +145,11 @@ const SignupDetail = ({ history }) => {
 
   function addPortfolioInput(e) {
     let arr = inputData["portfolio"];
-    console.log(arr);
+    //console.log(arr);
     arr.push("");
     setInputData({ ...inputData, portfolio: arr });
     setPortfolioInputLength(portfolioInputLength + 1);
-    console.log(arr);
+    //console.log(arr);
   }
   function delPortfolioInput(e) {
     if (portfolioInputLength > 1) {
@@ -157,7 +157,7 @@ const SignupDetail = ({ history }) => {
       arr.pop();
       setInputData({ ...inputData, portfolio: arr });
       setPortfolioInputLength(portfolioInputLength - 1);
-      console.log(arr);
+      //console.log(arr);
     }
   }
 

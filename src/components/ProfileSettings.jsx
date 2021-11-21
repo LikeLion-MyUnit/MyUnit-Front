@@ -44,7 +44,7 @@ const ProfileSettings = () => {
         <h1>포트폴리오</h1>
         <div className={styles.portfolio}>
           {details.portfolio.split("|").map((e, i) => (
-            <div>{e}</div>
+            <div key={i}>{e}</div>
           ))}
         </div>
       </div>

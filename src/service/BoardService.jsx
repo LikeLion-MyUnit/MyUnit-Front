@@ -40,7 +40,7 @@ export async function postBoard(
     });
     return response.data;
   } catch (e) {
-    console.log(e.response.data);
+    //console.log(e.response.data);
     // if (Object.keys(e.response.data).includes("email")) {
     //   return "중복된 이메일이 존재합니다.";
     // } else if (Object.keys(e.response.data).includes("nickname")) {
@@ -84,7 +84,7 @@ export async function getBoard(
     );
     return response.data;
   } catch (e) {
-    console.log(e.response.data);
+    //console.log(e.response.data);
     // if (Object.keys(e.response.data).includes("email")) {
     //   return "중복된 이메일이 존재합니다.";
     // } else if (Object.keys(e.response.data).includes("nickname")) {
@@ -98,10 +98,10 @@ export async function getBoard(
 export async function RequestMainPost() {
   try {
     const response = await axios.get(`${serverURL}/board/post_all`);
-    console.log(response.data);
+    //console.log(response.data);
     return response.data;
   } catch (e) {
-    console.log(e.response.data);
+    //console.log(e.response.data);
     alert("데이터를 불러오는데 실패해버렸쨔농 ㅜㅜ");
   }
 }
@@ -119,6 +119,6 @@ export async function RequestMainPost() {
 //     });
 
 //   }catch(e){
-//     console.log(e.response.data);
+//     //console.log(e.response.data);
 //   }
 // }

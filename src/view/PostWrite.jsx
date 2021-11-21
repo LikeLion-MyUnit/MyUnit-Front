@@ -102,7 +102,7 @@ function PostWrite({ history }) {
         setPoster(result);
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
       });
   }
 
