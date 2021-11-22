@@ -1,7 +1,8 @@
-import React from "react";
+import React, {useContext, useEffect} from "react";
 import { Link } from "react-router-dom";
 import MultiUserInfoBtn from "../components/MultiUserInfoBtn";
 import styles from "../components/ProfileSettings.module.scss";
+import { UserContext } from '../provider/UserProvider';
 import { serverURL } from "../service/ServerConst";
 
 const UserDetail = (props) => {
@@ -14,9 +15,12 @@ const UserDetail = (props) => {
     photo,
     portfolio,
     skill,
-    user,
-    user_pk,
+    otherUser,
+    user_pk, //oponent's pk value
+    my_user_pk, 
   } = props.location.state;
+  const { isLoggedIn } = useContext(UserContext);
+
   const image = `${serverURL}/board${photo}`;
   return (
     <div className={styles.container}>
@@ -27,10 +31,6 @@ const UserDetail = (props) => {
           className={styles.profileImg}
         />
         <p className={styles.name}>{nickname}</p>
-        {/* <div className={styles.interest}> */}
-        {/* <FontAwesomeIcon icon={faHeart} className={styles.heart} /> */}
-        {/* <span className={styles.heartCount}>100</span> */}
-        {/* </div> */}
       </div>
       <div className={styles.btnsContainer}>
         <MultiUserInfoBtn city={city} gender={gender} interest={interest} />
@@ -40,11 +40,6 @@ const UserDetail = (props) => {
         <div className={styles.intro}>{mycomment}</div>
         <h1>가능한 역할/기술</h1>
         <div className={styles.stack}>{skill}</div>
-        {/* <h1>수상/자격증/어학실적</h1>
-        <div className={styles.certificate}>
-          <button>이름</button>
-          <button>등급/점수</button>
-        </div> */}
         <h1>포트폴리오</h1>
         <div className={styles.portfolio}>
           {portfolio.split("|").map((e, i) => (
@@ -52,16 +47,16 @@ const UserDetail = (props) => {
           ))}
         </div>
       </div>
-      <Link to={{
+      <Link to={isLoggedIn? {
               pathname:`/chat`,
               state:{
                 nickname:nickname,
                 photo:photo,
-                receiver_user:user,
-                receiver_user_pk:user_pk
+                receiver_user:user_pk,
               }
-              }}>
-                <button className={`${styles.btnEdit} btn-main`}>쪽지보내기</button>
+              }: {pathname:'/login'}}>
+                
+                {my_user_pk !== user_pk && (<button className={`${styles.btnEdit} btn-main`}>쪽지보내기</button>)}
               </Link>
     </div>
   );

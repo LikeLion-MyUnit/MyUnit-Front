@@ -10,13 +10,19 @@ const Navbar = () => {
   const history = useHistory();
 
   function onClickProfileBtn() {
-    history.push("/mypage");
+    if(isLoggedIn)
+      history.push("/mypage");
+    else
+      history.push("/login")
   }
   function onClickLogo() {
     history.push("/");
   }
   function onClickMessageBtn() {
-    history.push("/messages");
+    if (isLoggedIn)
+      history.push("/messages");
+    else
+      history.push("/login")
   }
 
   return (

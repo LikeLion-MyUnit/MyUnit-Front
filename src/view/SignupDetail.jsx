@@ -9,30 +9,26 @@ const SignupDetail = ({ history }) => {
   const { user, details, updateProfile } = useContext(UserContext);
   const [inputData, setInputData] = useState({
     is_open: true,
-    photo: "",
+    photo: null,
     nickname: "",
     mycomment: "",
     skill: "",
     portfolio: [""],
+    interest: "기획/아이디어",
+    gender: "남자",
+    city: "서울",
   });
   const [portfolioInputLength, setPortfolioInputLength] = useState(1);
+
 
   useEffect(() => {
     if (user === null && details === null) {
     } else {
       if (details.nickname === null) {
         isNewUser.current = true;
-        setInputData({
-          ...user,
-          ...details,
-          city: "서울",
-          nickname: "",
-        });
       } else {
         let portfolio = details["portfolio"].split("|");
-
         setPortfolioInputLength(portfolio.length);
-
         setInputData({
           ...user,
           ...details,
@@ -69,10 +65,6 @@ const SignupDetail = ({ history }) => {
       case "skill":
         setInputData({ ...inputData, skill: value });
         break;
-
-      //TODO: 파일 삽입
-      //TODO: 사진 확인
-
       case "is_open":
         setInputData({ ...inputData, is_open: !inputData.is_open });
         break;
@@ -151,7 +143,7 @@ const SignupDetail = ({ history }) => {
 
   function addPortfolioInput(e) {
     let arr = inputData["portfolio"];
-    //console.log(arr);
+    console.log(arr);
     arr.push("");
     setInputData({ ...inputData, portfolio: arr });
     setPortfolioInputLength(portfolioInputLength + 1);
@@ -177,7 +169,7 @@ const SignupDetail = ({ history }) => {
         <input
           className={styles.nicknameInput}
           name="nickname"
-          value={inputData.nickname}
+          value={inputData.nickname || ''}
           onChange={changeTextInput}
           required
         ></input>
@@ -188,11 +180,7 @@ const SignupDetail = ({ history }) => {
           alt=""
           className={styles.profileImg}
         />
-        {/* <input
-          className={styles.profileFileInput}
-          type="file"
-          onChange={changeProfileInput}
-        /> */}
+  
         <input
           className={styles.fileInput}
           type="file"
@@ -204,7 +192,7 @@ const SignupDetail = ({ history }) => {
           <select
             className={styles.select}
             name="city"
-            value={inputData.city}
+            value={inputData.city || ''}
             onChange={changeTextInput}
           >
             <option value="서울">서울</option>
@@ -226,7 +214,7 @@ const SignupDetail = ({ history }) => {
           <select
             className={styles.select}
             name="interest"
-            value={inputData.interest}
+            value={inputData.interest || ''}
             onChange={changeTextInput}
           >
             <option value="기획/아이디어">기획/아이디어</option>
@@ -284,7 +272,7 @@ const SignupDetail = ({ history }) => {
               (e, i) => (
                 <input
                   key={i}
-                  value={inputData.portfolio[i]}
+                  value={inputData.portfolio[i] || ''}
                   className={styles.customInput}
                   onChange={(e) => {
                     changePortfolioInput(e, i);

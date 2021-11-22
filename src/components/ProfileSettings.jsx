@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext,  } from "react";
 import UserInfoBtns from "./UserInfoBtns";
 import { UserContext } from "../provider/UserProvider";
 import styles from "./ProfileSettings.module.scss";
@@ -6,8 +6,9 @@ import { useHistory } from "react-router";
 
 const ProfileSettings = () => {
   const { user, details } = useContext(UserContext);
-
   const history = useHistory();
+
+
   function onClickProfileBtn() {
     history.push("/signup_detail");
   }

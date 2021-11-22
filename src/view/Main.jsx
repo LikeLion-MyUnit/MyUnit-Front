@@ -48,7 +48,7 @@ const Main = ({ history }) => {
   const [selectedSecondTab, setSelectedSecondTab] = useState(secondTabs[0]);
   const [selectedThirdTab, setSelectedThirdTab] = useState(localTabs);
   const [searchInput, setSearchInput] = useState("");
-  const { details, isLoggedIn } = useContext(UserContext);
+  const { details, isLoggedIn, user } = useContext(UserContext);
 
   useEffect(() => {
     RequestMainPost().then((value) => {
@@ -133,7 +133,8 @@ const Main = ({ history }) => {
         </button>
       </div>
 
-      {selectedTab === "모집" && Posts.length > 0 ? (
+      {selectedTab === "모집"  ? (
+       Posts.length > 0 ?
         <div key="recruit">
           {[...Posts].reverse().map((post, i) =>
             (selectedSecondTab === "지역" &&
@@ -154,6 +155,7 @@ const Main = ({ history }) => {
                     content: post.content,
                     image: post.poster,
                     city: post.city,
+                    my_user_pk: user ? user.user_pk : -1,
                   },
                 }}
               >
@@ -170,17 +172,17 @@ const Main = ({ history }) => {
             )
           )}
           {/* <Link to="post_detail"><Post></Post></Link> */}
-        </div>
+        </div> : <div></div>
       ) : (
         // 초대 클릭시
         Users.length > 0 && (
           <div key="invite">
-            {Users.map((user, i) =>
+            {Users.map((otherUser, i) =>
               (selectedSecondTab === "지역" &&
-                selectedThirdTab.includes(user.city)) |
+                selectedThirdTab.includes(otherUser.city)) |
                 (selectedSecondTab === "대회분류" &&
-                  selectedThirdTab.includes(user.interest)) &&
-              (searchInput !== "" && user.nickname.includes(searchInput)) |
+                  selectedThirdTab.includes(otherUser.interest)) &&
+              (searchInput !== "" && otherUser.nickname.includes(searchInput)) |
                 (searchInput === "") ? (
                 <Link
                   style={{ textDecoration: "none", color: "black" }}
@@ -188,27 +190,28 @@ const Main = ({ history }) => {
                   to={{
                     pathname: `/user_detail`,
                     state: {
-                      nickname: user.nickname,
-                      gender: user.gender,
-                      city: user.city,
-                      mycomment: user.mycomment,
-                      photo: user.photo,
-                      skill: user.skill,
-                      interest: user.interest,
-                      portfolio: user.portfolio,
-                      user: user.user,
-                      user_pk: user.user_pk,
+                      nickname: otherUser.nickname,
+                      gender: otherUser.gender,
+                      city: otherUser.city,
+                      mycomment: otherUser.mycomment,
+                      photo: otherUser.photo,
+                      skill: otherUser.skill,
+                      interest: otherUser.interest,
+                      portfolio: otherUser.portfolio,
+                      user: otherUser.user,
+                      user_pk: otherUser.user_pk,
+                      my_user_pk:user ? user.user_pk : -1,
                     },
                   }}
                 >
                   <UserInfo
                     key={i}
-                    photo={user.photo}
-                    nickname={user.nickname}
-                    skill={user.skill}
-                    gender={user.gender}
-                    interest={user.interest}
-                    city={user.city}
+                    photo={otherUser.photo}
+                    nickname={otherUser.nickname}
+                    skill={otherUser.skill}
+                    gender={otherUser.gender}
+                    interest={otherUser.interest}
+                    city={otherUser.city}
                   />
                 </Link>
               ) : (

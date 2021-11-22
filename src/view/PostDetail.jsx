@@ -10,27 +10,34 @@ function PostDetail(props) {
   const { history, location } = props;
   const image = `${serverURL}/board${location.state.image}`;
   const [imageClick, setImageClick] = useState(false);
-  const { user } = useContext(UserContext);
+  const { user, isLoggedIn } = useContext(UserContext);
   const [writer, setWriter] = useState({ nickname: "" });
+  const [checkMyPost, setCheckMyPost] = useState(false)
 
   useEffect(() => {
     if (user !== null)
       getUserProfile(user.token, location.state.author).then((e) => {
         setWriter(e);
-        console.log(user);
+        setCheckMyPost((e.user_pk !== user.user_pk));
       });
   }, [location.state.author, user]);
+
+  
+
 
   const handleImageToggle = () => {
     setImageClick(!imageClick);
   };
 
   const directionMessage = () => {
-    history.push({
-      pathname: "/chat",
+    history.push(
+      isLoggedIn ? 
+      {
+      pathname: "/chat", 
       state: { nickname: writer.nickname, receiver_user: writer.user_pk },
-    });
+        } : { pathname:"/login"});
   };
+  
 
   return (
     <div className={styles.container}>
@@ -49,12 +56,15 @@ function PostDetail(props) {
         className={imageClick ? styles.imageOnClick : styles.image}
         onClick={handleImageToggle}
       />
-      <div className={styles.button_container}>
+
+      {checkMyPost && (<div className={styles.button_container}>
         <button onClick={directionMessage} className="btn-main">
           메세지 보내기
         </button>
-      </div>
+      </div>)}
+      
     </div>
+
   );
 }
 

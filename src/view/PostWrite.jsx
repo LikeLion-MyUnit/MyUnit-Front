@@ -192,7 +192,7 @@ function PostWrite({ history }) {
             <label htmlFor="모집 인원수"> 모집 인원수</label>
             <input
               className={styles.recruitInput}
-              value={recruit}
+              value={recruit ?? ''}
               name="recruit"
               type="number"
               placeholder="인원 수"

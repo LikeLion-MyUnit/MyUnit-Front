@@ -108,6 +108,7 @@ export async function RequestUsers() {
 }
 
 export async function getMessages(token, user_pk) {
+
   try {
     let response = await axios({
       method: "get",
@@ -118,9 +119,9 @@ export async function getMessages(token, user_pk) {
         Authorization: `Token ${token}`,
       },
     });
+    //console.log(response.data);
     return response.data;
   } catch (e) {
-    alert("네트워크 에러가 발생했습니다.");
     return null;
   }
 }
