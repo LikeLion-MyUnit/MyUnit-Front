@@ -3,6 +3,7 @@ import UserInfoBtns from "./UserInfoBtns";
 import { UserContext } from "../provider/UserProvider";
 import styles from "./ProfileSettings.module.scss";
 import { useHistory } from "react-router";
+import { serverURL } from '../service/ServerConst';
 
 const ProfileSettings = () => {
   const { user, details } = useContext(UserContext);
@@ -12,12 +13,14 @@ const ProfileSettings = () => {
   function onClickProfileBtn() {
     history.push("/signup_detail");
   }
+  
+  const image = details!==null? `${serverURL}/board/media${details.photo.split('/media')[1]}` : null
 
   return user && details ? (
     <div className={styles.container}>
       <div className={styles.profileBox}>
         <img
-          src={details.photo ?? "http://placehold.jp/50x50.png"}
+          src={image ?? "http://placehold.jp/50x50.png"}
           alt=""
           className={styles.profileImg}
         />

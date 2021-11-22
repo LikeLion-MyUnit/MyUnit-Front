@@ -2,17 +2,16 @@ import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { UserContext } from "../provider/UserProvider";
 import { getUserProfile } from "../service/AuthService";
-import { serverURL } from "../service/ServerConst";
+import { serverURL } from '../service/ServerConst';
 
 import styles from "./Message.module.scss";
 
 const Message = ({ user_pk, lastMessage, time }) => {
   const { user } = useContext(UserContext);
   const history = useHistory();
-  const [counterpartUser, setCounterpartUser] = useState({
-    nickname: "",
-  });
-  const image = `${serverURL}/board${counterpartUser.photo}`;
+  const [counterpartUser, setCounterpartUser] = useState(null);
+  const image = counterpartUser!==null? `${serverURL}/board/media${counterpartUser.photo.split('/media')[1]}` : null
+
   useEffect(() => {
     if (user !== null)
       getUserProfile(user.token, user_pk).then((e) => {
@@ -38,10 +37,10 @@ const Message = ({ user_pk, lastMessage, time }) => {
         className={styles.profileImg}
       />
       <div className={styles.content}>
-        <p className={styles.name}>{counterpartUser.nickname}</p>
-        <p className={styles.preview}>{lastMessage}</p>
+        <p className={styles.name}>{counterpartUser && counterpartUser.nickname}</p>
+        <p className={styles.preview}>{lastMessage ?? ''}</p>
       </div>
-      <p className={styles.time}>{time}</p>
+      <p className={styles.time}>{time.split('T')[0]} {time.split('T')[1].split('.')[0]}</p>
     </div>
   );
 };

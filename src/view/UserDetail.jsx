@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from "react";
+import React, {useContext} from "react";
 import { Link } from "react-router-dom";
 import MultiUserInfoBtn from "../components/MultiUserInfoBtn";
 import styles from "../components/ProfileSettings.module.scss";
@@ -15,7 +15,6 @@ const UserDetail = (props) => {
     photo,
     portfolio,
     skill,
-    otherUser,
     user_pk, //oponent's pk value
     my_user_pk, 
   } = props.location.state;

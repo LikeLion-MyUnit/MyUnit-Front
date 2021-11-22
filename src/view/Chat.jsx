@@ -59,6 +59,8 @@ const Chat = (props) => {
           },
         });
         $("#chatContent").scrollTop($("#chatContent")[0].scrollHeight);
+      
+   
         return setList(response.data);
       } catch (e) {
         console.log(e.response.data);
@@ -83,9 +85,9 @@ const Chat = (props) => {
       <div id="chatContent" className={styles.chatBox}>
         {list.map((list, i) =>
           list.sender === user.user_id ? (
-            <SentMessage key={i} message={list.message} />
+            <SentMessage key={i} message={list.message} time={list.timestamp} />
           ) : (
-            <ReceivedMessage key={i} message={list.message} />
+            <ReceivedMessage key={i} message={list.message} time={list.timestamp} />
           )
         )}
       </div>

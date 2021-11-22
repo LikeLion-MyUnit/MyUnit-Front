@@ -6,7 +6,9 @@ import { serverURL } from "../service/ServerConst";
 
 const UserInfo = (props) => {
   const { nickname, skill, gender, interest, city, photo } = props;
+
   const image = `${serverURL}/board${photo}`;
+
   return (
     <div className={styles.container}>
       <div className={styles.thumbnailBackground}>

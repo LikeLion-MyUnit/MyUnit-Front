@@ -57,7 +57,7 @@ export async function getUserProfile(token, pk) {
         Authorization: `Token ${token}`,
       },
     });
-    //console.log(response.data);
+    console.log(response.data);
     return response.data;
   } catch (e) {
     return null;
@@ -112,7 +112,7 @@ export async function getMessages(token, user_pk) {
   try {
     let response = await axios({
       method: "get",
-      url: `${serverURL}/messages/list/${user_pk}/`,
+      url: `${serverURL}/chat/messages/list/${user_pk}`,
       xstfCookieName: "csrftoken",
       xsrfHeaderName: "X-CSRFToken",
       headers: {
