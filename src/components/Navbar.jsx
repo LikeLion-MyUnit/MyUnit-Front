@@ -6,7 +6,7 @@ import { UserContext } from "../provider/UserProvider";
 import { useHistory } from "react-router";
 
 const Navbar = () => {
-  const { details, logout, isLoggedIn, user } = useContext(UserContext);
+  const { details, logout, isLoggedIn } = useContext(UserContext);
   const history = useHistory();
 
   function onClickProfileBtn() {
@@ -37,7 +37,7 @@ const Navbar = () => {
         <button className={styles.btnSettings} onClick={onClickProfileBtn}>
           <FontAwesomeIcon icon={faUserCog} />
         </button>
-        {isLoggedIn && user.nickname ? (
+        {isLoggedIn ? (
           <div>
             <span className={styles.nickname}>{details.nickname}님</span>
             <button
