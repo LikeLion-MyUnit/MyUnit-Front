@@ -6,23 +6,19 @@ import { UserContext } from "../provider/UserProvider";
 import { useHistory } from "react-router";
 
 const Navbar = () => {
-  const { details, logout, isLoggedIn } = useContext(UserContext);
+  const { details, logout, isLoggedIn, user } = useContext(UserContext);
   const history = useHistory();
 
   function onClickProfileBtn() {
-    if(isLoggedIn)
-      history.push("/mypage");
-    else
-      history.push("/login")
+    if (isLoggedIn) history.push("/mypage");
+    else history.push("/login");
   }
   function onClickLogo() {
     history.push("/");
   }
   function onClickMessageBtn() {
-    if (isLoggedIn)
-      history.push("/messages");
-    else
-      history.push("/login")
+    if (isLoggedIn) history.push("/messages");
+    else history.push("/login");
   }
 
   return (
@@ -41,7 +37,7 @@ const Navbar = () => {
         <button className={styles.btnSettings} onClick={onClickProfileBtn}>
           <FontAwesomeIcon icon={faUserCog} />
         </button>
-        {isLoggedIn ? (
+        {isLoggedIn && user.nickname ? (
           <div>
             <span className={styles.nickname}>{details.nickname}님</span>
             <button
