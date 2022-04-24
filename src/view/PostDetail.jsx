@@ -14,11 +14,11 @@ function PostDetail(props) {
   const [checkMyPost, setCheckMyPost] = useState(false);
 
   useEffect(() => {
-    if (user !== null)
-      getUserProfile(user.token, location.state.author).then((e) => {
-        setWriter(e);
-        setCheckMyPost(e.user_pk !== user.user_pk);
-      });
+    // if (user !== null)
+    getUserProfile(user.token, location.state.author).then((e) => {
+      setWriter(e);
+      if (user != null) setCheckMyPost(e.user_pk !== user.user_pk);
+    });
   }, [location.state.author, user]);
 
   const handleImageToggle = () => {

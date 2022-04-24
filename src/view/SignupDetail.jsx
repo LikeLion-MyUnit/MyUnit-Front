@@ -14,7 +14,7 @@ const SignupDetail = ({ history }) => {
     nickname: "",
     mycomment: "",
     skill: "",
-    portfolio: [""],
+    portfolio: ["http://"],
     interest: "기획/아이디어",
     gender: "남자",
     city: "서울",
