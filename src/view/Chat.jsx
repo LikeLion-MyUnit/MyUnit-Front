@@ -59,11 +59,10 @@ const Chat = (props) => {
           },
         });
         $("#chatContent").scrollTop($("#chatContent")[0].scrollHeight);
-      
-   
+
         return setList(response.data);
       } catch (e) {
-        console.log(e.response.data);
+        console.log(e);
       }
     },
     [receiver_user, user]
@@ -87,7 +86,11 @@ const Chat = (props) => {
           list.sender === user.user_id ? (
             <SentMessage key={i} message={list.message} time={list.timestamp} />
           ) : (
-            <ReceivedMessage key={i} message={list.message} time={list.timestamp} />
+            <ReceivedMessage
+              key={i}
+              message={list.message}
+              time={list.timestamp}
+            />
           )
         )}
       </div>
