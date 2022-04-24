@@ -57,6 +57,13 @@ function PostDetail(props) {
           className={imageClick ? styles.imageOnClick : styles.image}
           onClick={handleImageToggle}
         />
+        {!isLoggedIn && (
+          <div className={styles.button_container}>
+            <button onClick={directionMessage} className="btn-main">
+              로그인 후 팀원 찾기
+            </button>
+          </div>
+        )}
 
         {checkMyPost && (
           <div className={styles.button_container}>
