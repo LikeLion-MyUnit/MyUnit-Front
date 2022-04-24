@@ -3,7 +3,6 @@ import UserInfoBtns from "./UserInfoBtns";
 import { UserContext } from "../provider/UserProvider";
 import styles from "./ProfileSettings.module.scss";
 import { useHistory } from "react-router";
-import { serverURL } from "../service/ServerConst";
 
 const ProfileSettings = () => {
   const { user, details } = useContext(UserContext);
