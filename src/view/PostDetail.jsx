@@ -14,11 +14,11 @@ function PostDetail(props) {
   const [checkMyPost, setCheckMyPost] = useState(false);
 
   useEffect(() => {
-    // if (user !== null)
-    getUserProfile(user.token, location.state.author).then((e) => {
-      setWriter(e);
-      if (user != null) setCheckMyPost(e.user_pk !== user.user_pk);
-    });
+    if (user !== null)
+      getUserProfile(user.token, location.state.author).then((e) => {
+        setWriter(e);
+        if (user != null) setCheckMyPost(e.user_pk !== user.user_pk);
+      });
   }, [location.state.author, user]);
 
   const handleImageToggle = () => {
@@ -42,7 +42,9 @@ function PostDetail(props) {
       <article className={styles.article_container}>
         <div className={styles.header}>
           <p id={styles.title}>{location.state.title}</p>
-          <p id={styles.writer}>작성자: {writer.nickname}</p>
+          {writer.nickname !== "" && (
+            <p id={styles.writer}>작성자: {writer.nickname}</p>
+          )}
 
           <hr />
         </div>
