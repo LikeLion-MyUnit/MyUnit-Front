@@ -2,12 +2,11 @@ import React from "react";
 
 import styles from "./UserInfo.module.scss";
 import MultiUserInfoBtn from "./MultiUserInfoBtn";
-import { serverURL } from "../service/ServerConst";
 
 const UserInfo = (props) => {
   const { nickname, skill, gender, interest, city, photo } = props;
 
-  const image = `${serverURL}/board${photo}`;
+  const image = `${photo}`;
 
   return (
     <div className={styles.container}>

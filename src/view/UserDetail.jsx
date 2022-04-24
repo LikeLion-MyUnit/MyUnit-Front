@@ -1,9 +1,8 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import MultiUserInfoBtn from "../components/MultiUserInfoBtn";
 import styles from "../components/ProfileSettings.module.scss";
-import { UserContext } from '../provider/UserProvider';
-import { serverURL } from "../service/ServerConst";
+import { UserContext } from "../provider/UserProvider";
 
 const UserDetail = (props) => {
   const {
@@ -16,11 +15,11 @@ const UserDetail = (props) => {
     portfolio,
     skill,
     user_pk, //oponent's pk value
-    my_user_pk, 
+    my_user_pk,
   } = props.location.state;
   const { isLoggedIn } = useContext(UserContext);
 
-  const image = `${serverURL}/board${photo}`;
+  const image = `${photo}`;
   return (
     <div className={styles.container}>
       <div className={styles.profileBox}>
@@ -46,17 +45,24 @@ const UserDetail = (props) => {
           ))}
         </div>
       </div>
-      <Link to={isLoggedIn? {
-              pathname:`/chat`,
-              state:{
-                nickname:nickname,
-                photo:photo,
-                receiver_user:user_pk,
+      <Link
+        to={
+          isLoggedIn
+            ? {
+                pathname: `/chat`,
+                state: {
+                  nickname: nickname,
+                  photo: photo,
+                  receiver_user: user_pk,
+                },
               }
-              }: {pathname:'/login'}}>
-                
-                {my_user_pk !== user_pk && (<button className={`${styles.btnEdit} btn-main`}>쪽지보내기</button>)}
-              </Link>
+            : { pathname: "/login" }
+        }
+      >
+        {my_user_pk !== user_pk && (
+          <button className={`${styles.btnEdit} btn-main`}>쪽지보내기</button>
+        )}
+      </Link>
     </div>
   );
 };
