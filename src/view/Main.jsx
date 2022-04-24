@@ -12,35 +12,9 @@ import { UserContext } from "../provider/UserProvider";
 
 import { RequestUsers } from "../service/AuthService";
 import { RequestMainPost } from "../service/BoardService";
-
+import { contestCategoryTabs, localTabs } from "../const/const";
 const tabs = ["모집", "초대"];
 const secondTabs = ["지역", "대회분류"];
-export const localTabs = [
-  "서울",
-  "부산",
-  "인천",
-  "대구",
-  "울산",
-  "광주",
-  "대전",
-  "세종",
-  "강원",
-  "경기",
-  "충청",
-  "경상",
-  "전라",
-  "제주",
-];
-export const contestCategoryTabs = [
-  "기획/아이디어",
-  "사진/영상",
-  "디자인",
-  "광고/마케팅",
-  "과학/공학",
-  "창업",
-  "기타",
-];
-
 const Main = ({ history }) => {
   const [Posts, SetPosts] = useState([]);
   const [Users, SetUsers] = useState([]);
@@ -53,11 +27,11 @@ const Main = ({ history }) => {
   useEffect(() => {
     RequestMainPost().then((value) => {
       if (value !== null) SetPosts(value);
-      // else history.push("login");
+      else history.push("login");
     });
     RequestUsers().then((value) => {
       if (value !== null) SetUsers(value);
-      // else history.push("/login");
+      else history.push("/login");
     });
 
     if (details !== null && details.city === "선택안함" && isLoggedIn) {

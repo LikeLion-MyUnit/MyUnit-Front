@@ -35,6 +35,11 @@
   background: white;
   color: $black-color;
   cursor: pointer;
+  transition: all 0.5s;
+
+  &:hover {
+    box-shadow: 0 0 2px $dark-grey-color;
+  }
 }
 
 .btn-gray {

@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import Navbar from "../components/Navbar";
+import { contestCategoryTabs, localTabs } from "../const/const";
 import { UserContext } from "../provider/UserProvider";
 import { postBoard } from "../service/BoardService";
-import { contestCategoryTabs, localTabs } from "./Main";
 import styles from "./PostWrite.module.scss";
 
 function PostWrite({ history }) {
