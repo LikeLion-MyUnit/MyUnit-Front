@@ -17,7 +17,13 @@ const Navbar = () => {
     history.push("/");
   }
   function onClickMessageBtn() {
-    if (isLoggedIn) history.push("/messages");
+    if (isLoggedIn)
+      history.push({
+        pathname: "/messages",
+        state: {
+          independentPage: true,
+        },
+      });
     else history.push("/login");
   }
 
