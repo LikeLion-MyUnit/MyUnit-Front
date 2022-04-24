@@ -4,7 +4,7 @@ import styles from "./Post.module.scss";
 import { serverURL } from "../service/ServerConst";
 
 const Post = (props) => {
-  const image = `${serverURL}/board${props.poster}`;
+  const image = `${props.poster}`;
   return (
     <div className={styles.container}>
       <div className={styles.thumbnailBackground}>
