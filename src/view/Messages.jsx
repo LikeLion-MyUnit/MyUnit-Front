@@ -12,12 +12,13 @@ const Messages = () => {
     if (user)
       getMessages(user.token, user.user_pk).then((e) => {
         setMessages(e);
+        console.log(e);
       });
   }, [user]);
 
   return (
     <div className={styles.container}>
-      {messages !== null && messages !== undefined && messages.length > 0 ? (
+      {messages !== null && messages !== undefined ? (
         Object.values(messages).map((e, i) => (
           <Message
             key={i}
@@ -30,7 +31,7 @@ const Messages = () => {
         <div className={styles.commentBox}>Loading..</div>
       ) : (
         // <div>Empty Messages</div>
-        <div>메시지가 없습니다.</div>
+        <div className={styles.commentBox}>메시지가 없습니다.</div>
       )}
     </div>
   );

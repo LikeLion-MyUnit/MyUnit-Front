@@ -44,6 +44,7 @@ const Navbar = () => {
               className={styles.btnLogout}
               onClick={() => {
                 logout();
+                history.push("/");
               }}
             >
               <p>로그아웃</p>
