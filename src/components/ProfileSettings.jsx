@@ -8,7 +8,8 @@ import { serverURL } from "../service/ServerConst";
 const ProfileSettings = () => {
   const { user, details } = useContext(UserContext);
   const history = useHistory();
-  console.log("디테일", details, "유저", user);
+  console.log(details);
+  console.log(user);
   function onClickProfileBtn() {
     history.push("/signup_detail");
   }
