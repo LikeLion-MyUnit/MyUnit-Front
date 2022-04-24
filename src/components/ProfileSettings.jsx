@@ -8,14 +8,15 @@ import { serverURL } from "../service/ServerConst";
 const ProfileSettings = () => {
   const { user, details } = useContext(UserContext);
   const history = useHistory();
-
+  console.log(details, user);
   function onClickProfileBtn() {
     history.push("/signup_detail");
   }
 
   const image =
     details !== null
-      ? `${serverURL}/board/media${details.photo.split("/media")[1]}`
+      ? // ? `${serverURL}/board/media${details.photo.split("/media")[1]}`
+        `'${details.photo}`
       : null;
 
   return user && details ? (
