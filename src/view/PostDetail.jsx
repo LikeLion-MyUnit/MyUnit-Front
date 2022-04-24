@@ -39,28 +39,30 @@ function PostDetail(props) {
   return (
     <div className={styles.container}>
       <Navbar />
-      <div className={styles.header}>
-        <div className="">대회명:{location.state.title}</div>
-        <div className="">작성자: {writer.nickname}</div>
+      <article className={styles.article_container}>
+        <div className={styles.header}>
+          <p id={styles.title}>{location.state.title}</p>
+          <p id={styles.writer}>작성자: {writer.nickname}</p>
 
-        <hr />
-      </div>
-      <div className="content">{location.state.content}</div>
-      <hr />
-      <img
-        src={image}
-        alt=""
-        className={imageClick ? styles.imageOnClick : styles.image}
-        onClick={handleImageToggle}
-      />
-
-      {checkMyPost && (
-        <div className={styles.button_container}>
-          <button onClick={directionMessage} className="btn-main">
-            메세지 보내기
-          </button>
+          <hr />
         </div>
-      )}
+        <div className="content">{location.state.content}</div>
+
+        <img
+          src={image}
+          alt=""
+          className={imageClick ? styles.imageOnClick : styles.image}
+          onClick={handleImageToggle}
+        />
+
+        {checkMyPost && (
+          <div className={styles.button_container}>
+            <button onClick={directionMessage} className="btn-main">
+              메세지 보내기
+            </button>
+          </div>
+        )}
+      </article>
     </div>
   );
 }

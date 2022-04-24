@@ -318,6 +318,7 @@ const SignupDetail = ({ history }) => {
           id={styles.btn_logout}
           onClick={() => {
             logout();
+            history.push("/");
           }}
         >
           로그아웃

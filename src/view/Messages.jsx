@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import Message from "../components/Message";
-import Navbar from "../components/Navbar";
+import styles from "./Messages.module.scss";
 import { UserContext } from "../provider/UserProvider";
 import { getMessages } from "../service/AuthService";
 
 const Messages = () => {
-  const [messages, setMessages] = useState();
+  const [messages, setMessages] = useState(null);
   const { user } = useContext(UserContext);
 
   useEffect(() => {
@@ -16,8 +16,7 @@ const Messages = () => {
   }, [user]);
 
   return (
-    <>
-      <Navbar />
+    <div className={styles.container}>
       {messages ? (
         Object.values(messages).map((e, i) => (
           <Message
@@ -27,11 +26,13 @@ const Messages = () => {
             time={e.time}
           />
         ))
+      ) : messages === null ? (
+        <div className={styles.commentBox}>Loading..</div>
       ) : (
-        <div></div>
         // <div>Empty Messages</div>
+        <div>메시지가 없습니다.</div>
       )}
-    </>
+    </div>
   );
 };
 
