@@ -46,7 +46,7 @@ function PostDetail(props) {
 
           <hr />
         </div>
-        <div className="content">{location.state.content}</div>
+        <div id={styles.content}>{location.state.content}</div>
 
         <img
           src={image}
