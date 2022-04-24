@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import MultiUserInfoBtn from "../components/MultiUserInfoBtn";
 import styles from "../components/ProfileSettings.module.scss";
 import { UserContext } from "../provider/UserProvider";
-import { serverURL } from "../service/ServerConst";
 
 const UserDetail = (props) => {
   const {
@@ -20,7 +19,7 @@ const UserDetail = (props) => {
   } = props.location.state;
   const { isLoggedIn } = useContext(UserContext);
 
-  const image = `${serverURL}/board${photo}`;
+  const image = `${photo}`;
   return (
     <div className={styles.container}>
       <div className={styles.profileBox}>
