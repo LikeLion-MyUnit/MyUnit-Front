@@ -19,7 +19,7 @@ const Messages = ({ independentPage = false }) => {
 
   return (
     <>
-      {independentPage && <Navbar />}
+      {independentPage === true ? <Navbar /> : <div></div>}
       <div className={styles.container}>
         {messages !== null && messages !== undefined ? (
           Object.values(messages).map((e, i) => (

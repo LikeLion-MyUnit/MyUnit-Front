@@ -7,6 +7,7 @@ import styles from "./PostWrite.module.scss";
 
 function PostWrite({ history }) {
   const { user } = useContext(UserContext);
+  const [sumbitted, setSubmitted] = useState(false);
   const [title, setTitle] = useState("");
   const [contest, setContest] = useState("");
   const [content, setContent] = useState("");
@@ -57,6 +58,7 @@ function PostWrite({ history }) {
     if (title.length > 50) {
       alert("50자 이내로 작성해주세요.");
     } else {
+      setSubmitted(true);
       let response = await postBoard(
         user.token,
         title,
@@ -196,7 +198,7 @@ function PostWrite({ history }) {
             />
           </div>
           <br />
-          <button type="submit" className="btn-main">
+          <button disabled={sumbitted} type="submit" className="btn-main">
             작성완료
           </button>
         </form>
