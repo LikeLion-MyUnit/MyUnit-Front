@@ -51,8 +51,9 @@ function PostDetail(props) {
         <div id={styles.content}>{location.state.content}</div>
 
         <img
+          id={styles.img_post}
           src={image}
-          alt=""
+          alt="post"
           className={imageClick ? styles.imageOnClick : styles.image}
           onClick={handleImageToggle}
         />
