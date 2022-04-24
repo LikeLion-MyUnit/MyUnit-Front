@@ -17,6 +17,15 @@
   color: $white-color;
   font-size: 13px;
   cursor: pointer;
+
+  transition: all 0.5s;
+
+  &:hover {
+    background-color: $main-color-hover;
+  }
+  &:hover .text {
+    color: $white-color;
+  }
 }
 
 .btn {
@@ -27,5 +36,13 @@
   color: $white-color;
   font-size: 13px;
   cursor: pointer;
+  transition: all 0.5s;
+
+  &:hover {
+    background-color: $main-color-hover;
+  }
+  &:hover .text {
+    color: $white-color;
+  }
 }
 //

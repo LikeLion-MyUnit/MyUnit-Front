@@ -5,6 +5,9 @@
   color: $main-color;
   font-size: 18px;
   font-weight: bold;
+  &:hover {
+    text-shadow: 0 0 1px $main-color-hover;
+  }
 }
 
 .text {
@@ -13,6 +16,12 @@
   color: $dark-grey-color;
   font-size: 18px;
   font-weight: bold;
+  transition: all 0.5s;
+
+  &:hover {
+    color: $black-color;
+    text-shadow: 0 0 1px $main-color-hover;
+  }
 }
 
 .btnTab {

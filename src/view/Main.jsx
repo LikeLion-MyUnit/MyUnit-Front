@@ -15,7 +15,7 @@ import { RequestMainPost } from "../service/BoardService";
 
 const tabs = ["모집", "초대"];
 const secondTabs = ["지역", "대회분류"];
-const localTabs = [
+export const localTabs = [
   "서울",
   "부산",
   "인천",
@@ -31,7 +31,7 @@ const localTabs = [
   "전라",
   "제주",
 ];
-const contestCategoryTabs = [
+export const contestCategoryTabs = [
   "기획/아이디어",
   "사진/영상",
   "디자인",
@@ -53,11 +53,11 @@ const Main = ({ history }) => {
   useEffect(() => {
     RequestMainPost().then((value) => {
       if (value !== null) SetPosts(value);
-      else history.push("login");
+      // else history.push("login");
     });
     RequestUsers().then((value) => {
       if (value !== null) SetUsers(value);
-      else history.push("/login");
+      // else history.push("/login");
     });
 
     if (details !== null && details.city === "선택안함" && isLoggedIn) {
@@ -133,46 +133,49 @@ const Main = ({ history }) => {
         </button>
       </div>
 
-      {selectedTab === "모집"  ? (
-       Posts.length > 0 ?
-        <div key="recruit">
-          {[...Posts].reverse().map((post, i) =>
-            (selectedSecondTab === "지역" &&
-              selectedThirdTab.includes(post.city)) |
-              (selectedSecondTab === "대회분류" &&
-                selectedThirdTab.includes(post.interest)) &&
-            (searchInput !== "" && post.title.includes(searchInput)) |
-              (searchInput === "") ? (
-              <Link
-                style={{ textDecoration: "none", color: "black" }}
-                key={i}
-                to={{
-                  pathname: `/post_detail`,
-                  state: {
-                    title: post.title,
-                    author: post.profile,
-                    contest: post.contest,
-                    content: post.content,
-                    image: post.poster,
-                    city: post.city,
-                    my_user_pk: user ? user.user_pk : -1,
-                  },
-                }}
-              >
-                <Post
+      {selectedTab === "모집" ? (
+        Posts.length > 0 ? (
+          <div key="recruit">
+            {[...Posts].reverse().map((post, i) =>
+              (selectedSecondTab === "지역" &&
+                selectedThirdTab.includes(post.city)) |
+                (selectedSecondTab === "대회분류" &&
+                  selectedThirdTab.includes(post.interest)) &&
+              (searchInput !== "" && post.title.includes(searchInput)) |
+                (searchInput === "") ? (
+                <Link
+                  style={{ textDecoration: "none", color: "black" }}
                   key={i}
-                  poster={post.poster}
-                  title={post.title}
-                  contest={post.contest}
-                  end_date={post.end_date}
-                />
-              </Link>
-            ) : (
-              <div key={i}></div>
-            )
-          )}
-          {/* <Link to="post_detail"><Post></Post></Link> */}
-        </div> : <div></div>
+                  to={{
+                    pathname: `/post_detail`,
+                    state: {
+                      title: post.title,
+                      author: post.profile,
+                      contest: post.contest,
+                      content: post.content,
+                      image: post.poster,
+                      city: post.city,
+                      my_user_pk: user ? user.user_pk : -1,
+                    },
+                  }}
+                >
+                  <Post
+                    key={i}
+                    poster={post.poster}
+                    title={post.title}
+                    contest={post.contest}
+                    end_date={post.end_date}
+                  />
+                </Link>
+              ) : (
+                <div key={i}></div>
+              )
+            )}
+            {/* <Link to="post_detail"><Post></Post></Link> */}
+          </div>
+        ) : (
+          <div></div>
+        )
       ) : (
         // 초대 클릭시
         Users.length > 0 && (
@@ -200,7 +203,7 @@ const Main = ({ history }) => {
                       portfolio: otherUser.portfolio,
                       user: otherUser.user,
                       user_pk: otherUser.user_pk,
-                      my_user_pk:user ? user.user_pk : -1,
+                      my_user_pk: user ? user.user_pk : -1,
                     },
                   }}
                 >

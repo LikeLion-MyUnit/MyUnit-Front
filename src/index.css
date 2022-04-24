@@ -7,9 +7,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
   margin: 0px;
   padding: 0px;
-  width: 360px;
+  /* width: 360px;
   height: 812px;
-  border: 1px solid lightgray;
+  border: 1px solid lightgray; */
   margin-top: 32px;
   overflow-y: scroll;
 }
@@ -24,6 +24,7 @@ body {
 html {
   display: flex;
   justify-content: center;
+  height: 100vh;
   margin: 0px;
   padding: 0px;
   overflow-y: scroll;

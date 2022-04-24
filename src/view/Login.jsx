@@ -5,6 +5,7 @@ import "../common/Common.scss";
 import { useState } from "react";
 import { UserContext } from "../provider/UserProvider";
 import { requestLogin } from "../service/AuthService";
+import { Link } from "react-router-dom";
 
 const Login = ({ history }) => {
   const [id, setIdTextInput] = useState("");
@@ -45,8 +46,9 @@ const Login = ({ history }) => {
 
   return (
     <div className={styles.container}>
-      <img src="img/logo.png" alt="logo" className={styles.logo} />
-
+      <Link to={"/"}>
+        <img src="img/logo.png" alt="logo" className={styles.logo} />
+      </Link>
       <form className={styles.column} onSubmit={onSubmit} noValidate>
         <input
           name="id"

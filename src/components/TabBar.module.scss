@@ -28,6 +28,15 @@
   height: 100%;
   background-color: $grey-color;
   cursor: pointer;
+
+  transition: all 0.5s;
+
+  &:hover {
+    background-color: $main-color-hover;
+  }
+  &:hover .text {
+    color: $white-color;
+  }
 }
 
 .btnTabSelected {
@@ -38,6 +47,15 @@
   height: 100%;
   background-color: $white-color;
   cursor: pointer;
+
+  transition: all 0.5s;
+
+  &:hover {
+    background-color: $main-color-hover;
+  }
+  &:hover .textSelected {
+    color: $white-color;
+  }
 }
 
 .container {
