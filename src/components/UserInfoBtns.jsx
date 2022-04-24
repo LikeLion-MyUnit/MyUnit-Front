@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./UserInfoBtns.module.scss";
 
-const UserInfoBtns = ({details}) => {
+const UserInfoBtns = ({ details }) => {
   return (
     <div className={styles.infoBtns}>
       <button className={`${styles.btn} btn-main`}>{details.gender}</button>
