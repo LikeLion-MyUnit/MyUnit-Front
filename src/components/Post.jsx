@@ -1,7 +1,6 @@
 import React from "react";
 
 import styles from "./Post.module.scss";
-import { serverURL } from "../service/ServerConst";
 
 const Post = (props) => {
   const image = `${props.poster}`;
