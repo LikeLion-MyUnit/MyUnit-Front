@@ -17,7 +17,7 @@ const Messages = () => {
 
   return (
     <div className={styles.container}>
-      {messages ? (
+      {messages.length > 0 ? (
         Object.values(messages).map((e, i) => (
           <Message
             key={i}
