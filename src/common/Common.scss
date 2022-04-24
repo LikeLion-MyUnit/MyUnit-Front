@@ -57,6 +57,10 @@ input {
     border: 1px solid $main-color;
     box-shadow: 0 0 5px $main-color;
   }
+  &:hover {
+    box-shadow: 0 0 5px $main-color-hover;
+    color: $main-color-hover;
+  }
 }
 
 textarea {
@@ -66,10 +70,15 @@ textarea {
   box-sizing: border-box;
   border-radius: 10px;
   resize: none;
+  transition: all 0.5s;
   &:focus {
     outline: transparent;
     border: 1px solid $main-color;
     box-shadow: 0 0 10px transparent;
+  }
+  &:hover {
+    box-shadow: 0 0 5px $main-color-hover;
+    color: $main-color-hover;
   }
 }
 

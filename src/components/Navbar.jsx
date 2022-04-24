@@ -46,7 +46,7 @@ const Navbar = () => {
                 logout();
               }}
             >
-              <span>로그아웃</span>
+              <p>로그아웃</p>
             </button>
           </div>
         ) : (
@@ -56,7 +56,7 @@ const Navbar = () => {
               history.push("/login");
             }}
           >
-            <span>로그인</span>
+            <p>로그인</p>
           </button>
         )}
       </div>

@@ -19,7 +19,14 @@
   button {
     background-color: transparent;
     margin-left: 8px;
+
     cursor: pointer;
+
+    transition: all 0.5s;
+    &:hover {
+      box-shadow: 0 0 5px $main-color-hover;
+      color: $main-color;
+    }
   }
 }
 

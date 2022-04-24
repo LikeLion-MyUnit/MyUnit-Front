@@ -92,12 +92,12 @@ const Signup = ({ history }) => {
           value={phonenum}
           name="phonenum"
           type="text"
-          placeholder="전화 번호"
+          placeholder="전화 번호 (01012345678)"
           pattern="[0-9]{3}[0-9]{4}[0-9]{4}"
           onChange={changeTextInput}
           required
         />
-        <small>형식 : 01012345678</small>
+
         <button className="btn-main">회원가입</button>
       </form>
       <div className="btn-text" onClick={() => history.push("/login")}>
