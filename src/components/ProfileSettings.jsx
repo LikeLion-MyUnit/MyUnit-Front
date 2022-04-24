@@ -72,7 +72,9 @@ export const Profile = ({
         <h1>포트폴리오</h1>
         <div className={styles.portfolio}>
           {portfolio.split("|").map((e, i) => (
-            <div key={i}>{e}</div>
+            <div key={i}>
+              <a href={e}>{e}</a>
+            </div>
           ))}
         </div>{" "}
       </div>
