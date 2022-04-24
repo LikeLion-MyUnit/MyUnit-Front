@@ -316,7 +316,9 @@ const SignupDetail = ({ history }) => {
         <button
           class="btn-white"
           id={styles.btn_logout}
-          onClick={() => logout()}
+          onClick={() => {
+            logout();
+          }}
         >
           로그아웃
         </button>
