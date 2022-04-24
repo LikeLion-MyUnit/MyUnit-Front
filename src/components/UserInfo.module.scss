@@ -6,6 +6,12 @@
   align-items: center;
   margin-top: 8px;
   border-bottom: 1px solid $grey-color;
+  transition: all 0.5s;
+  cursor: pointer;
+
+  &:hover {
+    background: #c4c4c49c;
+  }
 }
 
 .thumbnailBackground {
