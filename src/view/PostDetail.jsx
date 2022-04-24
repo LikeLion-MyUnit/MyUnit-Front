@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import styles from "./PostDetail.module.scss";
 import "../common/Common.scss";
-import { serverURL } from "../service/ServerConst";
 import { getUserProfile } from "../service/AuthService";
 import { UserContext } from "../provider/UserProvider";
 
