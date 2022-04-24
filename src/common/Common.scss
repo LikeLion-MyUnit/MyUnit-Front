@@ -92,6 +92,16 @@ select {
   padding: 4px;
   border-radius: 10px;
   border: 1px solid $grey-color;
+  transition: all 0.5s;
+  &:focus {
+    outline: transparent;
+    border: 1px solid $main-color;
+    box-shadow: 0 0 10px transparent;
+  }
+  &:hover {
+    box-shadow: 0 0 5px $main-color-hover;
+    // color: $main-color-hover;
+  }
 }
 
 Link {

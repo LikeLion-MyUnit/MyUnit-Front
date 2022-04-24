@@ -64,7 +64,8 @@ const Login = ({ history }) => {
           onChange={changeTextInput}
           required
         />
-        <button className="btn-login btn-main" onClick={onSubmit}>
+
+        <button id={styles.btn_login} className="btn-main" onClick={onSubmit}>
           로그인
         </button>
       </form>

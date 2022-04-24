@@ -4,7 +4,7 @@ import MultipleTabBar from "../components/MultipleTabBar";
 import Navbar from "../components/Navbar";
 import Post from "../components/Post";
 import TabBar from "../components/TabBar";
-import FirstTabBar from "../components/TextTabBar";
+import TextTabBar from "../components/TextTabBar";
 
 import styles from "./Main.module.scss";
 import UserInfo from "./../components/UserInfo";
@@ -27,11 +27,11 @@ const Main = ({ history }) => {
   useEffect(() => {
     RequestMainPost().then((value) => {
       if (value !== null) SetPosts(value);
-      else history.push("login");
+      // else history.push("login");
     });
     RequestUsers().then((value) => {
       if (value !== null) SetUsers(value);
-      else history.push("/login");
+      // else history.push("/login");
     });
 
     if (details !== null && details.city === "선택안함" && isLoggedIn) {
@@ -73,19 +73,32 @@ const Main = ({ history }) => {
     <div>
       <Navbar />
       <TabBar
-        className="1stTabBar"
+        className="mainTabBar"
         tabs={tabs}
         selected={selectedTab}
         callback={(t) => changeTab(t)}
       ></TabBar>
-      <div className="2ndTabBar">
-        <FirstTabBar
+      <div className={styles.regionTabBar}>
+        <TextTabBar
           searchInput={searchInput}
           setSearchInput={setSearchInput}
           tabs={secondTabs}
           selected={selectedSecondTab}
           callback={(t) => changeSecondTab(t)}
-        ></FirstTabBar>
+        ></TextTabBar>
+        <div className={styles.searchGroup}>
+          <input
+            id={styles.searchInput}
+            name="keyword"
+            type="text"
+            value={searchInput}
+            onChange={(e) => {
+              setSearchInput(e.target.value);
+            }}
+            placeholder="키워드 검색"
+            className={styles.search}
+          />
+        </div>
       </div>
       <MultipleTabBar
         className="3rdTabBar"

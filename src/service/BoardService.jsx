@@ -99,7 +99,7 @@ export async function RequestMainPost() {
     //console.log(response.data);
     return response.data;
   } catch (e) {
-    alert("네트워크 에러가 발생했습니다.");
+    // alert("네트워크 에러가 발생했습니다.");
     return null;
   }
 }

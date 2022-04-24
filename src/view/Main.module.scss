@@ -11,3 +11,20 @@
   margin: 16px 16px;
 }
 //
+
+.regionTabBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 4px;
+}
+
+.searchGroup {
+  display: flex;
+  align-items: center;
+  margin-right: 16px;
+}
+
+#searchInput {
+  height: 36px;
+}

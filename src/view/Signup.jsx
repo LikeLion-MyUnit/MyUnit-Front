@@ -98,7 +98,9 @@ const Signup = ({ history }) => {
           required
         />
 
-        <button className="btn-main">회원가입</button>
+        <button id={styles.btn_login} className="btn-main">
+          회원가입
+        </button>
       </form>
       <div className="btn-text" onClick={() => history.push("/login")}>
         이미 가입하셨나요?

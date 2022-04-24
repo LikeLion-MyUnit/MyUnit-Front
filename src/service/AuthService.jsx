@@ -102,13 +102,12 @@ export async function RequestUsers() {
     return response.data;
   } catch (e) {
     //console.log(e.response.data);
-    alert("네트워크 에러가 발생했습니다.");
+    // alert("네트워크 에러가 발생했습니다.");
     return null;
   }
 }
 
 export async function getMessages(token, user_pk) {
-
   try {
     let response = await axios({
       method: "get",
