@@ -1,20 +1,22 @@
-import React, { useContext,  } from "react";
+import React, { useContext } from "react";
 import UserInfoBtns from "./UserInfoBtns";
 import { UserContext } from "../provider/UserProvider";
 import styles from "./ProfileSettings.module.scss";
 import { useHistory } from "react-router";
-import { serverURL } from '../service/ServerConst';
+import { serverURL } from "../service/ServerConst";
 
 const ProfileSettings = () => {
   const { user, details } = useContext(UserContext);
   const history = useHistory();
 
-
   function onClickProfileBtn() {
     history.push("/signup_detail");
   }
-  
-  const image = details!==null? `${serverURL}/board/media${details.photo.split('/media')[1]}` : null
+
+  const image =
+    details !== null
+      ? `${serverURL}/board/media${details.photo.split("/media")[1]}`
+      : null;
 
   return user && details ? (
     <div className={styles.container}>

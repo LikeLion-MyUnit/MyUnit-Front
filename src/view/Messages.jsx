@@ -28,7 +28,8 @@ const Messages = () => {
           />
         ))
       ) : (
-        <div>Empty Messages</div>
+        <div></div>
+        // <div>Empty Messages</div>
       )}
     </>
   );
