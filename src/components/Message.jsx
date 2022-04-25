@@ -5,7 +5,7 @@ import { getUserProfile } from "../service/AuthService";
 
 import styles from "./Message.module.scss";
 
-const Message = ({ user_pk, lastMessage, time }) => {
+const Message = React.memo(({ user_pk, lastMessage, time }) => {
   const { user } = useContext(UserContext);
   const history = useHistory();
   const [counterpartUser, setCounterpartUser] = useState(null);
@@ -46,6 +46,6 @@ const Message = ({ user_pk, lastMessage, time }) => {
       </p>
     </div>
   );
-};
+});
 
 export default Message;

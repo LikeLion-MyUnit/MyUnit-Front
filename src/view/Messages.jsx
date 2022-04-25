@@ -5,16 +5,23 @@ import { UserContext } from "../provider/UserProvider";
 import { getMessages } from "../service/AuthService";
 import Navbar from "../components/Navbar";
 
-const Messages = ({ independentPage = false }) => {
+const Messages = React.memo(({ independentPage = false }) => {
   const [messages, setMessages] = useState(null);
   const { user } = useContext(UserContext);
 
   useEffect(() => {
-    if (user)
-      getMessages(user.token, user.user_pk).then((e) => {
-        setMessages(e);
-        console.log(e);
-      });
+    let interval_id;
+    if (user) {
+      interval_id = setInterval(
+        getMessages(user.token, user.user_pk).then((e) => {
+          setMessages(e);
+        }),
+        2000
+      );
+    }
+    return () => {
+      clearInterval(interval_id);
+    };
   }, [user]);
 
   return (
@@ -39,6 +46,6 @@ const Messages = ({ independentPage = false }) => {
       </div>
     </>
   );
-};
+});
 
 export default Messages;
