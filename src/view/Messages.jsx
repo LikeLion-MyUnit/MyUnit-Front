@@ -10,18 +10,10 @@ const Messages = React.memo(({ independentPage = false }) => {
   const { user } = useContext(UserContext);
 
   useEffect(() => {
-    function initMessages() {
+    if (user)
       getMessages(user.token, user.user_pk).then((e) => {
         setMessages(e);
       });
-    }
-    let interval_id;
-    if (user) {
-      interval_id = setInterval(initMessages, 2000);
-    }
-    return () => {
-      if (user) clearInterval(interval_id);
-    };
   }, [user]);
 
   return (
