@@ -69,6 +69,11 @@ const Main = ({ history }) => {
     //console.log(selectedThirdTab);
   }
 
+  function onClickWrite(e) {
+    if (isLoggedIn) history.push("/post_write");
+    else history.push("/login");
+  }
+
   return (
     <div>
       <Navbar />
@@ -112,10 +117,7 @@ const Main = ({ history }) => {
             최신순
           </option>
         </select>
-        <button
-          className={`${styles.btnMain} btn-main`}
-          onClick={() => history.push("/post_write")}
-        >
+        <button className={`${styles.btnMain} btn-main`} onClick={onClickWrite}>
           글쓰기
         </button>
       </div>

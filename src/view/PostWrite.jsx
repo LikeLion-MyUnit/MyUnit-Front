@@ -59,6 +59,7 @@ function PostWrite({ history }) {
       alert("50자 이내로 작성해주세요.");
     } else {
       setSubmitted(true);
+      history.push("/");
       let response = await postBoard(
         user.token,
         title,
@@ -71,7 +72,6 @@ function PostWrite({ history }) {
         isOpen,
         recruit
       );
-      history.push("/");
       return response.data;
     }
   }
