@@ -37,7 +37,7 @@ const Main = () => {
         RequestUsers().then((value) => {
           if (value !== null) SetUsers(value);
         });
-      } else if (posts.length > 0) {
+      } else {
         console.log("stop");
         clearInterval(attemptConnectingServer);
       }
