@@ -28,21 +28,16 @@ const Main = () => {
 
   useEffect(() => {
     //until connecting server, attempt infinitely
-    let attemptConnectingServer = setInterval(() => {
-      if (posts.length === 0) {
-        RequestMainPost().then((value) => {
-          if (value !== null) SetPosts(value);
-          console.log("login");
-        });
-        RequestUsers().then((value) => {
-          if (value !== null) SetUsers(value);
-        });
-      } else {
-        console.log("stop");
-        clearInterval(attemptConnectingServer);
-      }
-    }, 2000);
-
+    function load() {
+      RequestMainPost().then((value) => {
+        if (value !== null) SetPosts(value);
+        else setTimeout(load, 3000);
+      });
+      RequestUsers().then((value) => {
+        if (value !== null) SetUsers(value);
+      });
+    }
+    load();
     if (details !== null && details.city === "선택안함" && isLoggedIn) {
       // if not be written user detail profile yet.
       history.push("/signup_detail");
