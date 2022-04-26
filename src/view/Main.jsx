@@ -127,7 +127,7 @@ const Main = () => {
         </button>
       </div>
 
-      {posts.length || users.length === 0 ? (
+      {posts.length === 0 ? (
         <div className={styles.loading}>
           <span>
             {" "}
@@ -135,95 +135,90 @@ const Main = () => {
           </span>
         </div>
       ) : selectedTab === "모집" ? (
-        posts.length > 0 ? (
-          <div key="recruit">
-            {[...posts].reverse().map((post, i) =>
-              (selectedSecondTab === "지역" &&
-                selectedThirdTab.includes(post.city)) |
-                (selectedSecondTab === "대회분류" &&
-                  selectedThirdTab.includes(post.interest)) &&
-              (searchInput !== "" && post.title.includes(searchInput)) |
-                (searchInput === "") ? (
-                <Link
-                  style={{ textDecoration: "none", color: "black" }}
+        <div key="recruit">
+          {[...posts].reverse().map((post, i) =>
+            (selectedSecondTab === "지역" &&
+              selectedThirdTab.includes(post.city)) |
+              (selectedSecondTab === "대회분류" &&
+                selectedThirdTab.includes(post.interest)) &&
+            (searchInput !== "" && post.title.includes(searchInput)) |
+              (searchInput === "") ? (
+              <Link
+                style={{ textDecoration: "none", color: "black" }}
+                key={i}
+                to={{
+                  pathname: `/post_detail`,
+                  state: {
+                    title: post.title,
+                    author: post.profile,
+                    contest: post.contest,
+                    content: post.content,
+                    image: post.poster,
+                    city: post.city,
+                    my_user_pk: user ? user.user_pk : -1,
+                  },
+                }}
+              >
+                <Post
                   key={i}
-                  to={{
-                    pathname: `/post_detail`,
-                    state: {
-                      title: post.title,
-                      author: post.profile,
-                      contest: post.contest,
-                      content: post.content,
-                      image: post.poster,
-                      city: post.city,
-                      my_user_pk: user ? user.user_pk : -1,
-                    },
-                  }}
-                >
-                  <Post
-                    key={i}
-                    poster={post.poster}
-                    title={post.title}
-                    contest={post.contest}
-                    end_date={post.end_date}
-                  />
-                </Link>
-              ) : (
-                <div key={i}></div>
-              )
-            )}
-            {/* <Link to="post_detail"><Post></Post></Link> */}
-          </div>
-        ) : (
-          <div></div>
-        )
+                  poster={post.poster}
+                  title={post.title}
+                  contest={post.contest}
+                  end_date={post.end_date}
+                />
+              </Link>
+            ) : (
+              <div key={i}></div>
+            )
+          )}
+          {/* <Link to="post_detail"><Post></Post></Link> */}
+        </div>
       ) : (
         // 초대 클릭시
-        users.length > 0 && (
-          <div key="invite">
-            {users.map((otherUser, i) =>
-              (selectedSecondTab === "지역" &&
-                selectedThirdTab.includes(otherUser.city)) |
-                (selectedSecondTab === "대회분류" &&
-                  selectedThirdTab.includes(otherUser.interest)) &&
-              (searchInput !== "" && otherUser.nickname.includes(searchInput)) |
-                (searchInput === "") ? (
-                <Link
-                  style={{ textDecoration: "none", color: "black" }}
+
+        <div key="invite">
+          {users.map((otherUser, i) =>
+            (selectedSecondTab === "지역" &&
+              selectedThirdTab.includes(otherUser.city)) |
+              (selectedSecondTab === "대회분류" &&
+                selectedThirdTab.includes(otherUser.interest)) &&
+            (searchInput !== "" && otherUser.nickname.includes(searchInput)) |
+              (searchInput === "") ? (
+              <Link
+                style={{ textDecoration: "none", color: "black" }}
+                key={i}
+                to={{
+                  pathname: `/user_detail`,
+                  state: {
+                    nickname: otherUser.nickname,
+                    gender: otherUser.gender,
+                    city: otherUser.city,
+                    mycomment: otherUser.mycomment,
+                    photo: otherUser.photo,
+                    skill: otherUser.skill,
+                    interest: otherUser.interest,
+                    portfolio: otherUser.portfolio,
+                    user: otherUser.user,
+                    user_pk: otherUser.user_pk,
+                    my_user_pk: user ? user.user_pk : -1,
+                  },
+                }}
+              >
+                <UserInfo
                   key={i}
-                  to={{
-                    pathname: `/user_detail`,
-                    state: {
-                      nickname: otherUser.nickname,
-                      gender: otherUser.gender,
-                      city: otherUser.city,
-                      mycomment: otherUser.mycomment,
-                      photo: otherUser.photo,
-                      skill: otherUser.skill,
-                      interest: otherUser.interest,
-                      portfolio: otherUser.portfolio,
-                      user: otherUser.user,
-                      user_pk: otherUser.user_pk,
-                      my_user_pk: user ? user.user_pk : -1,
-                    },
-                  }}
-                >
-                  <UserInfo
-                    key={i}
-                    photo={otherUser.photo}
-                    nickname={otherUser.nickname}
-                    skill={otherUser.skill}
-                    gender={otherUser.gender}
-                    interest={otherUser.interest}
-                    city={otherUser.city}
-                  />
-                </Link>
-              ) : (
-                <div key={i}></div>
-              )
-            )}
-          </div>
-        )
+                  photo={otherUser.photo}
+                  nickname={otherUser.nickname}
+                  skill={otherUser.skill}
+                  gender={otherUser.gender}
+                  interest={otherUser.interest}
+                  city={otherUser.city}
+                />
+              </Link>
+            ) : (
+              <div key={i}></div>
+            )
+          )}
+        </div>
       )}
     </div>
   );
