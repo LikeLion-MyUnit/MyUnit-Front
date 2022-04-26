@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 import MultipleTabBar from "../components/MultipleTabBar";
 import Navbar from "../components/Navbar";
 import Post from "../components/Post";
@@ -15,7 +15,8 @@ import { RequestMainPost } from "../service/BoardService";
 import { contestCategoryTabs, localTabs } from "../const/const";
 const tabs = ["모집", "초대"];
 const secondTabs = ["지역", "대회분류"];
-const Main = ({ history }) => {
+const Main = ({}) => {
+  const history = useHistory();
   const [Posts, SetPosts] = useState([]);
   const [Users, SetUsers] = useState([]);
   const [selectedTab, setSelectedTab] = useState(tabs[0]);
@@ -25,18 +26,21 @@ const Main = ({ history }) => {
   const { details, isLoggedIn, user } = useContext(UserContext);
 
   useEffect(() => {
-    RequestMainPost().then((value) => {
-      if (value !== null) SetPosts(value);
-      // else history.push("login");
-    });
-    RequestUsers().then((value) => {
-      if (value !== null) SetUsers(value);
-      // else history.push("/login");
-    });
+    //until connecting server, attempt infinitely
+    let attemptConnectingServer = setInterval(() => {
+      RequestMainPost().then((value) => {
+        if (value !== null) SetPosts(value);
+      });
+      RequestUsers().then((value) => {
+        if (value !== null) SetUsers(value);
+      });
+      if (value) {
+        clearInterval(attemptConnectingServer);
+      }
+    }, 2000);
 
     if (details !== null && details.city === "선택안함" && isLoggedIn) {
       // if not be written user detail profile yet.
-
       history.push("/signup_detail");
     }
   }, [details, history, isLoggedIn]);
