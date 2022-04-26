@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import MultipleTabBar from "../components/MultipleTabBar";
 import Navbar from "../components/Navbar";
 import Post from "../components/Post";
 import TabBar from "../components/TabBar";
 import TextTabBar from "../components/TextTabBar";
-
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import styles from "./Main.module.scss";
 import UserInfo from "./../components/UserInfo";
 import { UserContext } from "../provider/UserProvider";
@@ -13,12 +13,13 @@ import { UserContext } from "../provider/UserProvider";
 import { RequestUsers } from "../service/AuthService";
 import { RequestMainPost } from "../service/BoardService";
 import { contestCategoryTabs, localTabs } from "../const/const";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const tabs = ["모집", "초대"];
 const secondTabs = ["지역", "대회분류"];
-const Main = ({}) => {
+const Main = () => {
   const history = useHistory();
-  const [Posts, SetPosts] = useState([]);
-  const [Users, SetUsers] = useState([]);
+  const [posts, SetPosts] = useState([]);
+  const [users, SetUsers] = useState([]);
   const [selectedTab, setSelectedTab] = useState(tabs[0]);
   const [selectedSecondTab, setSelectedSecondTab] = useState(secondTabs[0]);
   const [selectedThirdTab, setSelectedThirdTab] = useState(localTabs);
@@ -34,7 +35,7 @@ const Main = ({}) => {
       RequestUsers().then((value) => {
         if (value !== null) SetUsers(value);
       });
-      if (value) {
+      if (posts) {
         clearInterval(attemptConnectingServer);
       }
     }, 2000);
@@ -43,7 +44,7 @@ const Main = ({}) => {
       // if not be written user detail profile yet.
       history.push("/signup_detail");
     }
-  }, [details, history, isLoggedIn]);
+  }, [details, history, isLoggedIn, posts]);
 
   function changeTab(t) {
     setSelectedTab(t);
@@ -79,7 +80,7 @@ const Main = ({}) => {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       <Navbar />
       <TabBar
         className="mainTabBar"
@@ -126,10 +127,17 @@ const Main = ({}) => {
         </button>
       </div>
 
-      {selectedTab === "모집" ? (
-        Posts.length > 0 ? (
+      {posts.length || users.length === 0 ? (
+        <div className={styles.loading}>
+          <span>
+            {" "}
+            <FontAwesomeIcon color="#3c17c4" icon={faSpinner} size={"2x"} />
+          </span>
+        </div>
+      ) : selectedTab === "모집" ? (
+        posts.length > 0 ? (
           <div key="recruit">
-            {[...Posts].reverse().map((post, i) =>
+            {[...posts].reverse().map((post, i) =>
               (selectedSecondTab === "지역" &&
                 selectedThirdTab.includes(post.city)) |
                 (selectedSecondTab === "대회분류" &&
@@ -171,9 +179,9 @@ const Main = ({}) => {
         )
       ) : (
         // 초대 클릭시
-        Users.length > 0 && (
+        users.length > 0 && (
           <div key="invite">
-            {Users.map((otherUser, i) =>
+            {users.map((otherUser, i) =>
               (selectedSecondTab === "지역" &&
                 selectedThirdTab.includes(otherUser.city)) |
                 (selectedSecondTab === "대회분류" &&
