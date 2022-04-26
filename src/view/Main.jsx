@@ -42,7 +42,7 @@ const Main = () => {
       // if not be written user detail profile yet.
       history.push("/signup_detail");
     }
-  }, [details, history, isLoggedIn, posts]);
+  }, [details, history, isLoggedIn]);
 
   function changeTab(t) {
     setSelectedTab(t);
