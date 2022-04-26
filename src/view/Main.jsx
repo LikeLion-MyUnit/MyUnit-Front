@@ -31,14 +31,17 @@ const Main = () => {
     let attemptConnectingServer = setInterval(() => {
       RequestMainPost().then((value) => {
         if (value !== null) SetPosts(value);
+        console.log("login");
       });
       RequestUsers().then((value) => {
         if (value !== null) SetUsers(value);
       });
+      if (posts.length > 0) {
+        console.log("stop");
+        clearInterval(attemptConnectingServer);
+      }
     }, 2000);
-    if (posts.length > 0) {
-      clearInterval(attemptConnectingServer);
-    }
+
     if (details !== null && details.city === "선택안함" && isLoggedIn) {
       // if not be written user detail profile yet.
       history.push("/signup_detail");
