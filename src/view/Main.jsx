@@ -35,11 +35,10 @@ const Main = () => {
       RequestUsers().then((value) => {
         if (value !== null) SetUsers(value);
       });
-      if (posts) {
-        clearInterval(attemptConnectingServer);
-      }
     }, 2000);
-
+    if (posts.length > 0) {
+      clearInterval(attemptConnectingServer);
+    }
     if (details !== null && details.city === "선택안함" && isLoggedIn) {
       // if not be written user detail profile yet.
       history.push("/signup_detail");
@@ -135,7 +134,7 @@ const Main = () => {
           </span>
         </div>
       ) : selectedTab === "모집" ? (
-        <div key="recruit">
+        <div className={styles.main_content} key="recruit">
           {[...posts].reverse().map((post, i) =>
             (selectedSecondTab === "지역" &&
               selectedThirdTab.includes(post.city)) |
@@ -176,7 +175,7 @@ const Main = () => {
       ) : (
         // 초대 클릭시
 
-        <div key="invite">
+        <div className={styles.main_content} key="invite">
           {users.map((otherUser, i) =>
             (selectedSecondTab === "지역" &&
               selectedThirdTab.includes(otherUser.city)) |

@@ -42,11 +42,15 @@
   flex: 1;
   justify-content: center;
   align-items: center;
-  height: 100%;
 
   span {
     animation: rotate 3s infinite;
   }
+}
+
+.main_content {
+  display: flex;
+  flex: 1;
 }
 
 @keyframes rotate {
