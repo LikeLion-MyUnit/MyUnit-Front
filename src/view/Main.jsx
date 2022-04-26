@@ -29,14 +29,15 @@ const Main = () => {
   useEffect(() => {
     //until connecting server, attempt infinitely
     let attemptConnectingServer = setInterval(() => {
-      RequestMainPost().then((value) => {
-        if (value !== null) SetPosts(value);
-        console.log("login");
-      });
-      RequestUsers().then((value) => {
-        if (value !== null) SetUsers(value);
-      });
-      if (posts.length > 0) {
+      if (posts.length === 0) {
+        RequestMainPost().then((value) => {
+          if (value !== null) SetPosts(value);
+          console.log("login");
+        });
+        RequestUsers().then((value) => {
+          if (value !== null) SetUsers(value);
+        });
+      } else if (posts.length > 0) {
         console.log("stop");
         clearInterval(attemptConnectingServer);
       }

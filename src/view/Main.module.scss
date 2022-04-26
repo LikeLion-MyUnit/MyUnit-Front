@@ -1,11 +1,5 @@
 @import "../common/Colors.scss";
 
-.container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
 .btnMain {
   width: 122px;
   height: 28px;
@@ -40,16 +34,13 @@
 .loading {
   display: flex;
   flex: 1;
+  height: 50vh;
   justify-content: center;
   align-items: center;
 
   span {
     animation: rotate 3s infinite;
   }
-}
-
-.main_content {
-  flex: 1;
 }
 
 @keyframes rotate {
