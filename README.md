@@ -1,10 +1,13 @@
 # :sunglasses:	MyUnit
 
+https://myunit.netlify.app/
+
 <h2>Simple Descriptioin</h2>
 <h3>:hear_no_evil:	Check user profile and find the best contest team members you need :hear_no_evil:</h3>
 <h2>Dev stack</h2>
 <li>React with React :fishing_pole_and_fish:Hooks</li>
 <li>Scss</li>
+<li>Django</li>
 <h2>Feature</h2>
 <li>프로필 작성 성별, 지역에서부터 관심 분야, 가능한 역할 및 기술, 포트폴리오 등을 기입합니다.</li>
 
